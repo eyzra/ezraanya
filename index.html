@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en" data-mode="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reflections W/ TEA — theezraanya.com</title>
+<meta name="description" content="One hour. One conversation. One question. Where introspection meets illumination. A monthly teaching by Ezra Anya.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cambria:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+/* ── LIGHT MODE ── */
+:root{
+  --bg:#F7F3ED;
+  --bg-mid:#F0EBE3;
+  --bg-dark:#EDE8DF;
+  --ink:#1A1713;
+  --ink-mid:#2E2B27;
+  --ink-light:#4A4640;
+  --orange:#C85A00;
+  --orange-lt:#E06A10;
+  --orange-pale:#FDF0E8;
+  --muted:#8C8680;
+  --muted-lt:#B5B0A8;
+  --rule:rgba(26,23,19,0.11);
+  --rule-strong:rgba(26,23,19,0.20);
+  --inverse:#1A1713;
+  --inverse-text:#F7F3ED;
+  --nav-bg:rgba(247,243,237,0.94);
+  --nav-bg-solid:rgba(247,243,237,0.98);
+  --light-ray:rgba(247,243,237,0.55);
+  --ghost-color:#1A1713;
+}
+
+/* ── DARK MODE ── */
+[data-mode="dark"]{
+  --bg:#0F0D0B;
+  --bg-mid:#181410;
+  --bg-dark:#201C17;
+  --ink:#EDE8DF;
+  --ink-mid:#C8C2B8;
+  --ink-light:#8C8680;
+  --orange:#E06A10;
+  --orange-lt:#F07820;
+  --orange-pale:rgba(200,90,0,0.12);
+  --muted:#6A6560;
+  --muted-lt:#4A4640;
+  --rule:rgba(237,232,223,0.09);
+  --rule-strong:rgba(237,232,223,0.16);
+  --inverse:#EDE8DF;
+  --inverse-text:#0F0D0B;
+  --nav-bg:rgba(15,13,11,0.94);
+  --nav-bg-solid:rgba(15,13,11,0.98);
+  --light-ray:rgba(200,90,0,0.04);
+  --ghost-color:#EDE8DF;
+}
+
+body{
+  background-color:var(--bg);
+  color:var(--ink);
+  font-family:'Cambria',Cambria,Georgia,'Times New Roman',serif;
+  font-weight:400;
+  line-height:1.7;
+  overflow-x:hidden;
+  position:relative;
+  transition:background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ── PAPER GRAIN ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* ── LIGHT RAY ── */
+body::after{
+  content:'';position:fixed;top:-180px;left:-180px;
+  width:800px;height:800px;
+  background:radial-gradient(ellipse at 20% 15%, var(--light-ray) 0%, transparent 68%);
+  pointer-events:none;z-index:0;
+}
+
+/* ── VIGNETTE ── */
+.vignette{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 50%, transparent 52%, rgba(0,0,0,0.14) 100%);
+}
+
+/* ── DUST ── */
+@keyframes floatUp{0%{transform:translateY(0) translateX(0);opacity:0}20%{opacity:1}80%{opacity:0.5}100%{transform:translateY(-100px) translateX(14px);opacity:0}}
+.dust{position:fixed;inset:0;pointer-events:none;z-index:1}
+.dust span{position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(200,90,0,0.15);animation:floatUp linear infinite}
+.dust span:nth-child(1){left:10%;top:60%;animation-duration:10s;animation-delay:0s}
+.dust span:nth-child(2){left:25%;top:70%;animation-duration:13s;animation-delay:3s;width:1px;height:1px}
+.dust span:nth-child(3){left:50%;top:55%;animation-duration:9s;animation-delay:1s}
+.dust span:nth-child(4){left:72%;top:65%;animation-duration:15s;animation-delay:5s;width:1px;height:1px}
+.dust span:nth-child(5){left:88%;top:60%;animation-duration:11s;animation-delay:2s}
+
+/* ── GHOST QUOTES ── */
+.ghost-quote{
+  position:fixed;font-family:'IM Fell English',serif;font-style:italic;
+  font-size:11px;color:var(--ghost-color);opacity:0.04;
+  letter-spacing:0.5px;line-height:1.6;
+  pointer-events:none;z-index:0;max-width:240px;
+}
+.gq1{top:14%;right:3%;transform:rotate(2deg)}
+.gq2{bottom:22%;left:2%;transform:rotate(-1.5deg)}
+
+/* ── CONSTELLATION ── */
+.constellation{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.04}
+
+/* ── COMPASS ── */
+.compass-bg{position:fixed;bottom:-80px;right:-80px;width:340px;height:340px;opacity:0.03;pointer-events:none;z-index:0}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 52px;height:66px;
+  background:var(--nav-bg);
+  border-bottom:1px solid var(--rule);
+  backdrop-filter:blur(10px);
+  transition:background 0.3s;
+}
+.nav-logo{font-family:'IM Fell English',serif;font-size:15px;font-style:italic;color:var(--ink);text-decoration:none}
+.nav-logo em{color:var(--orange);font-style:italic}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{
+  font-family:'Cambria',serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--muted);transition:color 0.2s;text-decoration:none;
+}
+.nav-links a:hover{color:var(--orange)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-cta{
+  font-family:'Cambria',serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  padding:8px 22px;border:1px solid var(--orange);color:var(--orange);
+  background:transparent;cursor:pointer;transition:all 0.2s;
+}
+.nav-cta:hover{background:var(--orange);color:var(--bg)}
+
+/* dark mode toggle */
+.mode-toggle{
+  background:none;border:1px solid var(--rule-strong);cursor:pointer;
+  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);transition:all 0.2s;font-size:14px;
+}
+.mode-toggle:hover{border-color:var(--orange);color:var(--orange)}
+.icon-sun,.icon-moon{display:none}
+[data-mode="light"] .icon-sun{display:block}
+[data-mode="dark"] .icon-moon{display:block}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:66px 52px 88px;
+  position:relative;overflow:hidden;
+}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:2}
+
+.hero-columns{
+  position:absolute;top:0;right:0;bottom:0;width:54%;
+  background:repeating-linear-gradient(90deg,transparent 0px,transparent 36px,rgba(26,23,19,0.022) 36px,rgba(26,23,19,0.022) 38px,transparent 38px,transparent 96px);
+  pointer-events:none;
+}
+[data-mode="dark"] .hero-columns{
+  background:repeating-linear-gradient(90deg,transparent 0px,transparent 36px,rgba(237,232,223,0.025) 36px,rgba(237,232,223,0.025) 38px,transparent 38px,transparent 96px);
+}
+.hero-manuscript{
+  position:absolute;inset:0;opacity:0.028;pointer-events:none;
+  background-image:repeating-linear-gradient(0deg,transparent 0px,transparent 22px,rgba(26,23,19,0.6) 22px,rgba(26,23,19,0.6) 23px);
+}
+.hero-halo{
+  position:absolute;top:50%;right:7%;transform:translateY(-50%);
+  width:440px;height:440px;border-radius:50%;
+  border:1px solid rgba(200,90,0,0.09);
+  box-shadow:0 0 0 30px rgba(200,90,0,0.035),0 0 0 60px rgba(200,90,0,0.018),0 0 0 90px rgba(200,90,0,0.01);
+  pointer-events:none;z-index:1;
+}
+.hero-halo::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:78%;height:78%;border-radius:50%;border:1px solid rgba(200,90,0,0.06);
+}
+.hero-busts{position:absolute;top:50%;right:4%;transform:translateY(-50%);width:400px;height:480px;z-index:1;opacity:0.08}
+[data-mode="dark"] .hero-busts{opacity:0.06}
+
+.hero-eyebrow{
+  font-family:'Cambria',serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--orange);
+  margin-bottom:28px;display:flex;align-items:center;gap:16px;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--orange)}
+.hero-display{
+  font-family:'IM Fell English',serif;
+  font-size:clamp(68px,10.5vw,148px);
+  font-weight:400;font-style:italic;
+  line-height:0.88;letter-spacing:-2px;
+  color:var(--ink);max-width:780px;
+}
+.hero-display .accent{color:var(--orange)}
+.hero-display .sub-word{
+  font-family:'Cambria',serif;font-style:normal;
+  font-size:clamp(13px,1.6vw,18px);letter-spacing:4px;text-transform:uppercase;
+  color:var(--muted);display:block;margin-top:16px;margin-left:4px;
+}
+.hero-rule{
+  width:100%;height:1px;
+  background:linear-gradient(to right, var(--orange) 0%, rgba(200,90,0,0.12) 55%, transparent 100%);
+  margin:50px 0 38px;
+}
+.hero-bottom{display:grid;grid-template-columns:1fr auto;gap:52px;align-items:end}
+.hero-premise{
+  font-family:'IM Fell English',serif;font-style:italic;
+  font-size:clamp(16px,1.7vw,20px);
+  color:rgba(26,23,19,0.6);max-width:500px;line-height:1.65;
+}
+[data-mode="dark"] .hero-premise{color:rgba(237,232,223,0.55)}
+.hero-premise strong{font-style:normal;color:var(--ink);font-weight:400}
+.hero-meta{text-align:right}
+.hero-meta-label{font-family:'Cambria',serif;font-size:9px;letter-spacing:3.5px;text-transform:uppercase;color:var(--muted-lt);margin-bottom:8px}
+.hero-meta-name{font-family:'IM Fell English',serif;font-size:17px;font-style:italic;color:var(--ink)}
+.hero-meta-role{font-family:'Cambria',serif;font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:1px}
+
+/* ── SECTION SHELL ── */
+.section{padding:100px 0;position:relative}
+.si{max-width:1100px;margin:0 auto;padding:0 52px}
+.s-label{
+  font-family:'Cambria',serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--orange);
+  margin-bottom:44px;display:flex;align-items:center;gap:16px;
+}
+.s-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+.s-title{
+  font-family:'IM Fell English',serif;
+  font-size:clamp(28px,4vw,48px);font-weight:400;font-style:italic;
+  line-height:1.1;color:var(--ink);margin-bottom:20px;
+}
+.s-title em{color:var(--orange)}
+.s-body{font-size:15px;color:var(--ink-light);line-height:1.88;max-width:620px}
+
+/* ── PHILOSOPHY ── */
+.phil-section{background:var(--bg-mid)}
+.phil-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:52px;background:var(--rule)}
+.phil-cell{padding:38px 34px;background:var(--bg)}
+.phil-cell.dark{background:var(--ink-mid)}
+[data-mode="dark"] .phil-cell{background:var(--bg-mid)}
+[data-mode="dark"] .phil-cell.dark{background:var(--ink-mid)}
+.phil-cell-label{font-family:'Cambria',serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
+.phil-cell-text{font-family:'IM Fell English',serif;font-size:17px;font-style:italic;color:var(--ink);line-height:1.7}
+.phil-cell.dark .phil-cell-text{color:rgba(237,232,223,0.8)}
+.phil-cell.dark .phil-cell-label{color:var(--orange-lt)}
+.phil-belief{
+  margin-top:2px;padding:48px 44px;background:var(--ink-mid);position:relative;overflow:hidden;
+}
+[data-mode="dark"] .phil-belief{background:var(--bg-dark)}
+.phil-belief::before{
+  content:'"';position:absolute;top:-40px;left:20px;
+  font-family:'IM Fell English',serif;font-size:240px;
+  color:rgba(200,90,0,0.06);line-height:1;pointer-events:none;
+}
+.phil-belief-label{font-family:'Cambria',serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--orange);margin-bottom:20px}
+.phil-belief-text{
+  font-family:'IM Fell English',serif;
+  font-size:clamp(19px,2.2vw,28px);font-weight:400;font-style:italic;
+  line-height:1.45;color:var(--inverse-text);max-width:660px;position:relative;z-index:1;
+}
+[data-mode="dark"] .phil-belief-text{color:var(--ink)}
+
+/* ── PILLARS CAROUSEL ── */
+.pillars-section{background:var(--bg)}
+.pillar-carousel{margin-top:52px;position:relative;overflow:hidden}
+.pillar-track{display:flex;transition:transform 0.45s ease}
+.pillar-slide{
+  min-width:100%;padding:52px 44px;background:var(--bg-mid);
+  border:1px solid var(--rule);
+  display:flex;gap:60px;align-items:start;
+}
+.pillar-num{
+  font-family:'IM Fell English',serif;font-size:96px;font-style:italic;
+  color:rgba(200,90,0,0.10);line-height:1;flex-shrink:0;padding-top:4px;
+}
+.pillar-body{}
+.pillar-title{font-family:'IM Fell English',serif;font-size:clamp(28px,3.5vw,42px);font-style:italic;color:var(--ink);margin-bottom:14px}
+.pillar-desc{font-size:15px;color:var(--ink-light);line-height:1.85;max-width:560px}
+.pillar-controls{display:flex;align-items:center;gap:20px;margin-top:28px}
+.pillar-btn{
+  background:none;border:1px solid var(--rule-strong);cursor:pointer;
+  width:40px;height:40px;display:flex;align-items:center;justify-content:center;
+  color:var(--muted);transition:all 0.2s;font-size:18px;font-family:serif;
+}
+.pillar-btn:hover{border-color:var(--orange);color:var(--orange)}
+.pillar-dots{display:flex;gap:8px}
+.pillar-dot{width:6px;height:6px;border-radius:50%;background:var(--rule-strong);transition:background 0.2s;border:none;cursor:pointer;padding:0}
+.pillar-dot.active{background:var(--orange)}
+
+/* ── WHAT TO EXPECT — ACCORDION ── */
+.expect-section{background:var(--bg-mid)}
+.accordion{margin-top:52px;display:flex;flex-direction:column;gap:1px}
+.acc-item{background:var(--bg);border:1px solid var(--rule);overflow:hidden}
+.acc-trigger{
+  width:100%;padding:26px 32px;display:flex;align-items:center;justify-content:space-between;
+  background:none;border:none;cursor:pointer;text-align:left;
+  transition:background 0.2s;
+}
+.acc-trigger:hover{background:var(--orange-pale)}
+[data-mode="dark"] .acc-trigger:hover{background:rgba(200,90,0,0.08)}
+.acc-trigger-left{display:flex;align-items:center;gap:20px}
+.acc-num{font-family:'Cambria',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--orange)}
+.acc-title{font-family:'IM Fell English',serif;font-size:20px;font-style:italic;color:var(--ink)}
+.acc-arrow{
+  font-family:'IM Fell English',serif;font-size:20px;color:var(--muted);
+  transition:transform 0.3s;display:block;
+}
+.acc-item.open .acc-arrow{transform:rotate(90deg);color:var(--orange)}
+.acc-body{
+  max-height:0;overflow:hidden;transition:max-height 0.4s ease;
+}
+.acc-item.open .acc-body{max-height:320px}
+.acc-inner{padding:0 32px 28px}
+.acc-points{list-style:none;margin-top:4px}
+.acc-points li{
+  font-family:'Cambria',serif;font-size:13.5px;color:var(--ink-light);
+  padding:8px 0;border-bottom:1px solid var(--rule);line-height:1.55;
+}
+.acc-points li:last-child{border-bottom:none}
+.acc-points li::before{content:'— ';color:var(--orange)}
+
+/* ── THIS MONTH ── */
+.month-section{background:var(--bg)}
+.month-feature{
+  margin-top:52px;display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:var(--rule);
+}
+.month-left{
+  padding:56px 48px;background:var(--ink-mid);position:relative;overflow:hidden;
+}
+[data-mode="dark"] .month-left{background:var(--bg-dark)}
+.month-left::before{
+  content:'RESET';position:absolute;bottom:-50px;left:-8px;
+  font-family:'IM Fell English',serif;font-size:190px;font-style:italic;
+  color:rgba(200,90,0,0.05);line-height:1;pointer-events:none;white-space:nowrap;
+}
+.month-edition{font-family:'Cambria',serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--orange);margin-bottom:22px}
+.month-title{
+  font-family:'IM Fell English',serif;
+  font-size:clamp(48px,6.5vw,84px);font-style:italic;
+  color:var(--inverse-text);line-height:0.9;margin-bottom:12px;position:relative;z-index:1;
+}
+[data-mode="dark"] .month-title{color:var(--ink)}
+.month-subtitle{
+  font-family:'IM Fell English',serif;font-size:17px;font-style:italic;
+  color:var(--orange-lt);margin-bottom:28px;position:relative;z-index:1;
+}
+.month-desc{
+  font-family:'Cambria',serif;font-size:14px;
+  color:rgba(237,232,223,0.62);line-height:1.85;
+  max-width:400px;position:relative;z-index:1;margin-bottom:36px;
+}
+[data-mode="dark"] .month-desc{color:var(--ink-light)}
+.month-tags{display:flex;flex-wrap:wrap;gap:10px;position:relative;z-index:1}
+.month-tag{
+  font-family:'Cambria',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  padding:6px 14px;border:1px solid rgba(200,90,0,0.35);color:var(--orange-lt);
+}
+.month-right{padding:56px 48px;background:var(--bg-mid)}
+.month-right-title{font-family:'Cambria',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:28px}
+.month-links{display:flex;flex-direction:column;gap:16px;margin-bottom:36px}
+.month-link-card{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 22px;border:1px solid var(--rule);background:var(--bg);
+  text-decoration:none;transition:border-color 0.2s, background 0.2s;
+}
+.month-link-card:hover{border-color:var(--orange);background:var(--orange-pale)}
+[data-mode="dark"] .month-link-card:hover{background:rgba(200,90,0,0.08)}
+.month-link-label{font-family:'Cambria',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:5px}
+.month-link-name{font-family:'IM Fell English',serif;font-size:16px;font-style:italic;color:var(--ink)}
+.month-link-arrow{font-family:'Cambria',serif;font-size:18px;color:var(--muted);transition:color 0.2s}
+.month-link-card:hover .month-link-arrow{color:var(--orange)}
+.month-wa-desc{
+  font-family:'Cambria',serif;font-size:12.5px;color:var(--muted);line-height:1.7;
+  margin-top:6px;font-style:italic;
+}
+.month-register{
+  width:100%;padding:17px 24px;background:var(--orange);
+  font-family:'Cambria',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--bg);border:none;cursor:pointer;transition:background 0.2s;
+}
+.month-register:hover{background:var(--orange-lt)}
+
+/* ── WHY REFLECTION — QUOTE ── */
+.why-section{background:var(--ink-mid)}
+[data-mode="dark"] .why-section{background:var(--bg-dark)}
+.why-section .s-title{color:var(--inverse-text)}
+[data-mode="dark"] .why-section .s-title{color:var(--ink)}
+.why-section .s-label{color:var(--orange)}
+.why-section .s-label::after{background:rgba(237,232,223,0.1)}
+[data-mode="dark"] .why-section .s-label::after{background:var(--rule)}
+.why-quotes{margin-top:52px;display:flex;flex-direction:column;gap:1px}
+.why-quote{
+  padding:36px 40px;border-left:2px solid var(--orange);background:rgba(237,232,223,0.04);
+  position:relative;
+}
+.why-quote-main{
+  font-family:'IM Fell English',serif;font-size:clamp(18px,2.2vw,26px);
+  font-style:italic;color:rgba(237,232,223,0.78);line-height:1.5;
+}
+[data-mode="dark"] .why-quote-main{color:var(--ink-light)}
+.why-quote-main strong{font-style:normal;color:var(--inverse-text);font-weight:400}
+[data-mode="dark"] .why-quote-main strong{color:var(--ink)}
+
+/* ── THEMES ── */
+.themes-section{background:var(--bg-mid)}
+.themes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:52px;background:var(--rule)}
+.theme-card{padding:28px 22px;background:var(--bg);transition:all 0.2s;position:relative}
+.theme-card:hover{background:var(--orange-pale)}
+[data-mode="dark"] .theme-card:hover{background:rgba(200,90,0,0.08)}
+.theme-card.active{background:var(--ink-mid)}
+[data-mode="dark"] .theme-card.active{background:var(--bg-dark)}
+.theme-card.locked{position:relative;cursor:default}
+/* blur for locked months */
+.theme-card.locked .theme-card-title,
+.theme-card.locked .theme-card-sub{
+  filter:blur(4px);user-select:none;
+}
+.theme-card.locked:hover{background:var(--bg)}
+[data-mode="dark"] .theme-card.locked:hover{background:var(--bg)}
+.theme-card.locked .lock-overlay{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.2s;
+}
+.theme-card.locked:hover .lock-overlay{opacity:1}
+.lock-badge{
+  font-family:'Cambria',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  padding:6px 14px;border:1px solid var(--orange);color:var(--orange);
+  background:var(--bg);text-align:center;
+}
+.theme-card-month{font-family:'Cambria',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.theme-card-title{font-family:'IM Fell English',serif;font-style:italic;font-size:17px;color:var(--ink);margin-bottom:7px}
+.theme-card.active .theme-card-title{color:var(--inverse-text)}
+[data-mode="dark"] .theme-card.active .theme-card-title{color:var(--ink)}
+.theme-card-sub{font-family:'Cambria',serif;font-size:11px;color:var(--muted);line-height:1.5}
+.theme-card.active .theme-card-sub{color:rgba(237,232,223,0.5)}
+[data-mode="dark"] .theme-card.active .theme-card-sub{color:var(--muted)}
+.theme-free-badge{
+  position:absolute;top:16px;right:16px;
+  font-family:'Cambria',serif;font-size:8px;letter-spacing:2px;
+  padding:3px 10px;border:1px solid var(--orange);color:var(--orange);text-transform:uppercase;
+}
+.themes-unlock{
+  margin-top:20px;text-align:center;
+  font-family:'Cambria',serif;font-size:12px;color:var(--muted);font-style:italic;
+}
+.themes-unlock a{color:var(--orange);text-decoration:none}
+.themes-unlock a:hover{text-decoration:underline}
+
+/* ── REGISTER ── */
+.register-section{
+  background:var(--ink-mid);padding:120px 52px;
+  text-align:center;position:relative;overflow:hidden;
+}
+[data-mode="dark"] .register-section{background:var(--bg-dark)}
+.register-section::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:680px;height:680px;border-radius:50%;
+  border:1px solid rgba(200,90,0,0.07);
+  box-shadow:0 0 0 60px rgba(200,90,0,0.03),0 0 0 120px rgba(200,90,0,0.015);
+  pointer-events:none;
+}
+.register-section::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent 0px,transparent 26px,rgba(237,232,223,0.022) 26px,rgba(237,232,223,0.022) 27px);
+  pointer-events:none;
+}
+.register-content{position:relative;z-index:2;max-width:560px;margin:0 auto}
+.register-eyebrow{font-family:'Cambria',serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--orange);margin-bottom:28px}
+.register-title{
+  font-family:'IM Fell English',serif;font-size:clamp(30px,4.5vw,52px);
+  font-weight:400;font-style:italic;color:var(--inverse-text);line-height:1.2;margin-bottom:20px;
+}
+[data-mode="dark"] .register-title{color:var(--ink)}
+.register-body{font-family:'Cambria',serif;font-size:14.5px;color:rgba(237,232,223,0.5);line-height:1.88;margin-bottom:48px}
+[data-mode="dark"] .register-body{color:var(--muted)}
+.register-form{display:flex;max-width:440px;margin:0 auto 16px}
+.register-input{
+  flex:1;padding:15px 20px;
+  background:rgba(237,232,223,0.06);border:1px solid rgba(237,232,223,0.14);border-right:none;
+  color:var(--inverse-text);font-family:'Cambria',serif;font-size:14px;outline:none;transition:border-color 0.2s;
+}
+[data-mode="dark"] .register-input{color:var(--ink);background:rgba(237,232,223,0.04);border-color:var(--rule)}
+.register-input::placeholder{color:rgba(237,232,223,0.28)}
+[data-mode="dark"] .register-input::placeholder{color:var(--muted)}
+.register-input:focus{border-color:var(--orange)}
+.register-btn{
+  padding:15px 28px;background:var(--orange);
+  font-family:'Cambria',serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--bg);border:1px solid var(--orange);cursor:pointer;transition:background 0.2s;white-space:nowrap;
+}
+.register-btn:hover{background:var(--orange-lt);border-color:var(--orange-lt)}
+.register-note{font-family:'Cambria',serif;font-size:10px;color:rgba(237,232,223,0.28);letter-spacing:1.5px;text-transform:uppercase}
+[data-mode="dark"] .register-note{color:var(--muted)}
+
+/* ── FOOTER ── */
+footer{
+  padding:42px 52px;border-top:1px solid var(--rule);background:var(--bg);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;
+}
+.footer-logo{font-family:'IM Fell English',serif;font-size:15px;font-style:italic;color:var(--ink)}
+.footer-logo em{color:var(--orange)}
+.footer-middle{font-family:'Cambria',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted-lt);text-align:center}
+.footer-links{display:flex;gap:28px}
+.footer-links a{
+  font-family:'Cambria',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);transition:color 0.2s;text-decoration:none;
+}
+.footer-links a:hover{color:var(--orange)}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.up{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  .nav-links{display:none}
+  .nav{padding:0 24px}
+  .hero{padding:80px 24px 60px}
+  .hero-busts,.hero-columns,.hero-halo{display:none}
+  .hero-bottom{grid-template-columns:1fr;gap:24px}
+  .hero-meta{text-align:left}
+  .section{padding:72px 0}
+  .si{padding:0 24px}
+  .phil-grid,.month-feature{grid-template-columns:1fr}
+  .themes-grid{grid-template-columns:1fr 1fr}
+  footer{flex-direction:column;gap:18px;text-align:center;padding:32px 24px}
+  .footer-links{justify-content:center}
+  .register-section{padding:80px 24px}
+  .register-form{flex-direction:column}
+  .register-btn{width:100%;border-left:1px solid var(--orange)}
+}
+@media(max-width:580px){
+  .themes-grid{grid-template-columns:1fr}
+  .pillar-slide{flex-direction:column;gap:16px;padding:36px 28px}
+  .month-left,.month-right{padding:40px 28px}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .dust span{animation:none}
+  .pillar-track{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="vignette"></div>
+<div class="dust"><span></span><span></span><span></span><span></span><span></span></div>
+<div class="ghost-quote gq1">"The unexamined life is not worth living."<br>— Socrates</div>
+<div class="ghost-quote gq2">"Wonder is the beginning of wisdom."<br>— Aristotle</div>
+
+<!-- CONSTELLATION -->
+<svg class="constellation" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="120" cy="180" r="1.5" fill="#1A1713"/><circle cx="380" cy="90" r="1" fill="#1A1713"/>
+  <circle cx="620" cy="240" r="1.5" fill="#1A1713"/><circle cx="880" cy="140" r="1" fill="#1A1713"/>
+  <circle cx="1100" cy="320" r="1.5" fill="#1A1713"/><circle cx="1380" cy="200" r="1" fill="#1A1713"/>
+  <circle cx="240" cy="420" r="1" fill="#1A1713"/><circle cx="500" cy="500" r="1.5" fill="#1A1713"/>
+  <circle cx="760" cy="380" r="1" fill="#1A1713"/><circle cx="1020" cy="560" r="1.5" fill="#1A1713"/>
+  <circle cx="160" cy="680" r="1.5" fill="#1A1713"/><circle cx="420" cy="750" r="1" fill="#1A1713"/>
+  <circle cx="940" cy="700" r="1.5" fill="#1A1713"/>
+  <line x1="120" y1="180" x2="380" y2="90" stroke="#1A1713" stroke-width="0.4"/>
+  <line x1="380" y1="90" x2="620" y2="240" stroke="#1A1713" stroke-width="0.4"/>
+  <line x1="620" y1="240" x2="880" y2="140" stroke="#1A1713" stroke-width="0.4"/>
+  <line x1="880" y1="140" x2="1100" y2="320" stroke="#1A1713" stroke-width="0.4"/>
+  <line x1="240" y1="420" x2="500" y2="500" stroke="#1A1713" stroke-width="0.4"/>
+  <line x1="500" y1="500" x2="760" y2="380" stroke="#1A1713" stroke-width="0.4"/>
+  <line x1="160" y1="680" x2="420" y2="750" stroke="#1A1713" stroke-width="0.4"/>
+  <line x1="420" y1="750" x2="940" y2="700" stroke="#1A1713" stroke-width="0.4"/>
+  <line x1="380" y1="90" x2="240" y2="420" stroke="#1A1713" stroke-width="0.3"/>
+  <line x1="880" y1="140" x2="760" y2="380" stroke="#1A1713" stroke-width="0.3"/>
+</svg>
+
+<!-- COMPASS -->
+<svg class="compass-bg" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#1A1713">
+  <circle cx="170" cy="170" r="150" stroke-width="1"/>
+  <circle cx="170" cy="170" r="110" stroke-width="0.5"/>
+  <circle cx="170" cy="170" r="8" stroke-width="1"/>
+  <line x1="170" y1="20" x2="170" y2="320" stroke-width="0.5"/>
+  <line x1="20" y1="170" x2="320" y2="170" stroke-width="0.5"/>
+  <line x1="64" y1="64" x2="276" y2="276" stroke-width="0.3"/>
+  <line x1="276" y1="64" x2="64" y2="276" stroke-width="0.3"/>
+  <polygon points="170,22 163,58 177,58" fill="#1A1713" stroke="none"/>
+</svg>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="#">Reflections W/ <em>TEA</em></a>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#this-month">This Month</a></li>
+    <li><a href="#themes">Themes</a></li>
+    <li><a href="#register">Register</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
+      <span class="icon-sun">☀</span>
+      <span class="icon-moon">☽</span>
+    </button>
+    <button class="nav-cta" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register Free</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-columns"></div>
+  <div class="hero-manuscript"></div>
+  <div class="hero-halo"></div>
+
+  <!-- BUST COLLAGE -->
+  <svg class="hero-busts" viewBox="0 0 400 480" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <g opacity="0.85" transform="translate(18,38)">
+      <ellipse cx="128" cy="78" rx="50" ry="60" stroke="#1A1713" stroke-width="1.2"/>
+      <path d="M80 128 Q90 158 110 168 L146 168 Q166 158 176 128" stroke="#1A1713" stroke-width="1.2"/>
+      <path d="M84 138 L76 200 Q104 220 128 220 Q152 220 180 200 L172 138" stroke="#1A1713" stroke-width="1"/>
+      <path d="M96 152 Q128 172 160 152" stroke="#1A1713" stroke-width="0.7"/>
+      <path d="M100 164 Q128 184 156 164" stroke="#1A1713" stroke-width="0.5"/>
+      <ellipse cx="106" cy="76" rx="6" ry="4" stroke="#1A1713" stroke-width="0.8"/>
+      <ellipse cx="150" cy="76" rx="6" ry="4" stroke="#1A1713" stroke-width="0.8"/>
+      <path d="M128 76 L124 98 Q128 102 132 98 L128 76" stroke="#1A1713" stroke-width="0.7"/>
+      <path d="M114 110 Q128 116 142 110" stroke="#1A1713" stroke-width="0.8"/>
+      <path d="M80 66 Q90 40 128 34 Q166 40 176 66" stroke="#1A1713" stroke-width="0.8"/>
+      <path d="M76 200 Q64 250 54 320" stroke="#1A1713" stroke-width="0.8"/>
+      <path d="M180 200 Q192 250 202 320" stroke="#1A1713" stroke-width="0.8"/>
+      <path d="M88 210 Q128 228 168 210" stroke="#1A1713" stroke-width="0.6"/>
+      <path d="M82 240 Q128 258 174 240" stroke="#1A1713" stroke-width="0.4"/>
+    </g>
+    <g opacity="0.4" transform="translate(148,16)">
+      <ellipse cx="108" cy="88" rx="46" ry="56" stroke="#1A1713" stroke-width="1"/>
+      <path d="M64 134 Q74 162 96 172 L120 172 Q144 162 152 134" stroke="#1A1713" stroke-width="1"/>
+      <path d="M68 142 L58 210 Q84 228 108 228 Q132 228 158 210 L148 142" stroke="#1A1713" stroke-width="0.9"/>
+      <path d="M70 148 Q108 174 146 148" stroke="#1A1713" stroke-width="0.8"/>
+      <path d="M74 160 Q108 188 142 160" stroke="#1A1713" stroke-width="0.6"/>
+      <path d="M78 172 Q108 198 138 172" stroke="#1A1713" stroke-width="0.4"/>
+      <ellipse cx="90" cy="82" rx="6" ry="4" stroke="#1A1713" stroke-width="0.7"/>
+      <ellipse cx="126" cy="82" rx="6" ry="4" stroke="#1A1713" stroke-width="0.7"/>
+      <path d="M78 58 Q90 38 108 36 Q126 38 138 58" stroke="#1A1713" stroke-width="0.7"/>
+      <path d="M60 210 Q48 258 40 318" stroke="#1A1713" stroke-width="0.7"/>
+      <path d="M156 210 Q168 258 176 318" stroke="#1A1713" stroke-width="0.7"/>
+    </g>
+    <!-- open book -->
+    <g opacity="0.32" transform="translate(74,336)">
+      <path d="M128 0 L8 18 L8 96 L128 78 Z" stroke="#1A1713" stroke-width="0.9"/>
+      <path d="M132 0 L252 18 L252 96 L132 78 Z" stroke="#1A1713" stroke-width="0.9"/>
+      <line x1="128" y1="0" x2="128" y2="78" stroke="#1A1713" stroke-width="1"/>
+      <line x1="28" y1="30" x2="118" y2="22" stroke="#1A1713" stroke-width="0.4"/>
+      <line x1="28" y1="44" x2="118" y2="36" stroke="#1A1713" stroke-width="0.4"/>
+      <line x1="28" y1="58" x2="118" y2="50" stroke="#1A1713" stroke-width="0.4"/>
+      <line x1="138" y1="22" x2="228" y2="30" stroke="#1A1713" stroke-width="0.4"/>
+      <line x1="138" y1="36" x2="228" y2="44" stroke="#1A1713" stroke-width="0.4"/>
+      <line x1="138" y1="50" x2="228" y2="58" stroke="#1A1713" stroke-width="0.4"/>
+    </g>
+    <!-- fountain pen -->
+    <g opacity="0.25" transform="translate(300,178) rotate(-38)">
+      <rect x="0" y="0" width="11" height="108" rx="3" stroke="#1A1713" stroke-width="0.8"/>
+      <path d="M2 108 L5.5 132 L9 108" stroke="#1A1713" stroke-width="0.8"/>
+      <line x1="0" y1="16" x2="11" y2="16" stroke="#1A1713" stroke-width="0.6"/>
+      <ellipse cx="5.5" cy="8" rx="4" ry="5.5" stroke="#1A1713" stroke-width="0.7"/>
+    </g>
+  </svg>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow reveal">A Monthly Teaching by Ezra Anya · theezraanya.com</div>
+    <h1 class="hero-display reveal">
+      Reflections<br>W/ <span class="accent">TEA</span>
+      <span class="sub-word">Where introspection meets illumination</span>
+    </h1>
+    <div class="hero-rule reveal"></div>
+    <div class="hero-bottom reveal">
+      <p class="hero-premise">
+        Many of us are moving without meaning, pursuing without purpose — not because we lack ambition, but because we are not aligned.
+        <strong>Reflections is the space where that changes.</strong>
+        One hour. One conversation. One question.
+      </p>
+      <div class="hero-meta">
+        <div class="hero-meta-label">Facilitated by</div>
+        <div class="hero-meta-name">Ezra Anya</div>
+        <div class="hero-meta-role">Thinker · Theologian · Teacher</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="section phil-section" id="philosophy">
+  <div class="si">
+    <div class="s-label reveal">The Philosophy</div>
+    <h2 class="s-title reveal">Why this exists</h2>
+    <p class="s-body reveal">Reflection is that conversation where the beliefs you have held about yourself, life, and God are stress-tested. In an environment free from the noise of your daily life, you are able to think deeply, see clearly, and live truly. Reflections W/ TEA was designed with you in mind and the next generation at heart.</p>
+    <div class="phil-grid reveal">
+      <div class="phil-cell">
+        <div class="phil-cell-label">What it is</div>
+        <div class="phil-cell-text">"A monthly gathering where ambitious people pause long enough to think clearly, challenge assumptions, gain perspective, and leave with practical steps toward meaningful growth."</div>
+      </div>
+      <div class="phil-cell dark">
+        <div class="phil-cell-label">What it is not</div>
+        <div class="phil-cell-text">"Not a motivational talk. Not a church service. Not a workshop. It is a teaching — and the teacher has done the work so the room does not have to start from scratch."</div>
+      </div>
+      <div class="phil-cell dark">
+        <div class="phil-cell-label">The goal</div>
+        <div class="phil-cell-text">"The goal is not inspiration. The goal is clarity. And clarity changes behaviour."</div>
+      </div>
+      <div class="phil-cell">
+        <div class="phil-cell-label">The name</div>
+        <div class="phil-cell-text">"TEA is The Ezra Anya — and also the posture. Tea is what you drink when you are actually talking. When the conversation is honest. When the only agenda is to think well together."</div>
+      </div>
+    </div>
+    <div class="phil-belief reveal">
+      <div class="phil-belief-label">The Core Belief</div>
+      <div class="phil-belief-text">People rarely stay stuck because they lack information. They stay stuck because they are not aligned. Every month, Reflections addresses one root of that misalignment.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS CAROUSEL -->
+<section class="section pillars-section">
+  <div class="si">
+    <div class="s-label reveal">The Three Pillars</div>
+    <div class="pillar-carousel reveal" id="pillarCarousel">
+      <div class="pillar-track" id="pillarTrack">
+        <div class="pillar-slide">
+          <div class="pillar-num">I</div>
+          <div class="pillar-body">
+            <div class="pillar-title">Reflect</div>
+            <div class="pillar-desc">Most people move from season to season without stopping to understand what the season meant. Reflections W/ TEA creates the space to slow down and think honestly about what is actually happening in your life — not the performance of it, the reality of it.</div>
+          </div>
+        </div>
+        <div class="pillar-slide">
+          <div class="pillar-num">II</div>
+          <div class="pillar-body">
+            <div class="pillar-title">Learn</div>
+            <div class="pillar-desc">Every session is anchored in rigorous thinking — Scripture, research, psychology, philosophy, and the kind of applied wisdom that has survived long enough to be trusted. This is not motivation. It is formation. The kind that stays after the feeling fades.</div>
+          </div>
+        </div>
+        <div class="pillar-slide">
+          <div class="pillar-num">III</div>
+          <div class="pillar-body">
+            <div class="pillar-title">Act</div>
+            <div class="pillar-desc">Every session closes with a reorientation, not a to-do list. You leave knowing something you did not know when you arrived, and you know what to do with it. The action is specific. The direction is clear. Nothing is left vague.</div>
+          </div>
+        </div>
+      </div>
+      <div class="pillar-controls">
+        <button class="pillar-btn" id="pillarPrev" aria-label="Previous pillar">&#8592;</button>
+        <div class="pillar-dots">
+          <button class="pillar-dot active" data-i="0" aria-label="Pillar 1"></button>
+          <button class="pillar-dot" data-i="1" aria-label="Pillar 2"></button>
+          <button class="pillar-dot" data-i="2" aria-label="Pillar 3"></button>
+        </div>
+        <button class="pillar-btn" id="pillarNext" aria-label="Next pillar">&#8594;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT — ACCORDION -->
+<section class="section expect-section">
+  <div class="si">
+    <div class="s-label reveal">What to Expect</div>
+    <h2 class="s-title reveal">Every session delivers <em>three things</em></h2>
+    <div class="accordion reveal" id="accordion">
+      <div class="acc-item open" data-acc="0">
+        <button class="acc-trigger" aria-expanded="true">
+          <div class="acc-trigger-left">
+            <span class="acc-num">01</span>
+            <span class="acc-title">Perspective — See differently</span>
+          </div>
+          <span class="acc-arrow">›</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <ul class="acc-points">
+              <li>Ask better questions about your own life</li>
+              <li>Challenge assumptions you did not know you held</li>
+              <li>Think deeper than the content cycle allows</li>
+              <li>See your situation from outside your own head</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="acc-item" data-acc="1">
+        <button class="acc-trigger" aria-expanded="false">
+          <div class="acc-trigger-left">
+            <span class="acc-num">02</span>
+            <span class="acc-title">Practical Wisdom — Think better</span>
+          </div>
+          <span class="acc-arrow">›</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <ul class="acc-points">
+              <li>Actionable frameworks, not theories or clichés</li>
+              <li>Mental models grounded in research and lived experience</li>
+              <li>Biblical wisdom applied honestly to real life</li>
+              <li>Leadership lessons from those who actually built things</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="acc-item" data-acc="2">
+        <button class="acc-trigger" aria-expanded="false">
+          <div class="acc-trigger-left">
+            <span class="acc-num">03</span>
+            <span class="acc-title">Personal Action — Move forward</span>
+          </div>
+          <span class="acc-arrow">›</span>
+        </button>
+        <div class="acc-body">
+          <div class="acc-inner">
+            <ul class="acc-points">
+              <li>Nobody leaves without a clear next step</li>
+              <li>What needs to change — and the honest reason why</li>
+              <li>How to begin changing it, starting today</li>
+              <li>One decision that shifts the entire trajectory</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THIS MONTH -->
+<section class="section month-section" id="this-month">
+  <div class="si">
+    <div class="s-label reveal">Edition One · This Month</div>
+    <div class="month-feature reveal">
+      <div class="month-left">
+        <div class="month-edition">Reflections W/ TEA — Edition 01</div>
+        <div class="month-title">Reset</div>
+        <div class="month-subtitle">Coming Out of Being Stuck</div>
+        <p class="month-desc">Stuck is not a personality. It is a posture. And postures can change. If you are a thinker like me — this session is for you. One hour. One conversation. One question that has the potential to shift everything.</p>
+        <div class="month-tags">
+          <span class="month-tag">Why smart people stay stuck</span>
+          <span class="month-tag">The anatomy of a reset</span>
+          <span class="month-tag">Breaking the guilt-inertia loop</span>
+          <span class="month-tag">One decision that changes everything</span>
+        </div>
+      </div>
+      <div class="month-right">
+        <div class="month-right-title">Read, Listen, Join</div>
+        <div class="month-links">
+          <a href="https://substack.com/@ezraanya" target="_blank" rel="noopener" class="month-link-card">
+            <div>
+              <div class="month-link-label">Substack</div>
+              <div class="month-link-name">The Ezra Anya — Articles & Essays</div>
+            </div>
+            <span class="month-link-arrow">→</span>
+          </a>
+          <a href="https://whatsapp.com/channel/theezraanya" target="_blank" rel="noopener" class="month-link-card">
+            <div>
+              <div class="month-link-label">WhatsApp Channel</div>
+              <div class="month-link-name">The Ezra Anya (TEA)</div>
+              <div class="month-wa-desc">Thoughts on theology, psychology, and personal development — sharpened by the Word.</div>
+            </div>
+            <span class="month-link-arrow">→</span>
+          </a>
+        </div>
+        <button class="month-register" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Reserve Your Spot — Free</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY REFLECTION — QUOTES -->
+<section class="section why-section">
+  <div class="si">
+    <div class="s-label reveal">Why Reflection</div>
+    <h2 class="s-title reveal">Experience alone <em>is not enough</em></h2>
+    <div class="why-quotes reveal">
+      <div class="why-quote">
+        <div class="why-quote-main">
+          Experience alone does not produce wisdom. <strong>Reflection on experience does.</strong>
+        </div>
+      </div>
+      <div class="why-quote">
+        <div class="why-quote-main">
+          Clarity is not given. It is carved — through the discipline of stopping long enough to think. <strong>That is what this is for.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THEMES -->
+<section class="section themes-section" id="themes">
+  <div class="si">
+    <div class="s-label reveal">The Year Ahead</div>
+    <h2 class="s-title reveal">Twelve months. <em>Twelve questions your life is already asking.</em></h2>
+    <div class="themes-grid reveal">
+      <div class="theme-card active">
+        <div class="theme-card-month">This Month</div>
+        <div class="theme-card-title">Reset</div>
+        <div class="theme-card-sub">Coming out of being stuck. The posture shift that makes everything else possible.</div>
+        <div class="theme-free-badge">Free</div>
+      </div>
+      <div class="theme-card">
+        <div class="theme-card-month">Month 02</div>
+        <div class="theme-card-title">Identity</div>
+        <div class="theme-card-sub">Who you actually are versus who you have been performing.</div>
+        <div class="theme-free-badge">Free</div>
+      </div>
+      <div class="theme-card locked">
+        <div class="theme-card-month">Month 03</div>
+        <div class="theme-card-title">Discipline</div>
+        <div class="theme-card-sub">Why willpower fails and what actually works.</div>
+        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+      </div>
+      <div class="theme-card locked">
+        <div class="theme-card-month">Month 04</div>
+        <div class="theme-card-title">Relationships</div>
+        <div class="theme-card-sub">The people question. Who you are with and what it is costing you.</div>
+        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+      </div>
+      <div class="theme-card locked">
+        <div class="theme-card-month">Month 05</div>
+        <div class="theme-card-title">Money</div>
+        <div class="theme-card-sub">A theology and psychology of stewardship.</div>
+        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+      </div>
+      <div class="theme-card locked">
+        <div class="theme-card-month">Month 06</div>
+        <div class="theme-card-title">Purpose</div>
+        <div class="theme-card-sub">What it means to have a calling — and what to do when you are not sure you do.</div>
+        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+      </div>
+      <div class="theme-card locked">
+        <div class="theme-card-month">Month 07</div>
+        <div class="theme-card-title">Communication</div>
+        <div class="theme-card-sub">How you speak determines what you build.</div>
+        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+      </div>
+      <div class="theme-card locked">
+        <div class="theme-card-month">Month 08</div>
+        <div class="theme-card-title">Faith</div>
+        <div class="theme-card-sub">A serious engagement with what you believe and whether you are living it.</div>
+        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+      </div>
+      <div class="theme-card locked">
+        <div class="theme-card-month">Month 09</div>
+        <div class="theme-card-title">Grief and Transition</div>
+        <div class="theme-card-sub">How to leave well and enter the next season clean.</div>
+        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+      </div>
+      <div class="theme-card locked">
+        <div class="theme-card-month">Month 10</div>
+        <div class="theme-card-title">Leadership</div>
+        <div class="theme-card-sub">The difference between managing and actually leading.</div>
+        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+      </div>
+      <div class="theme-card locked">
+        <div class="theme-card-month">Month 11</div>
+        <div class="theme-card-title">Decision Making</div>
+        <div class="theme-card-sub">The frameworks that produce better choices.</div>
+        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+      </div>
+      <div class="theme-card locked">
+        <div class="theme-card-month">Month 12</div>
+        <div class="theme-card-title">Review and Reset</div>
+        <div class="theme-card-sub">The annual reckoning. Where did the year go? Who did you become?</div>
+        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+      </div>
+    </div>
+    <p class="themes-unlock">Months 3 to 12 available with full-year access. <a href="#register">Join the waitlist</a> to be notified when it opens.</p>
+  </div>
+</section>
+
+<!-- ABOUT: commented out — revisit later -->
+<!--
+<section class="section about-section" id="about">
+  <div class="si">
+    About section placeholder
+  </div>
+</section>
+-->
+
+<!-- REGISTER -->
+<section class="register-section" id="register">
+  <div class="register-content reveal">
+    <div class="register-eyebrow">Join the next session</div>
+    <h2 class="register-title">Reserve your spot.<br>It is free.</h2>
+    <p class="register-body">The first edition of Reflections W/ TEA is open to everyone in the community. No charge. One hour. Come ready to think — and leave ready to move.</p>
+    <div class="register-form">
+      <input type="email" class="register-input" id="emailInput" placeholder="Your email address">
+      <button class="register-btn" id="registerBtn">Register Now</button>
+    </div>
+    <p class="register-note" id="registerNote">Free for this edition · No spam · Unsubscribe anytime</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Reflections W/ <em>TEA</em></div>
+  <div class="footer-middle">theezraanya.com · A monthly teaching event · 2026</div>
+  <div class="footer-links">
+    <a href="#philosophy">Philosophy</a>
+    <a href="#this-month">This Month</a>
+    <a href="#themes">Themes</a>
+    <a href="#register">Register</a>
+    <a href="https://substack.com/@ezraanya" target="_blank" rel="noopener">Substack</a>
+  </div>
+</footer>
+
+<script>
+/* ── DARK MODE TOGGLE ── */
+const root = document.documentElement;
+const toggleBtn = document.getElementById('modeToggle');
+const saved = localStorage.getItem('teaMode') || 'light';
+root.setAttribute('data-mode', saved);
+toggleBtn.addEventListener('click', () => {
+  const next = root.getAttribute('data-mode') === 'light' ? 'dark' : 'light';
+  root.setAttribute('data-mode', next);
+  localStorage.setItem('teaMode', next);
+  const nav = document.getElementById('nav');
+  nav.style.background = next === 'dark' ? 'rgba(15,13,11,0.98)' : '';
+});
+
+/* ── NAV SCROLL ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  const isDark = root.getAttribute('data-mode') === 'dark';
+  if (window.scrollY > 40) {
+    nav.style.background = isDark ? 'rgba(15,13,11,0.98)' : 'rgba(247,243,237,0.98)';
+  } else {
+    nav.style.background = '';
+  }
+});
+
+/* ── PILLAR CAROUSEL ── */
+const track = document.getElementById('pillarTrack');
+const dots = document.querySelectorAll('.pillar-dot');
+let current = 0;
+const total = 3;
+
+function goTo(i) {
+  current = (i + total) % total;
+  track.style.transform = `translateX(-${current * 100}%)`;
+  dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+}
+document.getElementById('pillarNext').addEventListener('click', () => goTo(current + 1));
+document.getElementById('pillarPrev').addEventListener('click', () => goTo(current - 1));
+dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.i)));
+
+/* touch swipe on carousel */
+let tsX = 0;
+track.addEventListener('touchstart', e => { tsX = e.touches[0].clientX; }, {passive:true});
+track.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tsX;
+  if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+});
+
+/* ── ACCORDION ── */
+document.getElementById('accordion').addEventListener('click', e => {
+  const trigger = e.target.closest('.acc-trigger');
+  if (!trigger) return;
+  const item = trigger.closest('.acc-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.acc-item.open').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.acc-trigger').setAttribute('aria-expanded', 'false');
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    trigger.setAttribute('aria-expanded', 'true');
+  }
+});
+
+/* ── REGISTER (demo — swap for Google Form or Mailchimp URL) ── */
+document.getElementById('registerBtn').addEventListener('click', () => {
+  const email = document.getElementById('emailInput').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('registerNote').textContent = 'Please enter a valid email address.';
+    return;
+  }
+  /* In production: POST to Mailchimp/ConvertKit API or redirect to Google Form */
+  /* window.open('https://forms.gle/YOUR_GOOGLE_FORM_LINK', '_blank'); */
+  document.getElementById('registerBtn').textContent = 'Registered ✓';
+  document.getElementById('registerBtn').style.background = '#2E7D32';
+  document.getElementById('registerNote').textContent = 'You are on the list. Watch your inbox for confirmation.';
+  document.getElementById('emailInput').disabled = true;
+});
+
+/* ── SCROLL REVEAL ── */
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('up'), i * 65);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.06 });
+reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
