@@ -165,8 +165,8 @@ body::after{
 
 /* ── HERO ── */
 .hero{
-  min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
-  padding:64px var(--pad) 72px;position:relative;overflow:hidden;
+  height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:64px var(--pad) clamp(28px,5vh,56px);position:relative;overflow:hidden;max-height:100vh;
 }
 .hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:2}
 .hero-columns{
@@ -932,7 +932,7 @@ footer{padding:clamp(28px,5vw,42px) var(--pad);border-top:1px solid var(--rule);
           <span class="faq-arrow" aria-hidden="true">›</span>
         </button>
         <div class="faq-body"><div class="faq-inner">
-          <p class="faq-a">Reflections W/ TEA is a monthly teaching event hosted by Ezra Anya. Each session focuses on one theme — one question your life is already asking — and explores it with depth, honesty, and practical application. It is not a motivational talk, not a church service, and not a workshop. It is a teaching. You come, you think, you leave with something concrete.</p>
+          <p class="faq-a">Reflections W/ TEA is a monthly online teaching event hosted by Ezra Anya. Each session focuses on one theme — one question your life is already asking — and explores it with depth, honesty, and practical application. It is not a motivational talk, not a church service, and not a workshop. It is a teaching. You come, you think, you leave with something concrete.</p>
         </div></div>
       </div>
 
@@ -942,7 +942,7 @@ footer{padding:clamp(28px,5vw,42px) var(--pad);border-top:1px solid var(--rule);
           <span class="faq-arrow" aria-hidden="true">›</span>
         </button>
         <div class="faq-body"><div class="faq-inner">
-          <p class="faq-a">Each session is one hour. Every minute is intentional. The session ends on time — always.</p>
+          <p class="faq-a">Each session is one hour. It opens with a framing question, moves into the core teaching, gives you a reflection prompt to sit with, and closes with a specific action or declaration. Every minute is intentional. The session ends on time — always.</p>
         </div></div>
       </div>
 
@@ -952,7 +952,7 @@ footer{padding:clamp(28px,5vw,42px) var(--pad);border-top:1px solid var(--rule);
           <span class="faq-arrow" aria-hidden="true">›</span>
         </button>
         <div class="faq-body"><div class="faq-inner">
-          <p class="faq-a">Yes, it is currently free of charge.</p>
+          <p class="faq-a">The first two editions — Reset and Renew — are completely free. No hidden fees, no upsells on the day. This is the trust-building season. Subsequent months will move to a paid model, and those who have been part of the early community will receive priority access and early-bird pricing.</p>
         </div></div>
       </div>
 
@@ -1002,7 +1002,7 @@ footer{padding:clamp(28px,5vw,42px) var(--pad);border-top:1px solid var(--rule);
           <span class="faq-arrow" aria-hidden="true">›</span>
         </button>
         <div class="faq-body"><div class="faq-inner">
-          <p class="faq-a">You can reach out via WhatsApp at <a href="https://wa.me/2349126634636" target="_blank" rel="noopener">+234 810 000 0000</a>You can also connect through the <a href="https://whatsapp.com/channel/0029VatWctcHrDZm8Kuch52O" target="_blank" rel="noopener">WhatsApp Channel</a> or find Ezra on <a href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Substack</a>.</p>
+          <p class="faq-a">You can reach out via WhatsApp at <a href="https://wa.me/2349126634636" target="_blank" rel="noopener">+234 912 663 4636</a> You can also send a message through the <a href="https://whatsapp.com/channel/0029VatWctcHrDZm8Kuch52O" target="_blank" rel="noopener">WhatsApp Channel</a> or find Ezra on <a href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Substack</a>.</p>
         </div></div>
       </div>
 
@@ -1042,7 +1042,7 @@ footer{padding:clamp(28px,5vw,42px) var(--pad);border-top:1px solid var(--rule);
 
     <div class="register-contact">
       <div class="register-contact-label">Questions? Reach out directly</div>
-      <a href="https://wa.me/2349126634636" target="_blank" rel="noopener">WhatsApp:+234 912 663 4636</a>
+      <a href="https://wa.me/2349126634636" target="_blank" rel="noopener">WhatsApp: +234 912 663 4636</a>
     </div>
 
     <p class="register-note" id="registerNote">Free for this edition · No spam · Unsubscribe anytime</p>
@@ -1147,7 +1147,19 @@ function initAccordion(containerId) {
 initAccordion('accordion');
 initAccordion('faqList');
 
-/* ── EMAIL NOTIFY (secondary form) ── */
+/* ── EMAIL NOTIFY ── */
+/* 
+  Wired to Google Form prefill.
+  Field IDs extracted from pre-fill URL:
+    entry.2005620554 = Full Name
+    entry.1045781291 = Email
+    entry.1065046570 = Location
+  The Notify Me button pre-fills the email field and opens the form.
+  The user completes their name and location on the form itself.
+*/
+const FORM_BASE = 'https://docs.google.com/forms/d/e/1FAIpQLSfca9MfUGNwg2K08WlIDEdyXaatxxAmnzbHaE2i0qV62tSlJQ/viewform?usp=pp_url';
+const EMAIL_FIELD = 'entry.1045781291';
+
 document.getElementById('registerBtn').addEventListener('click', () => {
   const email = document.getElementById('emailInput').value.trim();
   const note = document.getElementById('registerNote');
@@ -1157,12 +1169,14 @@ document.getElementById('registerBtn').addEventListener('click', () => {
     note.style.color = '#E06A10';
     return;
   }
-  btn.textContent = 'Added ✓';
+  const prefillURL = FORM_BASE + '&' + EMAIL_FIELD + '=' + encodeURIComponent(email);
+  window.open(prefillURL, '_blank');
+  btn.textContent = 'Continue in Form ✓';
   btn.style.background = 'rgba(46,125,50,0.4)';
   btn.disabled = true;
   document.getElementById('emailInput').disabled = true;
-  note.textContent = 'You are on the list. Watch your inbox.';
-  note.style.color = 'rgba(237,232,223,0.4)';
+  note.textContent = 'The form is opening. Your email is already filled in — just complete the rest.';
+  note.style.color = 'rgba(237,232,223,0.45)';
 });
 
 /* ── SCROLL REVEAL ── */
