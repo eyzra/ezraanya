@@ -7,12 +7,11 @@
 <meta name="description" content="One hour. One conversation. One question. Where introspection meets illumination. A monthly teaching by Ezra Anya.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cambria:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 
-/* ── LIGHT MODE ── */
 :root{
   --bg:#F7F3ED;
   --bg-mid:#F0EBE3;
@@ -31,9 +30,10 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
   --nav-bg:rgba(247,243,237,0.95);
   --ghost-color:#1A1713;
   --pad:clamp(20px,5vw,52px);
+  --body-font:'Cambria',Cambria,Georgia,'Times New Roman',serif;
+  --display-font:'IM Fell English',Georgia,serif;
 }
 
-/* ── DARK MODE ── */
 [data-mode="dark"]{
   --bg:#0F0D0B;
   --bg-mid:#181410;
@@ -56,21 +56,18 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   background-color:var(--bg);
   color:var(--ink);
-  font-family:'Outfit',sans-serif;
-  font-weight:300;
-  line-height:1.7;
+  font-family:var(--body-font);
+  font-weight:400;
+  line-height:1.75;
   overflow-x:hidden;
   position:relative;
   transition:background-color 0.4s,color 0.4s;
 }
 
-/* ── PAPER GRAIN ── */
 body::before{
   content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
 }
-
-/* ── LIGHT RAY ── */
 body::after{
   content:'';position:fixed;top:-120px;left:-120px;
   width:600px;height:600px;
@@ -81,83 +78,59 @@ body::after{
   background:radial-gradient(ellipse at 20% 15%, rgba(200,90,0,0.03) 0%, transparent 68%);
 }
 
-/* ── VIGNETTE ── */
 .vignette{
   position:fixed;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(ellipse at 50% 50%, transparent 52%, rgba(0,0,0,0.12) 100%);
 }
 
-/* ── DUST ── */
 @keyframes floatUp{
   0%{transform:translateY(0) translateX(0);opacity:0}
   20%{opacity:1}80%{opacity:0.5}
   100%{transform:translateY(-90px) translateX(12px);opacity:0}
 }
 .dust{position:fixed;inset:0;pointer-events:none;z-index:1}
-.dust span{
-  position:absolute;width:2px;height:2px;border-radius:50%;
-  background:rgba(200,90,0,0.15);animation:floatUp linear infinite;
-}
+.dust span{position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(200,90,0,0.15);animation:floatUp linear infinite}
 .dust span:nth-child(1){left:10%;top:65%;animation-duration:10s}
 .dust span:nth-child(2){left:28%;top:72%;animation-duration:13s;animation-delay:3s;width:1px;height:1px}
 .dust span:nth-child(3){left:55%;top:60%;animation-duration:9s;animation-delay:1s}
 .dust span:nth-child(4){left:75%;top:68%;animation-duration:15s;animation-delay:5s;width:1px;height:1px}
 .dust span:nth-child(5){left:88%;top:62%;animation-duration:11s;animation-delay:2s}
 
-/* ── GHOST QUOTES ── */
 .ghost-quote{
-  position:fixed;font-family:'IM Fell English',serif;font-style:italic;
-  font-size:10px;color:var(--ghost-color);opacity:0.035;
+  position:fixed;font-family:var(--display-font);font-style:italic;
+  font-size:11px;color:var(--ghost-color);opacity:0.038;
   letter-spacing:0.4px;line-height:1.6;
-  pointer-events:none;z-index:0;max-width:200px;
+  pointer-events:none;z-index:0;max-width:220px;
 }
 .gq1{top:14%;right:2%;transform:rotate(2deg)}
 .gq2{bottom:22%;left:1%;transform:rotate(-1.5deg)}
 
-/* ── CONSTELLATION ── */
-.constellation{
-  position:fixed;top:0;left:0;width:100%;height:100%;
-  pointer-events:none;z-index:0;opacity:0.04;
-}
+.constellation{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.04}
+.compass-bg{position:fixed;bottom:-80px;right:-80px;width:300px;height:300px;opacity:0.03;pointer-events:none;z-index:0}
 
-/* ── COMPASS ── */
-.compass-bg{
-  position:fixed;bottom:-80px;right:-80px;width:300px;height:300px;
-  opacity:0.03;pointer-events:none;z-index:0;
-}
-
-/* ─────────────────────────────────
-   NAV
-───────────────────────────────── */
+/* ── NAV ── */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 var(--pad);height:62px;
+  padding:0 var(--pad);height:64px;
   background:var(--nav-bg);
   border-bottom:1px solid var(--rule);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
 }
-.nav-logo{
-  font-family:'IM Fell English',serif;font-size:15px;font-style:italic;
-  color:var(--ink);text-decoration:none;flex-shrink:0;
-}
+.nav-logo{font-family:var(--display-font);font-size:16px;font-style:italic;color:var(--ink);text-decoration:none;flex-shrink:0}
 .nav-logo em{color:var(--orange)}
-.nav-links{
-  display:flex;gap:28px;list-style:none;
-}
+.nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{
-  font-family:'Outfit',sans-serif;font-size:11px;font-weight:400;
+  font-family:var(--body-font);font-size:12px;font-weight:400;
   letter-spacing:2px;text-transform:uppercase;
   color:var(--muted);transition:color 0.2s;text-decoration:none;
 }
 .nav-links a:hover{color:var(--orange)}
 .nav-right{display:flex;align-items:center;gap:12px}
 .nav-cta{
-  font-family:'Outfit',sans-serif;font-size:10px;font-weight:400;
+  font-family:var(--body-font);font-size:11px;font-weight:400;
   letter-spacing:2px;text-transform:uppercase;
-  padding:8px 18px;
-  border:1px solid var(--orange);color:var(--orange);
+  padding:8px 20px;border:1px solid var(--orange);color:var(--orange);
   background:transparent;cursor:pointer;transition:all 0.2s;white-space:nowrap;
 }
 .nav-cta:hover{background:var(--orange);color:var(--bg)}
@@ -170,402 +143,203 @@ body::after{
 .icon-sun,.icon-moon{display:none}
 [data-mode="light"] .icon-sun{display:block}
 [data-mode="dark"] .icon-moon{display:block}
-
-/* Mobile hamburger */
-.hamburger{
-  display:none;background:none;border:none;cursor:pointer;
-  flex-direction:column;gap:5px;padding:4px;
-}
-.hamburger span{
-  display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.3s;
-}
+.hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.3s}
 .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-
-/* Mobile nav drawer */
 .mobile-nav{
-  display:none;position:fixed;top:62px;left:0;right:0;z-index:190;
+  display:none;position:fixed;top:64px;left:0;right:0;z-index:190;
   background:var(--bg);border-bottom:1px solid var(--rule);
-  padding:24px var(--pad) 28px;
-  flex-direction:column;gap:0;
+  padding:24px var(--pad) 28px;flex-direction:column;gap:0;
 }
 .mobile-nav.open{display:flex}
 .mobile-nav a{
-  font-family:'Outfit',sans-serif;font-size:13px;font-weight:400;
+  font-family:var(--body-font);font-size:13px;font-weight:400;
   letter-spacing:2px;text-transform:uppercase;
   color:var(--muted);text-decoration:none;
-  padding:14px 0;border-bottom:1px solid var(--rule);
-  transition:color 0.2s;
+  padding:14px 0;border-bottom:1px solid var(--rule);transition:color 0.2s;
 }
 .mobile-nav a:last-child{border-bottom:none}
 .mobile-nav a:hover{color:var(--orange)}
 
-/* ─────────────────────────────────
-   HERO
-───────────────────────────────── */
+/* ── HERO ── */
 .hero{
-  min-height:100svh;
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:62px var(--pad) 72px;
-  position:relative;overflow:hidden;
+  min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:64px var(--pad) 72px;position:relative;overflow:hidden;
 }
-.hero-inner{
-  max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:2;
-}
+.hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:2}
 .hero-columns{
   position:absolute;top:0;right:0;bottom:0;width:50%;
-  background:repeating-linear-gradient(
-    90deg,transparent 0px,transparent 36px,
-    rgba(26,23,19,0.02) 36px,rgba(26,23,19,0.02) 38px,
-    transparent 38px,transparent 96px
-  );
+  background:repeating-linear-gradient(90deg,transparent 0px,transparent 36px,rgba(26,23,19,0.02) 36px,rgba(26,23,19,0.02) 38px,transparent 38px,transparent 96px);
   pointer-events:none;
 }
-[data-mode="dark"] .hero-columns{
-  background:repeating-linear-gradient(
-    90deg,transparent 0px,transparent 36px,
-    rgba(237,232,223,0.02) 36px,rgba(237,232,223,0.02) 38px,
-    transparent 38px,transparent 96px
-  );
-}
-.hero-manuscript{
-  position:absolute;inset:0;opacity:0.025;pointer-events:none;
-  background-image:repeating-linear-gradient(
-    0deg,transparent 0px,transparent 22px,
-    rgba(26,23,19,0.5) 22px,rgba(26,23,19,0.5) 23px
-  );
-}
+[data-mode="dark"] .hero-columns{background:repeating-linear-gradient(90deg,transparent 0px,transparent 36px,rgba(237,232,223,0.02) 36px,rgba(237,232,223,0.02) 38px,transparent 38px,transparent 96px)}
+.hero-manuscript{position:absolute;inset:0;opacity:0.025;pointer-events:none;background-image:repeating-linear-gradient(0deg,transparent 0px,transparent 22px,rgba(26,23,19,0.5) 22px,rgba(26,23,19,0.5) 23px)}
 .hero-halo{
   position:absolute;top:50%;right:6%;transform:translateY(-50%);
-  width:clamp(220px,38vw,440px);height:clamp(220px,38vw,440px);
-  border-radius:50%;
+  width:clamp(220px,38vw,440px);height:clamp(220px,38vw,440px);border-radius:50%;
   border:1px solid rgba(200,90,0,0.09);
-  box-shadow:
-    0 0 0 24px rgba(200,90,0,0.03),
-    0 0 0 48px rgba(200,90,0,0.016),
-    0 0 0 72px rgba(200,90,0,0.008);
+  box-shadow:0 0 0 24px rgba(200,90,0,0.03),0 0 0 48px rgba(200,90,0,0.016),0 0 0 72px rgba(200,90,0,0.008);
   pointer-events:none;z-index:1;
 }
-.hero-halo::before{
-  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:76%;height:76%;border-radius:50%;
-  border:1px solid rgba(200,90,0,0.055);
-}
-
-/* HERO PHOTO PLACEHOLDER */
-.hero-photo-placeholder{
-  position:absolute;top:50%;right:5%;transform:translateY(-50%);
-  width:clamp(180px,30vw,360px);height:clamp(220px,38vw,440px);
-  z-index:2;
-  border:1px solid var(--rule-strong);
-  background:var(--bg-dark);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:12px;
-  opacity:0.55;
-}
-[data-mode="dark"] .hero-photo-placeholder{background:var(--bg-mid);opacity:0.4}
-.hero-photo-placeholder svg{opacity:0.4}
-.hero-photo-placeholder-label{
-  font-family:'Outfit',sans-serif;font-size:9px;letter-spacing:3px;
-  text-transform:uppercase;color:var(--muted);text-align:center;
-}
+.hero-halo::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:76%;height:76%;border-radius:50%;border:1px solid rgba(200,90,0,0.055)}
 
 .hero-eyebrow{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;
+  font-family:var(--body-font);font-size:10px;font-weight:400;
   letter-spacing:4px;text-transform:uppercase;color:var(--orange);
-  margin-bottom:clamp(16px,3vw,28px);
-  display:flex;align-items:center;gap:14px;
+  margin-bottom:clamp(16px,3vw,28px);display:flex;align-items:center;gap:14px;
 }
 .hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--orange);flex-shrink:0}
 .hero-display{
-  font-family:'IM Fell English',serif;
-  font-size:clamp(52px,10vw,148px);
-  font-weight:400;font-style:italic;
-  line-height:0.88;letter-spacing:-1px;
-  color:var(--ink);
+  font-family:var(--display-font);
+  font-size:clamp(52px,10vw,148px);font-weight:400;font-style:italic;
+  line-height:0.88;letter-spacing:-1px;color:var(--ink);
 }
 .hero-display .accent{color:var(--orange)}
 .hero-display .sub-word{
-  font-family:'Outfit',sans-serif;font-style:normal;font-weight:300;
-  font-size:clamp(11px,1.4vw,16px);letter-spacing:4px;text-transform:uppercase;
-  color:var(--muted);display:block;margin-top:14px;margin-left:3px;
+  font-family:var(--body-font);font-style:normal;font-weight:400;
+  font-size:clamp(11px,1.4vw,15px);letter-spacing:4px;text-transform:uppercase;
+  color:var(--muted);display:block;margin-top:16px;margin-left:3px;
 }
 .hero-rule{
   width:100%;height:1px;
   background:linear-gradient(to right, var(--orange) 0%, rgba(200,90,0,0.1) 50%, transparent 100%);
   margin:clamp(28px,5vw,50px) 0 clamp(20px,4vw,36px);
 }
-.hero-bottom{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:clamp(20px,4vw,52px);
-  align-items:end;
-}
+.hero-bottom{display:grid;grid-template-columns:1fr auto;gap:clamp(20px,4vw,52px);align-items:end}
 .hero-premise{
-  font-family:'IM Fell English',serif;font-style:italic;
+  font-family:var(--display-font);font-style:italic;
   font-size:clamp(15px,1.6vw,20px);
   color:rgba(26,23,19,0.58);max-width:480px;line-height:1.65;
 }
 [data-mode="dark"] .hero-premise{color:rgba(237,232,223,0.52)}
 .hero-premise strong{font-style:normal;color:var(--ink);font-weight:400}
 .hero-meta{text-align:right;flex-shrink:0}
-.hero-meta-label{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;
-  letter-spacing:3px;text-transform:uppercase;color:var(--muted-lt);margin-bottom:7px;
-}
-.hero-meta-name{
-  font-family:'IM Fell English',serif;font-size:16px;font-style:italic;color:var(--ink);
-}
-.hero-meta-role{
-  font-family:'Outfit',sans-serif;font-size:10px;font-weight:300;
-  color:var(--muted);margin-top:4px;letter-spacing:1px;
-}
+.hero-meta-label{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--muted-lt);margin-bottom:7px}
+.hero-meta-name{font-family:var(--display-font);font-size:17px;font-style:italic;color:var(--ink)}
+.hero-meta-role{font-family:var(--body-font);font-size:11px;font-weight:400;color:var(--muted);margin-top:4px;letter-spacing:1px}
 
-/* ─────────────────────────────────
-   SECTION SHELL
-───────────────────────────────── */
+/* ── SECTION SHELL ── */
 .section{padding:clamp(60px,10vw,100px) 0;position:relative}
 .si{max-width:1100px;margin:0 auto;padding:0 var(--pad)}
-
 .s-label{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;
+  font-family:var(--body-font);font-size:10px;font-weight:400;
   letter-spacing:4px;text-transform:uppercase;color:var(--orange);
-  margin-bottom:clamp(28px,5vw,44px);
-  display:flex;align-items:center;gap:14px;
+  margin-bottom:clamp(28px,5vw,44px);display:flex;align-items:center;gap:14px;
 }
 .s-label::after{content:'';flex:1;height:1px;background:var(--rule);min-width:20px}
 .s-title{
-  font-family:'IM Fell English',serif;
+  font-family:var(--display-font);
   font-size:clamp(24px,4vw,48px);font-weight:400;font-style:italic;
   line-height:1.1;color:var(--ink);margin-bottom:18px;
 }
 .s-title em{color:var(--orange)}
-.s-body{
-  font-family:'Outfit',sans-serif;
-  font-size:clamp(14px,1.4vw,15.5px);font-weight:300;
-  color:var(--ink-light);line-height:1.88;max-width:620px;
-}
+.s-body{font-family:var(--body-font);font-size:clamp(14px,1.4vw,15.5px);font-weight:400;color:var(--ink-light);line-height:1.88;max-width:620px}
 
-/* ─────────────────────────────────
-   PHILOSOPHY
-───────────────────────────────── */
+/* ── PHILOSOPHY ── */
 .phil-section{background:var(--bg-mid)}
-.phil-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:1px;margin-top:clamp(28px,5vw,52px);background:var(--rule);
-}
+.phil-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:clamp(28px,5vw,52px);background:var(--rule)}
 .phil-cell{padding:clamp(24px,4vw,38px) clamp(20px,3vw,34px);background:var(--bg)}
 .phil-cell.dk{background:var(--ink-mid)}
 [data-mode="dark"] .phil-cell{background:var(--bg-mid)}
 [data-mode="dark"] .phil-cell.dk{background:var(--bg-dark)}
-.phil-cell-label{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;
-  letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:12px;
-}
-.phil-cell-text{
-  font-family:'IM Fell English',serif;
-  font-size:clamp(15px,1.6vw,17px);font-style:italic;
-  color:var(--ink);line-height:1.7;
-}
+.phil-cell-label{font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+.phil-cell-text{font-family:var(--display-font);font-size:clamp(15px,1.6vw,17px);font-style:italic;color:var(--ink);line-height:1.7}
 .phil-cell.dk .phil-cell-text{color:rgba(237,232,223,0.78)}
 .phil-cell.dk .phil-cell-label{color:var(--orange-lt)}
 
-.phil-belief{
-  margin-top:2px;padding:clamp(28px,5vw,48px) clamp(24px,4vw,44px);
-  background:var(--ink-mid);position:relative;overflow:hidden;
-}
-[data-mode="dark"] .phil-belief{background:var(--bg-dark)}
-.phil-belief::before{
-  content:'"';position:absolute;top:-30px;left:16px;
-  font-family:'IM Fell English',serif;font-size:200px;
-  color:rgba(200,90,0,0.055);line-height:1;pointer-events:none;
-}
-.phil-belief-label{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;
-  letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:18px;
-}
-.phil-belief-text{
-  font-family:'IM Fell English',serif;
-  font-size:clamp(17px,2.2vw,28px);font-weight:400;font-style:italic;
-  line-height:1.45;color:var(--inverse-text);max-width:640px;position:relative;z-index:1;
-}
-[data-mode="dark"] .phil-belief-text{color:var(--ink)}
-
-/* ─────────────────────────────────
-   PILLARS CAROUSEL
-───────────────────────────────── */
+/* ── PILLARS CAROUSEL ── */
 .pillars-section{background:var(--bg)}
-.pillar-carousel{
-  margin-top:clamp(28px,5vw,52px);position:relative;overflow:hidden;
-}
+.pillar-carousel{margin-top:clamp(28px,5vw,52px);position:relative;overflow:hidden}
 .pillar-track{display:flex;transition:transform 0.45s cubic-bezier(0.4,0,0.2,1)}
 .pillar-slide{
-  min-width:100%;
-  padding:clamp(28px,5vw,52px) clamp(20px,4vw,44px);
+  min-width:100%;padding:clamp(28px,5vw,52px) clamp(20px,4vw,44px);
   background:var(--bg-mid);border:1px solid var(--rule);
   display:flex;gap:clamp(24px,5vw,60px);align-items:start;
 }
-.pillar-num{
-  font-family:'IM Fell English',serif;
-  font-size:clamp(60px,8vw,96px);font-style:italic;
-  color:rgba(200,90,0,0.10);line-height:1;flex-shrink:0;padding-top:2px;
-}
-.pillar-body{}
-.pillar-title{
-  font-family:'IM Fell English',serif;
-  font-size:clamp(24px,3.5vw,42px);font-style:italic;
-  color:var(--ink);margin-bottom:12px;
-}
-.pillar-desc{
-  font-family:'Outfit',sans-serif;
-  font-size:clamp(13.5px,1.4vw,15px);font-weight:300;
-  color:var(--ink-light);line-height:1.85;max-width:540px;
-}
+.pillar-num{font-family:var(--display-font);font-size:clamp(60px,8vw,96px);font-style:italic;color:rgba(200,90,0,0.10);line-height:1;flex-shrink:0;padding-top:2px}
+.pillar-title{font-family:var(--display-font);font-size:clamp(24px,3.5vw,42px);font-style:italic;color:var(--ink);margin-bottom:12px}
+.pillar-desc{font-family:var(--body-font);font-size:clamp(13.5px,1.4vw,15px);font-weight:400;color:var(--ink-light);line-height:1.85;max-width:540px}
 .pillar-controls{display:flex;align-items:center;gap:16px;margin-top:clamp(16px,3vw,28px)}
-.pillar-btn{
-  background:none;border:1px solid var(--rule-strong);cursor:pointer;
-  width:40px;height:40px;min-width:40px;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--muted);transition:all 0.2s;font-size:18px;font-family:serif;
-}
+.pillar-btn{background:none;border:1px solid var(--rule-strong);cursor:pointer;width:40px;height:40px;min-width:40px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all 0.2s;font-size:18px;font-family:serif}
 .pillar-btn:hover{border-color:var(--orange);color:var(--orange)}
 .pillar-dots{display:flex;gap:8px}
-.pillar-dot{
-  width:7px;height:7px;border-radius:50%;background:var(--rule-strong);
-  transition:background 0.2s;border:none;cursor:pointer;padding:0;
-  min-width:7px;
-}
+.pillar-dot{width:7px;height:7px;border-radius:50%;background:var(--rule-strong);transition:background 0.2s;border:none;cursor:pointer;padding:0;min-width:7px}
 .pillar-dot.active{background:var(--orange)}
 
-/* ─────────────────────────────────
-   ACCORDION
-───────────────────────────────── */
+/* ── ACCORDION ── */
 .expect-section{background:var(--bg-mid)}
 .accordion{margin-top:clamp(28px,5vw,52px);display:flex;flex-direction:column;gap:1px}
 .acc-item{background:var(--bg);border:1px solid var(--rule);overflow:hidden}
-.acc-trigger{
-  width:100%;padding:clamp(18px,3vw,26px) clamp(16px,3vw,32px);
-  display:flex;align-items:center;justify-content:space-between;
-  background:none;border:none;cursor:pointer;text-align:left;
-  transition:background 0.2s;gap:12px;
-}
+.acc-trigger{width:100%;padding:clamp(18px,3vw,26px) clamp(16px,3vw,32px);display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;text-align:left;transition:background 0.2s;gap:12px}
 .acc-trigger:hover{background:var(--orange-pale)}
 [data-mode="dark"] .acc-trigger:hover{background:rgba(200,90,0,0.08)}
 .acc-trigger-left{display:flex;align-items:center;gap:clamp(12px,2vw,20px);flex:1}
-.acc-num{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;
-  letter-spacing:3px;text-transform:uppercase;color:var(--orange);flex-shrink:0;
-}
-.acc-title{
-  font-family:'IM Fell English',serif;
-  font-size:clamp(16px,1.8vw,20px);font-style:italic;color:var(--ink);
-}
-.acc-arrow{
-  font-size:20px;color:var(--muted);
-  transition:transform 0.3s;display:block;flex-shrink:0;line-height:1;
-}
+.acc-num{font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--orange);flex-shrink:0}
+.acc-title{font-family:var(--display-font);font-size:clamp(16px,1.8vw,20px);font-style:italic;color:var(--ink)}
+.acc-arrow{font-size:20px;color:var(--muted);transition:transform 0.3s;display:block;flex-shrink:0;line-height:1}
 .acc-item.open .acc-arrow{transform:rotate(90deg);color:var(--orange)}
 .acc-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
 .acc-item.open .acc-body{max-height:400px}
 .acc-inner{padding:0 clamp(16px,3vw,32px) clamp(16px,3vw,28px)}
 .acc-points{list-style:none;margin-top:4px}
-.acc-points li{
-  font-family:'Outfit',sans-serif;
-  font-size:clamp(12.5px,1.3vw,13.5px);font-weight:300;
-  color:var(--ink-light);
-  padding:8px 0;border-bottom:1px solid var(--rule);line-height:1.55;
-}
+.acc-points li{font-family:var(--body-font);font-size:clamp(13px,1.3vw,14px);font-weight:400;color:var(--ink-light);padding:8px 0;border-bottom:1px solid var(--rule);line-height:1.6}
 .acc-points li:last-child{border-bottom:none}
 .acc-points li::before{content:'— ';color:var(--orange)}
 
-/* ─────────────────────────────────
-   THIS MONTH
-───────────────────────────────── */
+/* ── THIS MONTH ── */
 .month-section{background:var(--bg)}
-.month-feature{
-  margin-top:clamp(28px,5vw,52px);
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:1px;background:var(--rule);
-}
-.month-left{
-  padding:clamp(32px,5vw,56px) clamp(24px,4vw,48px);
-  background:var(--ink-mid);position:relative;overflow:hidden;
-}
+.month-feature{margin-top:clamp(28px,5vw,52px);display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule)}
+.month-left{padding:clamp(32px,5vw,56px) clamp(24px,4vw,48px);background:var(--ink-mid);position:relative;overflow:hidden}
 [data-mode="dark"] .month-left{background:var(--bg-dark)}
-.month-left::before{
-  content:'RESET';
-  position:absolute;bottom:-40px;left:-6px;
-  font-family:'IM Fell English',serif;font-size:clamp(100px,18vw,190px);font-style:italic;
-  color:rgba(200,90,0,0.045);line-height:1;pointer-events:none;white-space:nowrap;
-}
-.month-edition{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;
-  letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:18px;
-}
-.month-title{
-  font-family:'IM Fell English',serif;
-  font-size:clamp(44px,7vw,84px);font-style:italic;
-  color:var(--inverse-text);line-height:0.9;margin-bottom:10px;position:relative;z-index:1;
-}
+.month-left::before{content:'RESET';position:absolute;bottom:-40px;left:-6px;font-family:var(--display-font);font-size:clamp(100px,18vw,190px);font-style:italic;color:rgba(200,90,0,0.045);line-height:1;pointer-events:none;white-space:nowrap}
+.month-edition{font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:18px}
+.month-title{font-family:var(--display-font);font-size:clamp(44px,7vw,84px);font-style:italic;color:var(--inverse-text);line-height:0.9;margin-bottom:10px;position:relative;z-index:1}
 [data-mode="dark"] .month-title{color:var(--ink)}
-.month-subtitle{
-  font-family:'IM Fell English',serif;font-size:clamp(14px,1.6vw,17px);font-style:italic;
-  color:var(--orange-lt);margin-bottom:24px;position:relative;z-index:1;
-}
-.month-desc{
-  font-family:'Outfit',sans-serif;font-size:clamp(13px,1.3vw,14px);font-weight:300;
-  color:rgba(237,232,223,0.60);line-height:1.88;
-  max-width:400px;position:relative;z-index:1;margin-bottom:32px;
-}
+.month-subtitle{font-family:var(--display-font);font-size:clamp(14px,1.6vw,17px);font-style:italic;color:var(--orange-lt);margin-bottom:24px;position:relative;z-index:1}
+.month-desc{font-family:var(--body-font);font-size:clamp(13px,1.3vw,14px);font-weight:400;color:rgba(237,232,223,0.60);line-height:1.88;max-width:400px;position:relative;z-index:1;margin-bottom:32px}
 [data-mode="dark"] .month-desc{color:var(--ink-light)}
 .month-tags{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
-.month-tag{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;
-  letter-spacing:1.5px;text-transform:uppercase;
-  padding:6px 13px;border:1px solid rgba(200,90,0,0.32);color:var(--orange-lt);
-}
+.month-tag{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:6px 13px;border:1px solid rgba(200,90,0,0.32);color:var(--orange-lt)}
 .month-right{padding:clamp(32px,5vw,56px) clamp(24px,4vw,48px);background:var(--bg-mid)}
-.month-right-title{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;
-  letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:24px;
-}
+.month-right-title{font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
 .month-links{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
-.month-link-card{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:16px 20px;border:1px solid var(--rule);background:var(--bg);
-  text-decoration:none;transition:border-color 0.2s,background 0.2s;gap:12px;
-}
+.month-link-card{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border:1px solid var(--rule);background:var(--bg);text-decoration:none;transition:border-color 0.2s,background 0.2s;gap:12px}
 .month-link-card:hover{border-color:var(--orange);background:var(--orange-pale)}
 [data-mode="dark"] .month-link-card:hover{background:rgba(200,90,0,0.08)}
 .month-link-inner{flex:1;min-width:0}
-.month-link-label{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;
-  letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:4px;
-}
-.month-link-name{
-  font-family:'IM Fell English',serif;font-size:clamp(14px,1.5vw,16px);
-  font-style:italic;color:var(--ink);
-}
-.month-link-arrow{
-  font-size:18px;color:var(--muted);transition:color 0.2s;flex-shrink:0;
-}
+.month-link-label{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.month-link-name{font-family:var(--display-font);font-size:clamp(14px,1.5vw,16px);font-style:italic;color:var(--ink)}
+.month-link-arrow{font-size:18px;color:var(--muted);transition:color 0.2s;flex-shrink:0}
 .month-link-card:hover .month-link-arrow{color:var(--orange)}
-.month-wa-desc{
-  font-family:'Outfit',sans-serif;font-size:11px;font-weight:300;
-  color:var(--muted);line-height:1.6;margin-top:5px;font-style:italic;
-}
-.month-register{
-  width:100%;padding:16px 20px;background:var(--orange);
-  font-family:'Outfit',sans-serif;font-size:10px;font-weight:400;
-  letter-spacing:2.5px;text-transform:uppercase;
-  color:#fff;border:none;cursor:pointer;transition:background 0.2s;
-}
+.month-wa-desc{font-family:var(--body-font);font-size:11px;font-weight:400;color:var(--muted);line-height:1.6;margin-top:5px;font-style:italic}
+.month-register{width:100%;padding:16px 20px;background:var(--orange);font-family:var(--body-font);font-size:11px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:#fff;border:none;cursor:pointer;transition:background 0.2s}
 .month-register:hover{background:var(--orange-lt)}
 
-/* ─────────────────────────────────
-   WHY REFLECTION
-───────────────────────────────── */
+/* ── NEXT MONTH TEASER ── */
+.next-section{background:var(--bg-dark)}
+[data-mode="dark"] .next-section{background:var(--bg-mid)}
+.next-card{
+  margin-top:clamp(24px,4vw,44px);
+  display:grid;grid-template-columns:auto 1fr;gap:1px;background:var(--rule);
+}
+.next-label-col{
+  padding:clamp(24px,4vw,40px) clamp(20px,3vw,36px);
+  background:var(--orange);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  min-width:clamp(100px,14vw,160px);text-align:center;
+}
+.next-label-top{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:8px}
+.next-label-num{font-family:var(--display-font);font-size:clamp(40px,6vw,72px);font-style:italic;color:#fff;line-height:1}
+.next-body{padding:clamp(24px,4vw,40px) clamp(24px,4vw,44px);background:var(--bg)}
+[data-mode="dark"] .next-body{background:var(--bg-dark)}
+.next-month-label{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.next-title{font-family:var(--display-font);font-size:clamp(22px,3.5vw,40px);font-style:italic;color:var(--ink);margin-bottom:10px;line-height:1.1}
+.next-subtitle{font-family:var(--display-font);font-size:clamp(13px,1.5vw,16px);font-style:italic;color:var(--muted);margin-bottom:14px}
+.next-desc{font-family:var(--body-font);font-size:clamp(13px,1.3vw,14px);font-weight:400;color:var(--ink-light);line-height:1.85;max-width:480px}
+
+/* ── WHY REFLECTION ── */
 .why-section{background:var(--ink-mid)}
 [data-mode="dark"] .why-section{background:var(--bg-dark)}
 .why-section .s-title{color:var(--inverse-text)}
@@ -574,201 +348,144 @@ body::after{
 .why-section .s-label::after{background:rgba(237,232,223,0.09)}
 [data-mode="dark"] .why-section .s-label::after{background:var(--rule)}
 .why-quotes{margin-top:clamp(24px,4vw,52px);display:flex;flex-direction:column;gap:2px}
-.why-quote{
-  padding:clamp(22px,4vw,36px) clamp(20px,4vw,40px);
-  border-left:2px solid var(--orange);
-  background:rgba(237,232,223,0.04);
-}
+.why-quote{padding:clamp(22px,4vw,36px) clamp(20px,4vw,40px);border-left:2px solid var(--orange);background:rgba(237,232,223,0.04)}
 [data-mode="dark"] .why-quote{background:rgba(237,232,223,0.02)}
-.why-quote-main{
-  font-family:'IM Fell English',serif;
-  font-size:clamp(16px,2.2vw,26px);font-style:italic;
-  color:rgba(237,232,223,0.76);line-height:1.5;
-}
+.why-quote-main{font-family:var(--display-font);font-size:clamp(16px,2.2vw,26px);font-style:italic;color:rgba(237,232,223,0.76);line-height:1.5}
 [data-mode="dark"] .why-quote-main{color:var(--ink-light)}
 .why-quote-main strong{font-style:normal;color:var(--inverse-text);font-weight:400}
 [data-mode="dark"] .why-quote-main strong{color:var(--ink)}
 
-/* ─────────────────────────────────
-   THEMES
-───────────────────────────────── */
+/* ── THEMES ── */
 .themes-section{background:var(--bg-mid)}
-.themes-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:1px;margin-top:clamp(28px,5vw,52px);background:var(--rule);
-}
+.themes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:clamp(28px,5vw,52px);background:var(--rule)}
 .theme-card{padding:clamp(18px,3vw,28px) clamp(14px,2vw,22px);background:var(--bg);transition:all 0.2s;position:relative}
 .theme-card:hover:not(.locked){background:var(--orange-pale)}
 [data-mode="dark"] .theme-card:hover:not(.locked){background:rgba(200,90,0,0.08)}
 .theme-card.active{background:var(--ink-mid)}
 [data-mode="dark"] .theme-card.active{background:var(--bg-dark)}
-.theme-card.locked .theme-card-title,
-.theme-card.locked .theme-card-sub{filter:blur(3.5px);user-select:none}
+.theme-card.next-up{background:var(--bg-dark);border:1px solid rgba(200,90,0,0.25)}
+[data-mode="dark"] .theme-card.next-up{background:var(--bg-mid)}
+.theme-card.locked .theme-card-title,.theme-card.locked .theme-card-sub{filter:blur(3.5px);user-select:none}
 .theme-card.locked{cursor:default}
-.lock-overlay{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:opacity 0.2s;
-}
+.lock-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.2s}
 .theme-card.locked:hover .lock-overlay{opacity:1}
-.lock-badge{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;
-  letter-spacing:1.5px;text-transform:uppercase;
-  padding:6px 12px;border:1px solid var(--orange);
-  color:var(--orange);background:var(--bg);text-align:center;
-}
-.theme-card-month{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;
-  letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:8px;
-}
-.theme-card-title{
-  font-family:'IM Fell English',serif;font-style:italic;
-  font-size:clamp(14px,1.5vw,17px);color:var(--ink);margin-bottom:6px;
-}
+.lock-badge{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border:1px solid var(--orange);color:var(--orange);background:var(--bg);text-align:center}
+.theme-card-month{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+.theme-card-title{font-family:var(--display-font);font-style:italic;font-size:clamp(14px,1.5vw,17px);color:var(--ink);margin-bottom:6px}
 .theme-card.active .theme-card-title{color:var(--inverse-text)}
 [data-mode="dark"] .theme-card.active .theme-card-title{color:var(--ink)}
-.theme-card-sub{
-  font-family:'Outfit',sans-serif;font-size:clamp(10px,1vw,11px);font-weight:300;
-  color:var(--muted);line-height:1.5;
-}
+.theme-card.next-up .theme-card-title{color:var(--ink)}
+.theme-card-sub{font-family:var(--body-font);font-size:clamp(10px,1vw,11.5px);font-weight:400;color:var(--muted);line-height:1.55}
 .theme-card.active .theme-card-sub{color:rgba(237,232,223,0.45)}
 [data-mode="dark"] .theme-card.active .theme-card-sub{color:var(--muted)}
-.theme-free-badge{
-  position:absolute;top:14px;right:14px;
-  font-family:'Outfit',sans-serif;font-size:8px;font-weight:400;
-  letter-spacing:1.5px;padding:3px 9px;
-  border:1px solid var(--orange);color:var(--orange);text-transform:uppercase;
-}
-.themes-unlock{
-  margin-top:18px;text-align:center;
-  font-family:'Outfit',sans-serif;font-size:12px;font-weight:300;
-  color:var(--muted);font-style:italic;
-}
+.theme-free-badge{position:absolute;top:14px;right:14px;font-family:var(--body-font);font-size:8px;font-weight:400;letter-spacing:1.5px;padding:3px 9px;border:1px solid var(--orange);color:var(--orange);text-transform:uppercase}
+.theme-next-badge{position:absolute;top:14px;right:14px;font-family:var(--body-font);font-size:8px;font-weight:400;letter-spacing:1.5px;padding:3px 9px;border:1px solid var(--muted);color:var(--muted);text-transform:uppercase}
+.themes-unlock{margin-top:18px;text-align:center;font-family:var(--body-font);font-size:12px;font-weight:400;color:var(--muted);font-style:italic}
 .themes-unlock a{color:var(--orange);text-decoration:none}
 .themes-unlock a:hover{text-decoration:underline}
 
-/* ─────────────────────────────────
-   REGISTER
-───────────────────────────────── */
+/* ── REGISTER ── */
 .register-section{
-  background:var(--ink-mid);
-  padding:clamp(72px,12vw,120px) var(--pad);
+  background:var(--ink-mid);padding:clamp(80px,12vw,130px) var(--pad);
   text-align:center;position:relative;overflow:hidden;
 }
 [data-mode="dark"] .register-section{background:var(--bg-dark)}
 .register-section::before{
   content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:min(680px,120vw);height:min(680px,120vw);border-radius:50%;
+  width:min(700px,130vw);height:min(700px,130vw);border-radius:50%;
   border:1px solid rgba(200,90,0,0.07);
   box-shadow:0 0 0 50px rgba(200,90,0,0.025),0 0 0 100px rgba(200,90,0,0.012);
   pointer-events:none;
 }
-.register-section::after{
-  content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(
-    0deg,transparent 0px,transparent 26px,
-    rgba(237,232,223,0.018) 26px,rgba(237,232,223,0.018) 27px
-  );
-  pointer-events:none;
-}
-.register-content{position:relative;z-index:2;max-width:520px;margin:0 auto}
-.register-eyebrow{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;
-  letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:24px;
-}
-.register-title{
-  font-family:'IM Fell English',serif;
-  font-size:clamp(28px,5vw,52px);font-weight:400;font-style:italic;
-  color:var(--inverse-text);line-height:1.2;margin-bottom:18px;
-}
+.register-section::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0px,transparent 26px,rgba(237,232,223,0.018) 26px,rgba(237,232,223,0.018) 27px);pointer-events:none}
+.register-content{position:relative;z-index:2;max-width:560px;margin:0 auto}
+.register-eyebrow{font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:24px}
+.register-title{font-family:var(--display-font);font-size:clamp(30px,5vw,56px);font-weight:400;font-style:italic;color:var(--inverse-text);line-height:1.2;margin-bottom:16px}
 [data-mode="dark"] .register-title{color:var(--ink)}
-.register-body{
-  font-family:'Outfit',sans-serif;font-size:clamp(13px,1.4vw,14.5px);font-weight:300;
-  color:rgba(237,232,223,0.48);line-height:1.88;margin-bottom:clamp(28px,5vw,48px);
-}
+.register-body{font-family:var(--body-font);font-size:clamp(13.5px,1.4vw,15px);font-weight:400;color:rgba(237,232,223,0.5);line-height:1.88;margin-bottom:clamp(28px,5vw,48px)}
 [data-mode="dark"] .register-body{color:var(--muted)}
-.register-form{
-  display:flex;flex-direction:column;
-  gap:0;max-width:420px;margin:0 auto 14px;
+
+/* register CTA emphasis */
+.register-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:20px}
+.register-main-btn{
+  display:inline-block;
+  padding:18px 40px;background:var(--orange);
+  font-family:var(--body-font);font-size:12px;font-weight:400;
+  letter-spacing:3px;text-transform:uppercase;
+  color:#fff;border:none;cursor:pointer;
+  text-decoration:none;
+  transition:background 0.2s,transform 0.2s;
+  width:100%;max-width:400px;text-align:center;
 }
-.register-input{
-  padding:15px 18px;
-  background:rgba(237,232,223,0.06);
-  border:1px solid rgba(237,232,223,0.14);
-  border-bottom:none;
-  color:var(--inverse-text);
-  font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;
-  outline:none;transition:border-color 0.2s;
-}
-[data-mode="dark"] .register-input{
-  color:var(--ink);background:rgba(237,232,223,0.04);
-  border-color:var(--rule);border-bottom:none;
-}
+.register-main-btn:hover{background:var(--orange-lt);transform:translateY(-1px)}
+.register-or{font-family:var(--body-font);font-size:11px;font-weight:400;color:rgba(237,232,223,0.3);letter-spacing:2px;text-transform:uppercase}
+[data-mode="dark"] .register-or{color:var(--muted)}
+
+/* inline email form (secondary) */
+.register-form{display:flex;flex-direction:column;gap:0;max-width:400px;margin:0 auto 14px;width:100%}
+.register-input{padding:14px 18px;background:rgba(237,232,223,0.06);border:1px solid rgba(237,232,223,0.14);border-bottom:none;color:var(--inverse-text);font-family:var(--body-font);font-size:14px;font-weight:400;outline:none;transition:border-color 0.2s}
+[data-mode="dark"] .register-input{color:var(--ink);background:rgba(237,232,223,0.04);border-color:var(--rule);border-bottom:none}
 .register-input::placeholder{color:rgba(237,232,223,0.28)}
 [data-mode="dark"] .register-input::placeholder{color:var(--muted)}
 .register-input:focus{border-color:var(--orange)}
-.register-btn{
-  padding:15px 18px;background:var(--orange);
-  font-family:'Outfit',sans-serif;font-size:10px;font-weight:400;
-  letter-spacing:2.5px;text-transform:uppercase;
-  color:#fff;border:1px solid var(--orange);cursor:pointer;transition:background 0.2s;
+.register-btn{padding:14px 18px;background:rgba(237,232,223,0.1);font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:rgba(237,232,223,0.6);border:1px solid rgba(237,232,223,0.14);cursor:pointer;transition:all 0.2s}
+.register-btn:hover{background:rgba(237,232,223,0.18);color:var(--inverse-text)}
+[data-mode="dark"] .register-btn{color:var(--muted-lt);border-color:var(--rule)}
+
+.register-contact{
+  margin-top:28px;padding-top:24px;border-top:1px solid rgba(237,232,223,0.08);
 }
-.register-btn:hover{background:var(--orange-lt);border-color:var(--orange-lt)}
-.register-note{
-  font-family:'Outfit',sans-serif;font-size:10px;font-weight:300;
-  color:rgba(237,232,223,0.26);letter-spacing:1.5px;text-transform:uppercase;
-}
+[data-mode="dark"] .register-contact{border-color:var(--rule)}
+.register-contact-label{font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:rgba(237,232,223,0.3);margin-bottom:8px}
+[data-mode="dark"] .register-contact-label{color:var(--muted)}
+.register-contact a{font-family:var(--display-font);font-style:italic;font-size:16px;color:var(--orange-lt);text-decoration:none;transition:color 0.2s}
+.register-contact a:hover{color:var(--orange)}
+.register-note{font-family:var(--body-font);font-size:10px;font-weight:400;color:rgba(237,232,223,0.22);letter-spacing:1.5px;text-transform:uppercase;margin-top:12px}
 [data-mode="dark"] .register-note{color:var(--muted)}
 
-/* ─────────────────────────────────
-   FOOTER
-───────────────────────────────── */
-footer{
-  padding:clamp(28px,5vw,42px) var(--pad);
-  border-top:1px solid var(--rule);background:var(--bg);
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:16px;
-}
-.footer-logo{
-  font-family:'IM Fell English',serif;font-size:14px;font-style:italic;color:var(--ink);
-}
+/* ── FAQ ── */
+.faq-section{background:var(--bg)}
+.faq-list{margin-top:clamp(28px,5vw,52px);display:flex;flex-direction:column;gap:1px}
+.faq-item{background:var(--bg-mid);border:1px solid var(--rule);overflow:hidden}
+.faq-trigger{width:100%;padding:clamp(18px,3vw,24px) clamp(16px,3vw,32px);display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;text-align:left;transition:background 0.2s;gap:12px}
+.faq-trigger:hover{background:var(--orange-pale)}
+[data-mode="dark"] .faq-trigger:hover{background:rgba(200,90,0,0.08)}
+.faq-q{font-family:var(--display-font);font-style:italic;font-size:clamp(15px,1.7vw,18px);color:var(--ink);flex:1}
+.faq-arrow{font-size:20px;color:var(--muted);transition:transform 0.3s;display:block;flex-shrink:0}
+.faq-item.open .faq-arrow{transform:rotate(90deg);color:var(--orange)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
+.faq-item.open .faq-body{max-height:320px}
+.faq-inner{padding:0 clamp(16px,3vw,32px) clamp(16px,3vw,24px)}
+.faq-a{font-family:var(--body-font);font-size:clamp(13px,1.3vw,14.5px);font-weight:400;color:var(--ink-light);line-height:1.8}
+.faq-a a{color:var(--orange);text-decoration:none}
+.faq-a a:hover{text-decoration:underline}
+
+/* ── FOOTER ── */
+footer{padding:clamp(28px,5vw,42px) var(--pad);border-top:1px solid var(--rule);background:var(--bg);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.footer-logo{font-family:var(--display-font);font-size:15px;font-style:italic;color:var(--ink)}
 .footer-logo em{color:var(--orange)}
-.footer-middle{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:300;
-  letter-spacing:2.5px;text-transform:uppercase;color:var(--muted-lt);text-align:center;
-}
+.footer-middle{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted-lt);text-align:center}
 .footer-links{display:flex;gap:clamp(16px,3vw,28px);flex-wrap:wrap}
-.footer-links a{
-  font-family:'Outfit',sans-serif;font-size:9px;font-weight:300;
-  letter-spacing:2px;text-transform:uppercase;
-  color:var(--muted);transition:color 0.2s;text-decoration:none;
-}
+.footer-links a{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.2s;text-decoration:none}
 .footer-links a:hover{color:var(--orange)}
 
-/* ─────────────────────────────────
-   SCROLL REVEAL
-───────────────────────────────── */
+/* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.65s ease,transform 0.65s ease}
 .reveal.up{opacity:1;transform:translateY(0)}
 
-/* ─────────────────────────────────
-   RESPONSIVE
-───────────────────────────────── */
-
-/* TABLET: ≤ 900px */
+/* ── RESPONSIVE ── */
 @media(max-width:900px){
   .nav-links{display:none}
   .hamburger{display:flex}
-  .hero-photo-placeholder{display:none}
   .hero-columns,.hero-halo{display:none}
   .hero-bottom{grid-template-columns:1fr;gap:20px}
   .hero-meta{text-align:left}
   .phil-grid{grid-template-columns:1fr}
   .month-feature{grid-template-columns:1fr}
+  .next-card{grid-template-columns:1fr}
+  .next-label-col{flex-direction:row;gap:16px;justify-content:flex-start;min-width:unset;padding:clamp(16px,3vw,24px) clamp(20px,4vw,36px)}
   .themes-grid{grid-template-columns:repeat(2,1fr)}
 }
-
-/* MOBILE: ≤ 580px */
 @media(max-width:580px){
   :root{--pad:18px}
   .nav-cta{display:none}
@@ -781,18 +498,13 @@ footer{
   footer{flex-direction:column;align-items:flex-start;gap:14px}
   .footer-middle{text-align:left}
   .footer-links{gap:14px}
-  .register-form{gap:0}
-  .acc-trigger{padding:16px 16px}
-  .acc-inner{padding:0 16px 20px}
+  .acc-trigger,.faq-trigger{padding:16px 16px}
+  .acc-inner,.faq-inner{padding:0 16px 20px}
+  .register-main-btn{padding:16px 24px}
 }
-
-/* VERY SMALL: ≤ 380px */
 @media(max-width:380px){
   .hero-display{font-size:44px}
-  .phil-belief-text{font-size:16px}
 }
-
-/* REDUCED MOTION */
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none;transition:none}
   .dust span{animation:none}
@@ -808,23 +520,16 @@ footer{
 <div class="ghost-quote gq1">"The unexamined life is not worth living."<br>— Socrates</div>
 <div class="ghost-quote gq2">"Wonder is the beginning of wisdom."<br>— Aristotle</div>
 
-<!-- CONSTELLATION -->
 <svg class="constellation" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <circle cx="120" cy="180" r="1.5" fill="#1A1713"/>
-  <circle cx="380" cy="90" r="1" fill="#1A1713"/>
-  <circle cx="620" cy="240" r="1.5" fill="#1A1713"/>
-  <circle cx="880" cy="140" r="1" fill="#1A1713"/>
-  <circle cx="1100" cy="320" r="1.5" fill="#1A1713"/>
-  <circle cx="240" cy="420" r="1" fill="#1A1713"/>
-  <circle cx="500" cy="500" r="1.5" fill="#1A1713"/>
-  <circle cx="760" cy="380" r="1" fill="#1A1713"/>
-  <circle cx="160" cy="680" r="1.5" fill="#1A1713"/>
-  <circle cx="420" cy="750" r="1" fill="#1A1713"/>
+  <circle cx="120" cy="180" r="1.5" fill="#1A1713"/><circle cx="380" cy="90" r="1" fill="#1A1713"/>
+  <circle cx="620" cy="240" r="1.5" fill="#1A1713"/><circle cx="880" cy="140" r="1" fill="#1A1713"/>
+  <circle cx="1100" cy="320" r="1.5" fill="#1A1713"/><circle cx="240" cy="420" r="1" fill="#1A1713"/>
+  <circle cx="500" cy="500" r="1.5" fill="#1A1713"/><circle cx="760" cy="380" r="1" fill="#1A1713"/>
+  <circle cx="160" cy="680" r="1.5" fill="#1A1713"/><circle cx="420" cy="750" r="1" fill="#1A1713"/>
   <circle cx="940" cy="700" r="1.5" fill="#1A1713"/>
   <line x1="120" y1="180" x2="380" y2="90" stroke="#1A1713" stroke-width="0.4"/>
   <line x1="380" y1="90" x2="620" y2="240" stroke="#1A1713" stroke-width="0.4"/>
   <line x1="620" y1="240" x2="880" y2="140" stroke="#1A1713" stroke-width="0.4"/>
-  <line x1="880" y1="140" x2="1100" y2="320" stroke="#1A1713" stroke-width="0.4"/>
   <line x1="240" y1="420" x2="500" y2="500" stroke="#1A1713" stroke-width="0.4"/>
   <line x1="500" y1="500" x2="760" y2="380" stroke="#1A1713" stroke-width="0.4"/>
   <line x1="160" y1="680" x2="420" y2="750" stroke="#1A1713" stroke-width="0.4"/>
@@ -833,7 +538,6 @@ footer{
   <line x1="880" y1="140" x2="760" y2="380" stroke="#1A1713" stroke-width="0.3"/>
 </svg>
 
-<!-- COMPASS -->
 <svg class="compass-bg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#1A1713" aria-hidden="true">
   <circle cx="150" cy="150" r="130" stroke-width="1"/>
   <circle cx="150" cy="150" r="90" stroke-width="0.5"/>
@@ -845,13 +549,14 @@ footer{
   <polygon points="150,22 144,55 156,55" fill="#1A1713" stroke="none"/>
 </svg>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
   <a class="nav-logo" href="#">Reflections W/ <em>TEA</em></a>
   <ul class="nav-links" aria-label="Desktop navigation">
     <li><a href="#philosophy">Philosophy</a></li>
     <li><a href="#this-month">This Month</a></li>
     <li><a href="#themes">Themes</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#register">Register</a></li>
   </ul>
   <div class="nav-right">
@@ -866,32 +571,23 @@ footer{
   </div>
 </nav>
 
-<!-- MOBILE NAV DRAWER -->
+<!-- MOBILE NAV -->
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-  <a href="#philosophy" class="mob-link">Philosophy</a>
-  <a href="#this-month" class="mob-link">This Month</a>
-  <a href="#themes" class="mob-link">Themes</a>
-  <a href="#register" class="mob-link">Register Free</a>
-  <a href="https://substack.com/@theezraanya" target="_blank" rel="noopener" class="mob-link">Substack</a>
+  <a href="#philosophy">Philosophy</a>
+  <a href="#this-month">This Month</a>
+  <a href="#themes">Themes</a>
+  <a href="#faq">FAQ</a>
+  <a href="#register">Register Free</a>
+  <a href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Substack</a>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <section class="hero" id="home" aria-label="Hero">
   <div class="hero-columns" aria-hidden="true"></div>
   <div class="hero-manuscript" aria-hidden="true"></div>
   <div class="hero-halo" aria-hidden="true"></div>
-
-  <!-- PHOTO PLACEHOLDER — replace src with real photo when ready -->
-  <!-- <div class="hero-photo-placeholder" aria-hidden="true">
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="24" cy="18" r="10" stroke="#8C8680" stroke-width="1"/>
-      <path d="M6 42c0-9.94 8.06-18 18-18s18 8.06 18 18" stroke="#8C8680" stroke-width="1"/>
-    </svg>
-    <div class="hero-photo-placeholder-label">Photo<br>Coming Soon</div>
-  </div> -->
-
   <div class="hero-inner">
-    <div class="hero-eyebrow reveal">A Monthly Teaching by Ezra Anya</div>
+    <div class="hero-eyebrow reveal">A Monthly Teaching by Ezra Anya · theezraanya.com</div>
     <h1 class="hero-display reveal">
       Reflections<br>W/ <span class="accent">TEA</span>
       <span class="sub-word">Where introspection meets illumination</span>
@@ -912,7 +608,7 @@ footer{
   </div>
 </section>
 
-<!-- ── PHILOSOPHY ── -->
+<!-- PHILOSOPHY -->
 <section class="section phil-section" id="philosophy">
   <div class="si">
     <div class="s-label reveal">The Philosophy</div>
@@ -936,14 +632,17 @@ footer{
         <div class="phil-cell-text">"TEA is The Ezra Anya — and also the posture. Tea is what you drink when you are actually talking. When the conversation is honest. When the only agenda is to think well together."</div>
       </div>
     </div>
-    <!-- <div class="phil-belief reveal">
+    <!-- commented out per request -->
+    <!--
+    <div class="phil-belief reveal">
       <div class="phil-belief-label">The Core Belief</div>
       <div class="phil-belief-text">People rarely stay stuck because they lack information. They stay stuck because they are not aligned. Every month, Reflections addresses one root of that misalignment.</div>
-    </div> -->
+    </div>
+    -->
   </div>
 </section>
 
-<!-- ── PILLARS CAROUSEL ── -->
+<!-- PILLARS CAROUSEL -->
 <section class="section pillars-section">
   <div class="si">
     <div class="s-label reveal">The Three Pillars</div>
@@ -973,10 +672,10 @@ footer{
       </div>
       <div class="pillar-controls" aria-label="Pillar navigation">
         <button class="pillar-btn" id="pillarPrev" aria-label="Previous pillar">&#8592;</button>
-        <div class="pillar-dots" role="tablist" aria-label="Pillar selector">
-          <button class="pillar-dot active" data-i="0" role="tab" aria-label="Pillar 1: Reflect" aria-selected="true"></button>
-          <button class="pillar-dot" data-i="1" role="tab" aria-label="Pillar 2: Learn" aria-selected="false"></button>
-          <button class="pillar-dot" data-i="2" role="tab" aria-label="Pillar 3: Act" aria-selected="false"></button>
+        <div class="pillar-dots" role="tablist">
+          <button class="pillar-dot active" data-i="0" role="tab" aria-selected="true" aria-label="Reflect"></button>
+          <button class="pillar-dot" data-i="1" role="tab" aria-selected="false" aria-label="Learn"></button>
+          <button class="pillar-dot" data-i="2" role="tab" aria-selected="false" aria-label="Act"></button>
         </div>
         <button class="pillar-btn" id="pillarNext" aria-label="Next pillar">&#8594;</button>
       </div>
@@ -984,13 +683,13 @@ footer{
   </div>
 </section>
 
-<!-- ── WHAT TO EXPECT — ACCORDION ── -->
+<!-- WHAT TO EXPECT -->
 <section class="section expect-section">
   <div class="si">
     <div class="s-label reveal">What to Expect</div>
     <h2 class="s-title reveal">Every session delivers <em>three things</em></h2>
-    <div class="accordion reveal" id="accordion" role="list">
-      <div class="acc-item open" role="listitem">
+    <div class="accordion reveal" id="accordion">
+      <div class="acc-item open">
         <button class="acc-trigger" aria-expanded="true">
           <div class="acc-trigger-left">
             <span class="acc-num">01</span>
@@ -1009,7 +708,7 @@ footer{
           </div>
         </div>
       </div>
-      <div class="acc-item" role="listitem">
+      <div class="acc-item">
         <button class="acc-trigger" aria-expanded="false">
           <div class="acc-trigger-left">
             <span class="acc-num">02</span>
@@ -1028,7 +727,7 @@ footer{
           </div>
         </div>
       </div>
-      <div class="acc-item" role="listitem">
+      <div class="acc-item">
         <button class="acc-trigger" aria-expanded="false">
           <div class="acc-trigger-left">
             <span class="acc-num">03</span>
@@ -1051,7 +750,7 @@ footer{
   </div>
 </section>
 
-<!-- ── THIS MONTH ── -->
+<!-- THIS MONTH -->
 <section class="section month-section" id="this-month">
   <div class="si">
     <div class="s-label reveal">Edition One · This Month</div>
@@ -1093,27 +792,42 @@ footer{
   </div>
 </section>
 
-<!-- ── WHY REFLECTION ── -->
+<!-- NEXT MONTH TEASER -->
+<section class="section next-section">
+  <div class="si">
+    <div class="s-label reveal">Coming Next · Edition 02</div>
+    <div class="next-card reveal">
+      <div class="next-label-col">
+        <div class="next-label-top">Edition</div>
+        <div class="next-label-num">02</div>
+      </div>
+      <div class="next-body">
+        <div class="next-month-label">Next Month · Free</div>
+        <div class="next-title">Renew</div>
+        <div class="next-subtitle">Overcoming Addictions and Negative Patterns</div>
+        <p class="next-desc">Most people do not struggle with lack of information about their patterns. They struggle with the invisible architecture that keeps the pattern in place. This session is about naming what holds you — and building the framework to finally walk free of it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY REFLECTION -->
 <section class="section why-section">
   <div class="si">
     <div class="s-label reveal">Why Reflection</div>
     <h2 class="s-title reveal">Experience alone <em>is not enough</em></h2>
     <div class="why-quotes reveal">
       <div class="why-quote">
-        <div class="why-quote-main">
-          Experience alone does not produce wisdom. <strong>Reflection on experience does.</strong>
-        </div>
+        <div class="why-quote-main">Experience alone does not produce wisdom. <strong>Reflection on experience does.</strong></div>
       </div>
       <div class="why-quote">
-        <div class="why-quote-main">
-          Clarity is not given. It is carved — through the discipline of stopping long enough to think. <strong>That is what this is for.</strong>
-        </div>
+        <div class="why-quote-main">Clarity is not given. It is carved — through the discipline of stopping long enough to think. <strong>That is what this is for.</strong></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── THEMES ── -->
+<!-- THEMES -->
 <section class="section themes-section" id="themes">
   <div class="si">
     <div class="s-label reveal">The Year Ahead</div>
@@ -1122,74 +836,74 @@ footer{
       <div class="theme-card active">
         <div class="theme-card-month">This Month</div>
         <div class="theme-card-title">Reset</div>
-        <div class="theme-card-sub">Coming out of being stuck. The posture shift that makes everything else possible.</div>
+        <div class="theme-card-sub">Coming out of being stuck.</div>
         <div class="theme-free-badge">Free</div>
       </div>
-      <div class="theme-card">
+      <div class="theme-card next-up">
         <div class="theme-card-month">Month 02</div>
-        <div class="theme-card-title">Identity</div>
-        <div class="theme-card-sub">Who you actually are versus who you have been performing.</div>
-        <div class="theme-free-badge">Free</div>
+        <div class="theme-card-title">Renew</div>
+        <div class="theme-card-sub">Overcoming addictions and negative patterns.</div>
+        <div class="theme-next-badge">Next</div>
       </div>
       <div class="theme-card locked">
         <div class="theme-card-month">Month 03</div>
-        <div class="theme-card-title">Discipline</div>
-        <div class="theme-card-sub">Why willpower fails and what actually works.</div>
-        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+        <div class="theme-card-title">Identity</div>
+        <div class="theme-card-sub">Who you actually are versus who you have been performing.</div>
+        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
       </div>
       <div class="theme-card locked">
         <div class="theme-card-month">Month 04</div>
-        <div class="theme-card-title">Relationships</div>
-        <div class="theme-card-sub">The people question. Who you are with and what it is costing you.</div>
-        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+        <div class="theme-card-title">Discipline</div>
+        <div class="theme-card-sub">Why willpower fails and what actually works.</div>
+        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
       </div>
       <div class="theme-card locked">
         <div class="theme-card-month">Month 05</div>
-        <div class="theme-card-title">Money</div>
-        <div class="theme-card-sub">A theology and psychology of stewardship.</div>
-        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+        <div class="theme-card-title">Relationships</div>
+        <div class="theme-card-sub">The people question. Who you are with and what it is costing you.</div>
+        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
       </div>
       <div class="theme-card locked">
         <div class="theme-card-month">Month 06</div>
-        <div class="theme-card-title">Purpose</div>
-        <div class="theme-card-sub">What it means to have a calling — and what to do when you are not sure you do.</div>
-        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+        <div class="theme-card-title">Money</div>
+        <div class="theme-card-sub">A theology and psychology of stewardship.</div>
+        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
       </div>
       <div class="theme-card locked">
         <div class="theme-card-month">Month 07</div>
-        <div class="theme-card-title">Communication</div>
-        <div class="theme-card-sub">How you speak determines what you build.</div>
-        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+        <div class="theme-card-title">Purpose</div>
+        <div class="theme-card-sub">What it means to have a calling — and what to do when you are not sure you do.</div>
+        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
       </div>
       <div class="theme-card locked">
         <div class="theme-card-month">Month 08</div>
-        <div class="theme-card-title">Faith</div>
-        <div class="theme-card-sub">A serious engagement with what you believe and whether you are living it.</div>
-        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+        <div class="theme-card-title">Communication</div>
+        <div class="theme-card-sub">How you speak determines what you build.</div>
+        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
       </div>
       <div class="theme-card locked">
         <div class="theme-card-month">Month 09</div>
-        <div class="theme-card-title">Grief and Transition</div>
-        <div class="theme-card-sub">How to leave well and enter the next season clean.</div>
-        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+        <div class="theme-card-title">Faith</div>
+        <div class="theme-card-sub">A serious engagement with what you believe and whether you are living it.</div>
+        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
       </div>
       <div class="theme-card locked">
         <div class="theme-card-month">Month 10</div>
         <div class="theme-card-title">Leadership</div>
         <div class="theme-card-sub">The difference between managing and actually leading.</div>
-        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
       </div>
       <div class="theme-card locked">
         <div class="theme-card-month">Month 11</div>
         <div class="theme-card-title">Decision Making</div>
         <div class="theme-card-sub">The frameworks that produce better choices.</div>
-        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
       </div>
       <div class="theme-card locked">
         <div class="theme-card-month">Month 12</div>
         <div class="theme-card-title">Review and Reset</div>
-        <div class="theme-card-sub">The annual reckoning. Where did the year go? Who did you become?</div>
-        <div class="lock-overlay"><div class="lock-badge">Access full year</div></div>
+        <div class="theme-card-sub">The annual reckoning. Where did the year go?</div>
+        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
       </div>
     </div>
     <p class="themes-unlock">Months 3 to 12 available with full-year access. <a href="#register">Join the waitlist</a> to be notified when it opens.</p>
@@ -1201,17 +915,119 @@ footer{
 <section class="section about-section" id="about">
   <div class="si">
     <div class="s-label">About the Teacher</div>
-    About section: add photo + bio when ready.
   </div>
 </section>
 -->
 
-<!-- ── REGISTER ── -->
+<!-- FAQ -->
+<section class="section faq-section" id="faq">
+  <div class="si">
+    <div class="s-label reveal">FAQ</div>
+    <h2 class="s-title reveal">Questions you probably <em>already have</em></h2>
+    <div class="faq-list reveal" id="faqList">
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-q">What exactly is Reflections W/ TEA?</span>
+          <span class="faq-arrow" aria-hidden="true">›</span>
+        </button>
+        <div class="faq-body"><div class="faq-inner">
+          <p class="faq-a">Reflections W/ TEA is a monthly teaching event hosted by Ezra Anya. Each session focuses on one theme — one question your life is already asking — and explores it with depth, honesty, and practical application. It is not a motivational talk, not a church service, and not a workshop. It is a teaching. You come, you think, you leave with something concrete.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-q">How long is each session?</span>
+          <span class="faq-arrow" aria-hidden="true">›</span>
+        </button>
+        <div class="faq-body"><div class="faq-inner">
+          <p class="faq-a">Each session is one hour. Every minute is intentional. The session ends on time — always.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-q">Is it really free?</span>
+          <span class="faq-arrow" aria-hidden="true">›</span>
+        </button>
+        <div class="faq-body"><div class="faq-inner">
+          <p class="faq-a">Yes, it is currently free of charge.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-q">Where does it happen?</span>
+          <span class="faq-arrow" aria-hidden="true">›</span>
+        </button>
+        <div class="faq-body"><div class="faq-inner">
+          <p class="faq-a">Currently online. Once you register, you will receive the session link via email before the event. Physical sessions are being planned depending on where the community is concentrated — registering now helps us understand your location and whether a physical event near you is viable.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-q">Do I need to register for each session separately?</span>
+          <span class="faq-arrow" aria-hidden="true">›</span>
+        </button>
+        <div class="faq-body"><div class="faq-inner">
+          <p class="faq-a">Yes. Each month has its own registration so we can track who is attending each session, understand the community better, and send you the right information for that specific theme. It takes less than two minutes to register and you only need to do it once per session.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-q">Will the session be recorded?</span>
+          <span class="faq-arrow" aria-hidden="true">›</span>
+        </button>
+        <div class="faq-body"><div class="faq-inner">
+          <p class="faq-a">Yes. Each session is recorded. Registered attendees will receive access to the recording. In future paid sessions, the recording may be available exclusively to paying members. Attending live is always the richer experience — the energy of a live room is different — but life happens and the recording will be there.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-q">Who is this for?</span>
+          <span class="faq-arrow" aria-hidden="true">›</span>
+        </button>
+        <div class="faq-body"><div class="faq-inner">
+          <p class="faq-a">Anyone in Ezra's community who is serious about their interior life — their thinking, their decisions, and the gap between who they are and who they are becoming. If you are a thinker, a builder, a person of faith navigating a complex world, or simply someone who suspects there is more to your life than what is currently visible — this is for you.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-q">How do I reach Ezra directly for more information?</span>
+          <span class="faq-arrow" aria-hidden="true">›</span>
+        </button>
+        <div class="faq-body"><div class="faq-inner">
+          <p class="faq-a">You can reach out via WhatsApp at <a href="https://wa.me/2349126634636" target="_blank" rel="noopener">+234 810 000 0000</a>You can also connect through the <a href="https://whatsapp.com/channel/0029VatWctcHrDZm8Kuch52O" target="_blank" rel="noopener">WhatsApp Channel</a> or find Ezra on <a href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Substack</a>.</p>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
 <section class="register-section" id="register">
   <div class="register-content reveal">
     <div class="register-eyebrow">Join the next session</div>
     <h2 class="register-title">Reserve your spot.<br>It is free.</h2>
     <p class="register-body">The first edition of Reflections W/ TEA is open to everyone in the community. No charge. One hour. Come ready to think — and leave ready to move.</p>
+
+    <div class="register-cta-wrap">
+      <a
+        class="register-main-btn"
+        href="https://forms.gle/LEg3BuSVerWbdjH67"
+        target="_blank"
+        rel="noopener"
+        id="registerMainBtn"
+      >Register Now — Edition 01: Reset</a>
+      <span class="register-or">or drop your email to stay on the list</span>
+    </div>
+
     <div class="register-form">
       <input
         type="email"
@@ -1221,13 +1037,19 @@ footer{
         autocomplete="email"
         inputmode="email"
       >
-      <button class="register-btn" id="registerBtn">Register Now</button>
+      <button class="register-btn" id="registerBtn">Notify Me</button>
     </div>
+
+    <div class="register-contact">
+      <div class="register-contact-label">Questions? Reach out directly</div>
+      <a href="https://wa.me/2349126634636" target="_blank" rel="noopener">WhatsApp:+234 912 663 4636</a>
+    </div>
+
     <p class="register-note" id="registerNote">Free for this edition · No spam · Unsubscribe anytime</p>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-logo">Reflections W/ <em>TEA</em></div>
   <div class="footer-middle">theezraanya.com · A monthly teaching event · 2026</div>
@@ -1235,6 +1057,7 @@ footer{
     <a href="#philosophy">Philosophy</a>
     <a href="#this-month">This Month</a>
     <a href="#themes">Themes</a>
+    <a href="#faq">FAQ</a>
     <a href="#register">Register</a>
     <a href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Substack</a>
   </div>
@@ -1244,22 +1067,19 @@ footer{
 /* ── DARK MODE ── */
 const root = document.documentElement;
 const modeBtn = document.getElementById('modeToggle');
-const savedMode = localStorage.getItem('teaMode') || 'light';
-root.setAttribute('data-mode', savedMode);
-
+root.setAttribute('data-mode', localStorage.getItem('teaMode') || 'light');
 modeBtn.addEventListener('click', () => {
   const next = root.getAttribute('data-mode') === 'light' ? 'dark' : 'light';
   root.setAttribute('data-mode', next);
   localStorage.setItem('teaMode', next);
 });
 
-/* ── NAV SCROLL SOLIDIFY ── */
+/* ── NAV SCROLL ── */
 const navEl = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   const dark = root.getAttribute('data-mode') === 'dark';
   navEl.style.background = window.scrollY > 40
-    ? (dark ? 'rgba(15,13,11,0.98)' : 'rgba(247,243,237,0.98)')
-    : '';
+    ? (dark ? 'rgba(15,13,11,0.98)' : 'rgba(247,243,237,0.98)') : '';
 }, {passive:true});
 
 /* ── HAMBURGER ── */
@@ -1270,15 +1090,11 @@ ham.addEventListener('click', () => {
   ham.classList.toggle('open', open);
   ham.setAttribute('aria-expanded', open);
 });
-/* Close on link tap */
-mob.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    mob.classList.remove('open');
-    ham.classList.remove('open');
-    ham.setAttribute('aria-expanded', 'false');
-  });
-});
-/* Close on outside tap */
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  mob.classList.remove('open');
+  ham.classList.remove('open');
+  ham.setAttribute('aria-expanded', 'false');
+}));
 document.addEventListener('click', e => {
   if (!navEl.contains(e.target) && !mob.contains(e.target)) {
     mob.classList.remove('open');
@@ -1291,10 +1107,8 @@ document.addEventListener('click', e => {
 const track = document.getElementById('pillarTrack');
 const dots = document.querySelectorAll('.pillar-dot');
 let cur = 0;
-const total = 3;
-
 function goTo(i) {
-  cur = ((i % total) + total) % total;
+  cur = ((i % 3) + 3) % 3;
   track.style.transform = 'translateX(-' + (cur * 100) + '%)';
   dots.forEach((d, idx) => {
     d.classList.toggle('active', idx === cur);
@@ -1304,8 +1118,6 @@ function goTo(i) {
 document.getElementById('pillarNext').addEventListener('click', () => goTo(cur + 1));
 document.getElementById('pillarPrev').addEventListener('click', () => goTo(cur - 1));
 dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.i)));
-
-/* Touch swipe */
 let tsX = 0;
 track.addEventListener('touchstart', e => { tsX = e.touches[0].clientX; }, {passive:true});
 track.addEventListener('touchend', e => {
@@ -1313,23 +1125,29 @@ track.addEventListener('touchend', e => {
   if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
 }, {passive:true});
 
-/* ── ACCORDION ── */
-document.getElementById('accordion').addEventListener('click', e => {
-  const trigger = e.target.closest('.acc-trigger');
-  if (!trigger) return;
-  const item = trigger.closest('.acc-item');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.acc-item.open').forEach(i => {
-    i.classList.remove('open');
-    i.querySelector('.acc-trigger').setAttribute('aria-expanded', 'false');
+/* ── ACCORDION (shared for both expect + faq) ── */
+function initAccordion(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.addEventListener('click', e => {
+    const trigger = e.target.closest('.acc-trigger, .faq-trigger');
+    if (!trigger) return;
+    const item = trigger.closest('.acc-item, .faq-item');
+    const isOpen = item.classList.contains('open');
+    container.querySelectorAll('.acc-item.open, .faq-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.acc-trigger, .faq-trigger').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
   });
-  if (!isOpen) {
-    item.classList.add('open');
-    trigger.setAttribute('aria-expanded', 'true');
-  }
-});
+}
+initAccordion('accordion');
+initAccordion('faqList');
 
-/* ── REGISTER ── */
+/* ── EMAIL NOTIFY (secondary form) ── */
 document.getElementById('registerBtn').addEventListener('click', () => {
   const email = document.getElementById('emailInput').value.trim();
   const note = document.getElementById('registerNote');
@@ -1339,20 +1157,12 @@ document.getElementById('registerBtn').addEventListener('click', () => {
     note.style.color = '#E06A10';
     return;
   }
-  /* 
-    TO WIRE UP REAL REGISTRATION — choose one:
-    Option A — Google Form redirect:
-      window.open('https://forms.gle/YOUR_FORM_ID', '_blank');
-    Option B — Mailchimp embed: replace with Mailchimp embed form
-    Option C — ConvertKit: replace with ConvertKit form action
-  */
-  btn.textContent = 'Registered ✓';
-  btn.style.background = '#2E7D32';
-  btn.style.borderColor = '#2E7D32';
+  btn.textContent = 'Added ✓';
+  btn.style.background = 'rgba(46,125,50,0.4)';
   btn.disabled = true;
   document.getElementById('emailInput').disabled = true;
-  note.textContent = 'You are on the list. Watch your inbox for details.';
-  note.style.color = 'rgba(237,232,223,0.5)';
+  note.textContent = 'You are on the list. Watch your inbox.';
+  note.style.color = 'rgba(237,232,223,0.4)';
 });
 
 /* ── SCROLL REVEAL ── */
