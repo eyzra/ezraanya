@@ -3,577 +3,305 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reflections W/ TEA — theezraanya.com</title>
+<title>Reflections W/ TEA — Edition 01: Reset</title>
 <meta name="description" content="One hour. One conversation. One question. Where introspection meets illumination. A monthly teaching by Ezra Anya.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cambria:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lexend:wght@300;400;500&family=Dancing+Script:wght@700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-
 :root{
-  --bg:#F7F3ED;
-  --bg-mid:#F0EBE3;
-  --bg-dark:#EDE8DF;
-  --ink:#1A1713;
-  --ink-mid:#2E2B27;
-  --ink-light:#4A4640;
-  --orange:#C85A00;
-  --orange-lt:#E06A10;
-  --orange-pale:#FDF0E8;
-  --muted:#8C8680;
-  --muted-lt:#B5B0A8;
-  --rule:rgba(26,23,19,0.11);
-  --rule-strong:rgba(26,23,19,0.20);
-  --inverse-text:#F7F3ED;
-  --nav-bg:rgba(247,243,237,0.95);
-  --ghost-color:#1A1713;
-  --pad:clamp(20px,5vw,52px);
-  --body-font:'Cambria',Cambria,Georgia,'Times New Roman',serif;
-  --display-font:'IM Fell English',Georgia,serif;
+  --black:#0A0A0A;--black2:#111111;--black3:#1A1A1A;
+  --white:#FFFFFF;--white-dim:rgba(255,255,255,0.55);--white-faint:rgba(255,255,255,0.07);
+  --orange:#B84F00;--orange-lt:#D05A00;--orange-pale:rgba(184,79,0,0.10);
+  --grey:#666;--grey-lt:#999;
+  --ivory:#F7F3ED;--ivory-mid:#F0EBE3;
+  --ink:#1A1713;--ink-light:#4A4640;--muted:#8C8680;
+  --rule:rgba(255,255,255,0.08);--rule-lt:rgba(10,10,10,0.10);--rule-ink:rgba(26,23,19,0.11);
+  --pad:clamp(20px,5vw,64px);
+  --display:'Bebas Neue',sans-serif;
+  --cursive:'Dancing Script',cursive;
+  --body:'Lexend',sans-serif;
+  --serif:'IM Fell English',Georgia,serif;
 }
+[data-mode="light"]{--bg:var(--ivory);--bg-mid:var(--ivory-mid);--surface:var(--white);--text:var(--ink);--text-dim:var(--ink-light);--text-muted:var(--muted);--r:var(--rule-ink)}
+[data-mode="dark"]{--bg:#0F0D0B;--bg-mid:#181410;--surface:#201C17;--text:#EDE8DF;--text-dim:#8C8680;--text-muted:#6A6560;--r:rgba(237,232,223,0.09)}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-weight:300;line-height:1.65;overflow-x:hidden;transition:background 0.4s,color 0.4s}
+a{color:inherit;text-decoration:none}
 
-[data-mode="dark"]{
-  --bg:#0F0D0B;
-  --bg-mid:#181410;
-  --bg-dark:#201C17;
-  --ink:#EDE8DF;
-  --ink-mid:#C8C2B8;
-  --ink-light:#8C8680;
-  --orange:#E06A10;
-  --orange-lt:#F07820;
-  --orange-pale:rgba(200,90,0,0.12);
-  --muted:#6A6560;
-  --muted-lt:#4A4640;
-  --rule:rgba(237,232,223,0.09);
-  --rule-strong:rgba(237,232,223,0.16);
-  --inverse-text:#0F0D0B;
-  --nav-bg:rgba(15,13,11,0.95);
-  --ghost-color:#EDE8DF;
-}
-
-body{
-  background-color:var(--bg);
-  color:var(--ink);
-  font-family:var(--body-font);
-  font-weight:400;
-  line-height:1.75;
-  overflow-x:hidden;
-  position:relative;
-  transition:background-color 0.4s,color 0.4s;
-}
-
-body::before{
-  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
-}
-body::after{
-  content:'';position:fixed;top:-120px;left:-120px;
-  width:600px;height:600px;
-  background:radial-gradient(ellipse at 20% 15%, rgba(247,243,237,0.45) 0%, transparent 68%);
-  pointer-events:none;z-index:0;
-}
-[data-mode="dark"] body::after{
-  background:radial-gradient(ellipse at 20% 15%, rgba(200,90,0,0.03) 0%, transparent 68%);
-}
-
-.vignette{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse at 50% 50%, transparent 52%, rgba(0,0,0,0.12) 100%);
-}
-
-@keyframes floatUp{
-  0%{transform:translateY(0) translateX(0);opacity:0}
-  20%{opacity:1}80%{opacity:0.5}
-  100%{transform:translateY(-90px) translateX(12px);opacity:0}
-}
-.dust{position:fixed;inset:0;pointer-events:none;z-index:1}
-.dust span{position:absolute;width:2px;height:2px;border-radius:50%;background:rgba(200,90,0,0.15);animation:floatUp linear infinite}
-.dust span:nth-child(1){left:10%;top:65%;animation-duration:10s}
-.dust span:nth-child(2){left:28%;top:72%;animation-duration:13s;animation-delay:3s;width:1px;height:1px}
-.dust span:nth-child(3){left:55%;top:60%;animation-duration:9s;animation-delay:1s}
-.dust span:nth-child(4){left:75%;top:68%;animation-duration:15s;animation-delay:5s;width:1px;height:1px}
-.dust span:nth-child(5){left:88%;top:62%;animation-duration:11s;animation-delay:2s}
-
-.ghost-quote{
-  position:fixed;font-family:var(--display-font);font-style:italic;
-  font-size:11px;color:var(--ghost-color);opacity:0.038;
-  letter-spacing:0.4px;line-height:1.6;
-  pointer-events:none;z-index:0;max-width:220px;
-}
-.gq1{top:14%;right:2%;transform:rotate(2deg)}
-.gq2{bottom:22%;left:1%;transform:rotate(-1.5deg)}
-
-.constellation{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.04}
-.compass-bg{position:fixed;bottom:-80px;right:-80px;width:300px;height:300px;opacity:0.03;pointer-events:none;z-index:0}
-
-/* ── NAV ── */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 var(--pad);height:64px;
-  background:var(--nav-bg);
-  border-bottom:1px solid var(--rule);
-  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-}
-.nav-logo{font-family:var(--display-font);font-size:16px;font-style:italic;color:var(--ink);text-decoration:none;flex-shrink:0}
-.nav-logo em{color:var(--orange)}
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{
-  font-family:var(--body-font);font-size:12px;font-weight:400;
-  letter-spacing:2px;text-transform:uppercase;
-  color:var(--muted);transition:color 0.2s;text-decoration:none;
-}
-.nav-links a:hover{color:var(--orange)}
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);height:62px;background:rgba(10,10,10,0.96);border-bottom:1px solid var(--rule);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.nav-logo{font-family:var(--cursive);font-size:18px;font-weight:700;color:var(--white);letter-spacing:0.3px}
+.nav-logo em{color:var(--orange);font-style:italic}
+.nav-back{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--grey);transition:color 0.2s;display:flex;align-items:center;gap:8px}
+.nav-back:hover{color:var(--white)}
+.nav-back::before{content:'←';font-size:14px}
 .nav-right{display:flex;align-items:center;gap:12px}
-.nav-cta{
-  font-family:var(--body-font);font-size:11px;font-weight:400;
-  letter-spacing:2px;text-transform:uppercase;
-  padding:8px 20px;border:1px solid var(--orange);color:var(--orange);
-  background:transparent;cursor:pointer;transition:all 0.2s;white-space:nowrap;
-}
-.nav-cta:hover{background:var(--orange);color:var(--bg)}
-.mode-toggle{
-  background:none;border:1px solid var(--rule-strong);cursor:pointer;
-  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
-  color:var(--muted);transition:all 0.2s;font-size:14px;flex-shrink:0;
-}
+.mode-toggle{background:none;border:1px solid var(--rule);cursor:pointer;width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:var(--grey);transition:all 0.2s;font-size:14px}
 .mode-toggle:hover{border-color:var(--orange);color:var(--orange)}
 .icon-sun,.icon-moon{display:none}
 [data-mode="light"] .icon-sun{display:block}
 [data-mode="dark"] .icon-moon{display:block}
+.nav-cta{font-family:var(--body);font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border:1px solid var(--orange);color:var(--orange);background:transparent;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.nav-cta:hover{background:var(--orange);color:var(--white)}
 .hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
-.hamburger span{display:block;width:22px;height:1.5px;background:var(--ink);transition:all 0.3s}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);transition:all 0.3s}
 .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
 .hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-.mobile-nav{
-  display:none;position:fixed;top:64px;left:0;right:0;z-index:190;
-  background:var(--bg);border-bottom:1px solid var(--rule);
-  padding:24px var(--pad) 28px;flex-direction:column;gap:0;
-}
+.mobile-nav{display:none;position:fixed;top:62px;left:0;right:0;z-index:190;background:var(--black2);border-bottom:1px solid var(--rule);padding:20px var(--pad) 28px;flex-direction:column}
 .mobile-nav.open{display:flex}
-.mobile-nav a{
-  font-family:var(--body-font);font-size:13px;font-weight:400;
-  letter-spacing:2px;text-transform:uppercase;
-  color:var(--muted);text-decoration:none;
-  padding:14px 0;border-bottom:1px solid var(--rule);transition:color 0.2s;
-}
+.mobile-nav a{font-family:var(--body);font-size:13px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--grey);padding:14px 0;border-bottom:1px solid var(--rule);transition:color 0.2s}
 .mobile-nav a:last-child{border-bottom:none}
-.mobile-nav a:hover{color:var(--orange)}
+.mobile-nav a:hover{color:var(--white)}
 
-/* ── HERO ── */
-.hero{
-  height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
-  padding:64px var(--pad) clamp(28px,5vh,56px);position:relative;overflow:hidden;max-height:100vh;
-}
-.hero-inner{max-width:1100px;margin:0 auto;width:100%;position:relative;z-index:2}
-.hero-columns{
-  position:absolute;top:0;right:0;bottom:0;width:50%;
-  background:repeating-linear-gradient(90deg,transparent 0px,transparent 36px,rgba(26,23,19,0.02) 36px,rgba(26,23,19,0.02) 38px,transparent 38px,transparent 96px);
-  pointer-events:none;
-}
-[data-mode="dark"] .hero-columns{background:repeating-linear-gradient(90deg,transparent 0px,transparent 36px,rgba(237,232,223,0.02) 36px,rgba(237,232,223,0.02) 38px,transparent 38px,transparent 96px)}
-.hero-manuscript{position:absolute;inset:0;opacity:0.025;pointer-events:none;background-image:repeating-linear-gradient(0deg,transparent 0px,transparent 22px,rgba(26,23,19,0.5) 22px,rgba(26,23,19,0.5) 23px)}
-.hero-halo{
-  position:absolute;top:50%;right:6%;transform:translateY(-50%);
-  width:clamp(220px,38vw,440px);height:clamp(220px,38vw,440px);border-radius:50%;
-  border:1px solid rgba(200,90,0,0.09);
-  box-shadow:0 0 0 24px rgba(200,90,0,0.03),0 0 0 48px rgba(200,90,0,0.016),0 0 0 72px rgba(200,90,0,0.008);
-  pointer-events:none;z-index:1;
-}
-.hero-halo::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:76%;height:76%;border-radius:50%;border:1px solid rgba(200,90,0,0.055)}
+/* HERO */
+.hero{height:100vh;height:100svh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;text-align:center;padding-top:62px;background:var(--black)}
+.hero-text{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding:0 var(--pad)}
+.hero-eyebrow{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:clamp(14px,2vw,22px);display:flex;align-items:center;justify-content:center;gap:12px}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:20px;height:1px;background:var(--orange);flex-shrink:0}
+.hero-title{font-family:var(--display);font-size:clamp(52px,10vw,130px);line-height:1;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:clamp(8px,1.5vw,14px)}
+.hero-title em{color:var(--orange);font-style:normal}
+.hero-sub{font-family:var(--serif);font-style:italic;font-size:clamp(14px,1.6vw,20px);color:rgba(255,255,255,0.55);margin-bottom:clamp(20px,3vw,32px);max-width:480px;line-height:1.55}
+/* DATE BADGE */
+.hero-date{display:flex;align-items:center;gap:12px;margin-bottom:clamp(24px,4vw,40px);justify-content:center;flex-wrap:wrap}
+.date-pill{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;border:1px solid var(--orange);color:var(--orange)}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:13px 26px;cursor:pointer;transition:all 0.2s;display:inline-block;border:none}
+.btn-fill{background:var(--orange);color:var(--white)}
+.btn-fill:hover{background:var(--orange-lt)}
+.btn-outline{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.2)}
+.btn-outline:hover{border-color:rgba(255,255,255,0.5)}
 
-.hero-eyebrow{
-  font-family:var(--body-font);font-size:10px;font-weight:400;
-  letter-spacing:4px;text-transform:uppercase;color:var(--orange);
-  margin-bottom:clamp(16px,3vw,28px);display:flex;align-items:center;gap:14px;
-}
-.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--orange);flex-shrink:0}
-.hero-display{
-  font-family:var(--display-font);
-  font-size:clamp(40px,7.5vw,108px);font-weight:400;font-style:italic;
-  line-height:0.88;letter-spacing:-1px;color:var(--ink);
-}
-.hero-display .accent{color:var(--orange)}
-.hero-display .sub-word{
-  font-family:var(--body-font);font-style:normal;font-weight:400;
-  font-size:clamp(11px,1.4vw,15px);letter-spacing:4px;text-transform:uppercase;
-  color:var(--muted);display:block;margin-top:16px;margin-left:3px;
-}
-.hero-rule{
-  width:100%;height:1px;
-  background:linear-gradient(to right, var(--orange) 0%, rgba(200,90,0,0.1) 50%, transparent 100%);
-  margin:clamp(28px,5vw,50px) 0 clamp(20px,4vw,36px);
-}
-.hero-bottom{display:grid;grid-template-columns:1fr auto;gap:clamp(20px,4vw,52px);align-items:end}
-.hero-premise{
-  font-family:var(--display-font);font-style:italic;
-  font-size:clamp(15px,1.6vw,20px);
-  color:rgba(26,23,19,0.58);max-width:480px;line-height:1.65;
-}
-[data-mode="dark"] .hero-premise{color:rgba(237,232,223,0.52)}
-.hero-premise strong{font-style:normal;color:var(--ink);font-weight:400}
-.hero-meta{text-align:right;flex-shrink:0}
-.hero-meta-label{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--muted-lt);margin-bottom:7px}
-.hero-meta-name{font-family:var(--display-font);font-size:17px;font-style:italic;color:var(--ink)}
-.hero-meta-role{font-family:var(--body-font);font-size:11px;font-weight:400;color:var(--muted);margin-top:4px;letter-spacing:1px}
-
-/* ── SECTION SHELL ── */
-.section{padding:clamp(60px,10vw,100px) 0;position:relative}
-.si{max-width:1100px;margin:0 auto;padding:0 var(--pad)}
-.s-label{
-  font-family:var(--body-font);font-size:10px;font-weight:400;
-  letter-spacing:4px;text-transform:uppercase;color:var(--orange);
-  margin-bottom:clamp(28px,5vw,44px);display:flex;align-items:center;gap:14px;
-}
+/* FLYER SECTION */
+.flyer-section{background:var(--black2);padding:clamp(60px,8vw,100px) var(--pad)}
+.flyer-inner{max-width:1100px;margin:0 auto}
+.s-label{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:clamp(28px,4vw,44px);display:flex;align-items:center;gap:14px}
 .s-label::after{content:'';flex:1;height:1px;background:var(--rule);min-width:20px}
-.s-title{
-  font-family:var(--display-font);
-  font-size:clamp(24px,4vw,48px);font-weight:400;font-style:italic;
-  line-height:1.1;color:var(--ink);margin-bottom:18px;
+.flyer-frame{
+  /* 1080:1350 ratio = 4:5 */
+  width:100%;max-width:540px;
+  aspect-ratio:4/5;
+  margin:0 auto;
+  background:var(--black3);
+  border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
 }
-.s-title em{color:var(--orange)}
-.s-body{font-family:var(--body-font);font-size:clamp(14px,1.4vw,15.5px);font-weight:400;color:var(--ink-light);line-height:1.88;max-width:620px}
+.flyer-placeholder{text-align:center;padding:40px}
+.flyer-placeholder-icon{font-size:48px;opacity:0.15;margin-bottom:16px}
+.flyer-placeholder-text{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--grey);line-height:1.8}
+.flyer-placeholder-dims{font-family:var(--display);font-size:28px;color:var(--orange);opacity:0.3;margin-top:12px;letter-spacing:1px}
+/* When you drop a flyer image in, use this: */
+.flyer-img{width:100%;height:100%;object-fit:cover;display:block}
 
-/* ── PHILOSOPHY ── */
-.phil-section{background:var(--bg-mid)}
-.phil-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:clamp(28px,5vw,52px);background:var(--rule)}
-.phil-cell{padding:clamp(24px,4vw,38px) clamp(20px,3vw,34px);background:var(--bg)}
-.phil-cell.dk{background:var(--ink-mid)}
-[data-mode="dark"] .phil-cell{background:var(--bg-mid)}
-[data-mode="dark"] .phil-cell.dk{background:var(--bg-dark)}
-.phil-cell-label{font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
-.phil-cell-text{font-family:var(--display-font);font-size:clamp(15px,1.6vw,17px);font-style:italic;color:var(--ink);line-height:1.7}
-.phil-cell.dk .phil-cell-text{color:rgba(237,232,223,0.78)}
-.phil-cell.dk .phil-cell-label{color:var(--orange-lt)}
+/* ABOUT THIS MONTH */
+.month-split{background:var(--bg);display:grid;grid-template-columns:1fr 1fr;min-height:60vh}
+[data-mode="dark"] .month-split{background:var(--black3)}
+.month-left{background:var(--black2);padding:clamp(40px,6vw,80px) var(--pad);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+[data-mode="dark"] .month-left{background:var(--black3)}
+.month-left::before{content:'RESET';position:absolute;bottom:-30px;left:-10px;font-family:var(--display);font-size:clamp(100px,18vw,200px);color:rgba(184,79,0,0.05);line-height:1;pointer-events:none;white-space:nowrap}
+.month-edition{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
+.month-title{font-family:var(--display);font-size:clamp(52px,8vw,96px);text-transform:uppercase;color:var(--white);line-height:0.9;margin-bottom:10px;position:relative;z-index:1;letter-spacing:1px}
+.month-subtitle{font-family:var(--serif);font-style:italic;font-size:clamp(14px,1.5vw,18px);color:var(--orange-lt);margin-bottom:22px;position:relative;z-index:1}
+.month-desc{font-family:var(--body);font-size:clamp(13px,1.3vw,14.5px);font-weight:300;color:rgba(255,255,255,0.55);line-height:1.85;max-width:400px;position:relative;z-index:1;margin-bottom:28px}
+.month-tags{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.month-tag{font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border:1px solid rgba(184,79,0,0.32);color:var(--orange-lt)}
+.month-right{background:var(--bg-mid);padding:clamp(40px,6vw,80px) var(--pad);display:flex;flex-direction:column;justify-content:center}
+[data-mode="dark"] .month-right{background:var(--black2)}
+.month-right-title{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:24px}
+.month-links{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+.month-link-card{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border:1px solid var(--r);background:var(--bg);text-decoration:none;transition:border-color 0.2s,background 0.2s;gap:12px}
+[data-mode="dark"] .month-link-card{background:var(--black3)}
+.month-link-card:hover{border-color:var(--orange);background:var(--orange-pale)}
+.month-link-inner{flex:1;min-width:0}
+.month-link-label{font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
+.month-link-name{font-family:var(--serif);font-style:italic;font-size:clamp(14px,1.5vw,16px);color:var(--text)}
+.month-link-arrow{font-size:18px;color:var(--text-muted);transition:color 0.2s;flex-shrink:0}
+.month-link-card:hover .month-link-arrow{color:var(--orange)}
+.month-wa-desc{font-family:var(--body);font-size:11px;font-weight:300;color:var(--text-muted);line-height:1.6;margin-top:5px;font-style:italic}
+.month-register{width:100%;padding:16px 20px;background:var(--orange);font-family:var(--body);font-size:10px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:#fff;border:none;cursor:pointer;transition:background 0.2s}
+.month-register:hover{background:var(--orange-lt)}
 
-/* ── PILLARS CAROUSEL ── */
-.pillars-section{background:var(--bg)}
-.pillar-carousel{margin-top:clamp(28px,5vw,52px);position:relative;overflow:hidden}
+/* NEXT MONTH */
+.next-section{background:var(--black);padding:clamp(60px,8vw,100px) var(--pad)}
+.next-inner{max-width:1100px;margin:0 auto}
+.next-card{display:grid;grid-template-columns:auto 1fr;gap:1px;background:var(--rule);margin-top:clamp(24px,4vw,44px)}
+.next-num-col{padding:clamp(28px,5vw,52px) clamp(24px,4vw,40px);background:var(--orange);display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:clamp(80px,12vw,140px);text-align:center}
+.next-num-label{font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:8px}
+.next-num{font-family:var(--display);font-size:clamp(40px,7vw,72px);color:var(--white);line-height:1}
+.next-body{padding:clamp(28px,5vw,52px) clamp(28px,4vw,52px);background:var(--black2)}
+.next-month-label{font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.next-title{font-family:var(--display);font-size:clamp(24px,4vw,48px);text-transform:uppercase;color:var(--white);margin-bottom:8px;line-height:1;letter-spacing:0.5px}
+.next-subtitle{font-family:var(--serif);font-style:italic;font-size:clamp(13px,1.5vw,16px);color:var(--grey-lt);margin-bottom:14px}
+.next-desc{font-family:var(--body);font-size:clamp(13px,1.3vw,14px);font-weight:300;color:rgba(255,255,255,0.5);line-height:1.82;max-width:480px}
+
+/* PILLARS */
+.pillars-section{background:var(--bg-mid);padding:clamp(60px,8vw,100px) var(--pad)}
+[data-mode="dark"] .pillars-section{background:var(--black3)}
+.pillars-inner{max-width:1100px;margin:0 auto}
+.pillar-carousel{margin-top:clamp(24px,4vw,44px);position:relative;overflow:hidden}
 .pillar-track{display:flex;transition:transform 0.45s cubic-bezier(0.4,0,0.2,1)}
-.pillar-slide{
-  min-width:100%;padding:clamp(28px,5vw,52px) clamp(20px,4vw,44px);
-  background:var(--bg-mid);border:1px solid var(--rule);
-  display:flex;gap:clamp(24px,5vw,60px);align-items:start;
-}
-.pillar-num{font-family:var(--display-font);font-size:clamp(60px,8vw,96px);font-style:italic;color:rgba(200,90,0,0.10);line-height:1;flex-shrink:0;padding-top:2px}
-.pillar-title{font-family:var(--display-font);font-size:clamp(24px,3.5vw,42px);font-style:italic;color:var(--ink);margin-bottom:12px}
-.pillar-desc{font-family:var(--body-font);font-size:clamp(13.5px,1.4vw,15px);font-weight:400;color:var(--ink-light);line-height:1.85;max-width:540px}
+.pillar-slide{min-width:100%;padding:clamp(28px,5vw,52px) clamp(20px,4vw,44px);background:var(--bg);border:1px solid var(--r);display:flex;gap:clamp(20px,5vw,60px);align-items:start}
+[data-mode="dark"] .pillar-slide{background:var(--black2)}
+.pillar-num{font-family:var(--display);font-size:clamp(60px,8vw,96px);color:rgba(184,79,0,0.10);line-height:1;flex-shrink:0;padding-top:2px}
+.pillar-title{font-family:var(--display);font-size:clamp(24px,3.5vw,44px);text-transform:uppercase;color:var(--text);margin-bottom:12px;letter-spacing:0.5px}
+.pillar-desc{font-family:var(--body);font-size:clamp(13.5px,1.4vw,15px);font-weight:300;color:var(--text-dim);line-height:1.85;max-width:540px}
 .pillar-controls{display:flex;align-items:center;gap:16px;margin-top:clamp(16px,3vw,28px)}
-.pillar-btn{background:none;border:1px solid var(--rule-strong);cursor:pointer;width:40px;height:40px;min-width:40px;display:flex;align-items:center;justify-content:center;color:var(--muted);transition:all 0.2s;font-size:18px;font-family:serif}
+.pillar-btn{background:none;border:1px solid var(--r);cursor:pointer;width:40px;height:40px;min-width:40px;display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all 0.2s;font-size:18px;font-family:serif}
 .pillar-btn:hover{border-color:var(--orange);color:var(--orange)}
 .pillar-dots{display:flex;gap:8px}
-.pillar-dot{width:7px;height:7px;border-radius:50%;background:var(--rule-strong);transition:background 0.2s;border:none;cursor:pointer;padding:0;min-width:7px}
+.pillar-dot{width:7px;height:7px;border-radius:50%;background:var(--r);transition:background 0.2s;border:none;cursor:pointer;padding:0;min-width:7px}
 .pillar-dot.active{background:var(--orange)}
 
-/* ── ACCORDION ── */
-.expect-section{background:var(--bg-mid)}
-.accordion{margin-top:clamp(28px,5vw,52px);display:flex;flex-direction:column;gap:1px}
-.acc-item{background:var(--bg);border:1px solid var(--rule);overflow:hidden}
-.acc-trigger{width:100%;padding:clamp(18px,3vw,26px) clamp(16px,3vw,32px);display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;text-align:left;transition:background 0.2s;gap:12px}
+/* ACCORDION */
+.expect-section{background:var(--bg);padding:clamp(60px,8vw,100px) var(--pad)}
+[data-mode="dark"] .expect-section{background:var(--black2)}
+.expect-inner{max-width:1100px;margin:0 auto}
+.acc-list{margin-top:clamp(24px,4vw,44px);display:flex;flex-direction:column;gap:1px}
+.acc-item{background:var(--bg-mid);border:1px solid var(--r);overflow:hidden}
+[data-mode="dark"] .acc-item{background:var(--black3)}
+.acc-trigger{width:100%;padding:clamp(18px,3vw,24px) clamp(16px,3vw,28px);display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;text-align:left;transition:background 0.2s;gap:12px}
 .acc-trigger:hover{background:var(--orange-pale)}
-[data-mode="dark"] .acc-trigger:hover{background:rgba(200,90,0,0.08)}
 .acc-trigger-left{display:flex;align-items:center;gap:clamp(12px,2vw,20px);flex:1}
-.acc-num{font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--orange);flex-shrink:0}
-.acc-title{font-family:var(--display-font);font-size:clamp(16px,1.8vw,20px);font-style:italic;color:var(--ink)}
-.acc-arrow{font-size:20px;color:var(--muted);transition:transform 0.3s;display:block;flex-shrink:0;line-height:1}
+.acc-num{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--orange);flex-shrink:0}
+.acc-title{font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.8vw,20px);color:var(--text)}
+.acc-arrow{font-size:20px;color:var(--text-muted);transition:transform 0.3s;display:block;flex-shrink:0;line-height:1}
 .acc-item.open .acc-arrow{transform:rotate(90deg);color:var(--orange)}
 .acc-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
 .acc-item.open .acc-body{max-height:400px}
-.acc-inner{padding:0 clamp(16px,3vw,32px) clamp(16px,3vw,28px)}
+.acc-inner{padding:0 clamp(16px,3vw,28px) clamp(16px,3vw,24px)}
 .acc-points{list-style:none;margin-top:4px}
-.acc-points li{font-family:var(--body-font);font-size:clamp(13px,1.3vw,14px);font-weight:400;color:var(--ink-light);padding:8px 0;border-bottom:1px solid var(--rule);line-height:1.6}
+.acc-points li{font-family:var(--body);font-size:clamp(13px,1.3vw,14px);font-weight:300;color:var(--text-dim);padding:8px 0;border-bottom:1px solid var(--r);line-height:1.6}
 .acc-points li:last-child{border-bottom:none}
 .acc-points li::before{content:'— ';color:var(--orange)}
 
-/* ── THIS MONTH ── */
-.month-section{background:var(--bg)}
-.month-feature{margin-top:clamp(28px,5vw,52px);display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule)}
-.month-left{padding:clamp(32px,5vw,56px) clamp(24px,4vw,48px);background:var(--ink-mid);position:relative;overflow:hidden}
-[data-mode="dark"] .month-left{background:var(--bg-dark)}
-.month-left::before{content:'RESET';position:absolute;bottom:-40px;left:-6px;font-family:var(--display-font);font-size:clamp(100px,18vw,190px);font-style:italic;color:rgba(200,90,0,0.045);line-height:1;pointer-events:none;white-space:nowrap}
-.month-edition{font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:18px}
-.month-title{font-family:var(--display-font);font-size:clamp(44px,7vw,84px);font-style:italic;color:var(--inverse-text);line-height:0.9;margin-bottom:10px;position:relative;z-index:1}
-[data-mode="dark"] .month-title{color:var(--ink)}
-.month-subtitle{font-family:var(--display-font);font-size:clamp(14px,1.6vw,17px);font-style:italic;color:var(--orange-lt);margin-bottom:24px;position:relative;z-index:1}
-.month-desc{font-family:var(--body-font);font-size:clamp(13px,1.3vw,14px);font-weight:400;color:rgba(237,232,223,0.60);line-height:1.88;max-width:400px;position:relative;z-index:1;margin-bottom:32px}
-[data-mode="dark"] .month-desc{color:var(--ink-light)}
-.month-tags{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
-.month-tag{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:6px 13px;border:1px solid rgba(200,90,0,0.32);color:var(--orange-lt)}
-.month-right{padding:clamp(32px,5vw,56px) clamp(24px,4vw,48px);background:var(--bg-mid)}
-.month-right-title{font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
-.month-links{display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
-.month-link-card{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border:1px solid var(--rule);background:var(--bg);text-decoration:none;transition:border-color 0.2s,background 0.2s;gap:12px}
-.month-link-card:hover{border-color:var(--orange);background:var(--orange-pale)}
-[data-mode="dark"] .month-link-card:hover{background:rgba(200,90,0,0.08)}
-.month-link-inner{flex:1;min-width:0}
-.month-link-label{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:4px}
-.month-link-name{font-family:var(--display-font);font-size:clamp(14px,1.5vw,16px);font-style:italic;color:var(--ink)}
-.month-link-arrow{font-size:18px;color:var(--muted);transition:color 0.2s;flex-shrink:0}
-.month-link-card:hover .month-link-arrow{color:var(--orange)}
-.month-wa-desc{font-family:var(--body-font);font-size:11px;font-weight:400;color:var(--muted);line-height:1.6;margin-top:5px;font-style:italic}
-.month-register{width:100%;padding:16px 20px;background:var(--orange);font-family:var(--body-font);font-size:11px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:#fff;border:none;cursor:pointer;transition:background 0.2s}
-.month-register:hover{background:var(--orange-lt)}
+/* WHY */
+.why-section{background:var(--black);padding:clamp(60px,8vw,100px) var(--pad)}
+.why-inner{max-width:1100px;margin:0 auto}
+.why-quotes{margin-top:clamp(24px,4vw,44px);display:flex;flex-direction:column;gap:2px}
+.why-quote{padding:clamp(22px,4vw,36px) clamp(20px,4vw,40px);border-left:2px solid var(--orange);background:rgba(255,255,255,0.03)}
+.why-quote-main{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2.2vw,26px);color:rgba(255,255,255,0.72);line-height:1.5}
+.why-quote-main strong{font-style:normal;color:var(--white);font-weight:400}
 
-/* ── NEXT MONTH TEASER ── */
-.next-section{background:var(--bg-dark)}
-[data-mode="dark"] .next-section{background:var(--bg-mid)}
-.next-card{
-  margin-top:clamp(24px,4vw,44px);
-  display:grid;grid-template-columns:auto 1fr;gap:1px;background:var(--rule);
-}
-.next-label-col{
-  padding:clamp(24px,4vw,40px) clamp(20px,3vw,36px);
-  background:var(--orange);
-  display:flex;flex-direction:column;justify-content:center;align-items:center;
-  min-width:clamp(100px,14vw,160px);text-align:center;
-}
-.next-label-top{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:8px}
-.next-label-num{font-family:var(--display-font);font-size:clamp(40px,6vw,72px);font-style:italic;color:#fff;line-height:1}
-.next-body{padding:clamp(24px,4vw,40px) clamp(24px,4vw,44px);background:var(--bg)}
-[data-mode="dark"] .next-body{background:var(--bg-dark)}
-.next-month-label{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
-.next-title{font-family:var(--display-font);font-size:clamp(22px,3.5vw,40px);font-style:italic;color:var(--ink);margin-bottom:10px;line-height:1.1}
-.next-subtitle{font-family:var(--display-font);font-size:clamp(13px,1.5vw,16px);font-style:italic;color:var(--muted);margin-bottom:14px}
-.next-desc{font-family:var(--body-font);font-size:clamp(13px,1.3vw,14px);font-weight:400;color:var(--ink-light);line-height:1.85;max-width:480px}
-
-/* ── WHY REFLECTION ── */
-.why-section{background:var(--ink-mid)}
-[data-mode="dark"] .why-section{background:var(--bg-dark)}
-.why-section .s-title{color:var(--inverse-text)}
-[data-mode="dark"] .why-section .s-title{color:var(--ink)}
-.why-section .s-label{color:var(--orange)}
-.why-section .s-label::after{background:rgba(237,232,223,0.09)}
-[data-mode="dark"] .why-section .s-label::after{background:var(--rule)}
-.why-quotes{margin-top:clamp(24px,4vw,52px);display:flex;flex-direction:column;gap:2px}
-.why-quote{padding:clamp(22px,4vw,36px) clamp(20px,4vw,40px);border-left:2px solid var(--orange);background:rgba(237,232,223,0.04)}
-[data-mode="dark"] .why-quote{background:rgba(237,232,223,0.02)}
-.why-quote-main{font-family:var(--display-font);font-size:clamp(16px,2.2vw,26px);font-style:italic;color:rgba(237,232,223,0.76);line-height:1.5}
-[data-mode="dark"] .why-quote-main{color:var(--ink-light)}
-.why-quote-main strong{font-style:normal;color:var(--inverse-text);font-weight:400}
-[data-mode="dark"] .why-quote-main strong{color:var(--ink)}
-
-/* ── THEMES ── */
-.themes-section{background:var(--bg-mid)}
-.themes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:clamp(28px,5vw,52px);background:var(--rule)}
-.theme-card{padding:clamp(18px,3vw,28px) clamp(14px,2vw,22px);background:var(--bg);transition:all 0.2s;position:relative}
-.theme-card:hover:not(.locked){background:var(--orange-pale)}
-[data-mode="dark"] .theme-card:hover:not(.locked){background:rgba(200,90,0,0.08)}
-.theme-card.active{background:var(--ink-mid)}
-[data-mode="dark"] .theme-card.active{background:var(--bg-dark)}
-.theme-card.next-up{background:var(--bg-dark);border:1px solid rgba(200,90,0,0.25)}
-[data-mode="dark"] .theme-card.next-up{background:var(--bg-mid)}
+/* THEMES */
+.themes-section{background:var(--black2);padding:clamp(60px,8vw,100px) var(--pad)}
+.themes-inner{max-width:1100px;margin:0 auto}
+.themes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:clamp(24px,4vw,44px);background:var(--rule)}
+.theme-card{padding:clamp(18px,3vw,28px) clamp(14px,2vw,20px);background:var(--black3);transition:all 0.2s;position:relative}
+.theme-card:hover:not(.locked){background:var(--black2)}
+.theme-card.active{background:var(--black)}
+.theme-card.next-up{background:var(--black);border:1px solid rgba(184,79,0,0.22)}
 .theme-card.locked .theme-card-title,.theme-card.locked .theme-card-sub{filter:blur(3.5px);user-select:none}
 .theme-card.locked{cursor:default}
 .lock-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.2s}
 .theme-card.locked:hover .lock-overlay{opacity:1}
-.lock-badge{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border:1px solid var(--orange);color:var(--orange);background:var(--bg);text-align:center}
-.theme-card-month{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
-.theme-card-title{font-family:var(--display-font);font-style:italic;font-size:clamp(14px,1.5vw,17px);color:var(--ink);margin-bottom:6px}
-.theme-card.active .theme-card-title{color:var(--inverse-text)}
-[data-mode="dark"] .theme-card.active .theme-card-title{color:var(--ink)}
-.theme-card.next-up .theme-card-title{color:var(--ink)}
-.theme-card-sub{font-family:var(--body-font);font-size:clamp(10px,1vw,11.5px);font-weight:400;color:var(--muted);line-height:1.55}
-.theme-card.active .theme-card-sub{color:rgba(237,232,223,0.45)}
-[data-mode="dark"] .theme-card.active .theme-card-sub{color:var(--muted)}
-.theme-free-badge{position:absolute;top:14px;right:14px;font-family:var(--body-font);font-size:8px;font-weight:400;letter-spacing:1.5px;padding:3px 9px;border:1px solid var(--orange);color:var(--orange);text-transform:uppercase}
-.theme-next-badge{position:absolute;top:14px;right:14px;font-family:var(--body-font);font-size:8px;font-weight:400;letter-spacing:1.5px;padding:3px 9px;border:1px solid var(--muted);color:var(--muted);text-transform:uppercase}
-.themes-unlock{margin-top:18px;text-align:center;font-family:var(--body-font);font-size:12px;font-weight:400;color:var(--muted);font-style:italic}
-.themes-unlock a{color:var(--orange);text-decoration:none}
+.lock-badge{font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border:1px solid var(--orange);color:var(--orange);background:var(--black3);text-align:center}
+.theme-card-month{font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+.theme-card-title{font-family:var(--display);font-size:clamp(14px,1.5vw,18px);text-transform:uppercase;color:var(--white);margin-bottom:6px;letter-spacing:0.3px}
+.theme-card-sub{font-family:var(--body);font-size:clamp(10px,1vw,11.5px);font-weight:300;color:var(--grey);line-height:1.5}
+.theme-free-badge,.theme-next-badge{position:absolute;top:14px;right:14px;font-family:var(--body);font-size:8px;font-weight:400;letter-spacing:1.5px;padding:3px 9px;text-transform:uppercase}
+.theme-free-badge{border:1px solid var(--orange);color:var(--orange)}
+.theme-next-badge{border:1px solid var(--grey);color:var(--grey)}
+.themes-unlock{margin-top:18px;text-align:center;font-family:var(--body);font-size:12px;font-weight:300;color:var(--grey);font-style:italic}
+.themes-unlock a{color:var(--orange)}
 .themes-unlock a:hover{text-decoration:underline}
 
-/* ── REGISTER ── */
-.register-section{
-  background:var(--ink-mid);padding:clamp(80px,12vw,130px) var(--pad);
-  text-align:center;position:relative;overflow:hidden;
-}
-[data-mode="dark"] .register-section{background:var(--bg-dark)}
-.register-section::before{
-  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:min(700px,130vw);height:min(700px,130vw);border-radius:50%;
-  border:1px solid rgba(200,90,0,0.07);
-  box-shadow:0 0 0 50px rgba(200,90,0,0.025),0 0 0 100px rgba(200,90,0,0.012);
-  pointer-events:none;
-}
-.register-section::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0px,transparent 26px,rgba(237,232,223,0.018) 26px,rgba(237,232,223,0.018) 27px);pointer-events:none}
-.register-content{position:relative;z-index:2;max-width:560px;margin:0 auto}
-.register-eyebrow{font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:24px}
-.register-title{font-family:var(--display-font);font-size:clamp(30px,5vw,56px);font-weight:400;font-style:italic;color:var(--inverse-text);line-height:1.2;margin-bottom:16px}
-[data-mode="dark"] .register-title{color:var(--ink)}
-.register-body{font-family:var(--body-font);font-size:clamp(13.5px,1.4vw,15px);font-weight:400;color:rgba(237,232,223,0.5);line-height:1.88;margin-bottom:clamp(28px,5vw,48px)}
-[data-mode="dark"] .register-body{color:var(--muted)}
-
-/* register CTA emphasis */
-.register-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;margin-bottom:20px}
-.register-main-btn{
-  display:inline-block;
-  padding:18px 40px;background:var(--orange);
-  font-family:var(--body-font);font-size:12px;font-weight:400;
-  letter-spacing:3px;text-transform:uppercase;
-  color:#fff;border:none;cursor:pointer;
-  text-decoration:none;
-  transition:background 0.2s,transform 0.2s;
-  width:100%;max-width:400px;text-align:center;
-}
-.register-main-btn:hover{background:var(--orange-lt);transform:translateY(-1px)}
-.register-or{font-family:var(--body-font);font-size:11px;font-weight:400;color:rgba(237,232,223,0.3);letter-spacing:2px;text-transform:uppercase}
-[data-mode="dark"] .register-or{color:var(--muted)}
-
-/* inline email form (secondary) */
-.register-form{display:flex;flex-direction:column;gap:0;max-width:400px;margin:0 auto 14px;width:100%}
-.register-input{padding:14px 18px;background:rgba(237,232,223,0.06);border:1px solid rgba(237,232,223,0.14);border-bottom:none;color:var(--inverse-text);font-family:var(--body-font);font-size:14px;font-weight:400;outline:none;transition:border-color 0.2s}
-[data-mode="dark"] .register-input{color:var(--ink);background:rgba(237,232,223,0.04);border-color:var(--rule);border-bottom:none}
-.register-input::placeholder{color:rgba(237,232,223,0.28)}
-[data-mode="dark"] .register-input::placeholder{color:var(--muted)}
-.register-input:focus{border-color:var(--orange)}
-.register-btn{padding:14px 18px;background:rgba(237,232,223,0.1);font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:rgba(237,232,223,0.6);border:1px solid rgba(237,232,223,0.14);cursor:pointer;transition:all 0.2s}
-.register-btn:hover{background:rgba(237,232,223,0.18);color:var(--inverse-text)}
-[data-mode="dark"] .register-btn{color:var(--muted-lt);border-color:var(--rule)}
-
-.register-contact{
-  margin-top:28px;padding-top:24px;border-top:1px solid rgba(237,232,223,0.08);
-}
-[data-mode="dark"] .register-contact{border-color:var(--rule)}
-.register-contact-label{font-family:var(--body-font);font-size:10px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:rgba(237,232,223,0.3);margin-bottom:8px}
-[data-mode="dark"] .register-contact-label{color:var(--muted)}
-.register-contact a{font-family:var(--display-font);font-style:italic;font-size:16px;color:var(--orange-lt);text-decoration:none;transition:color 0.2s}
-.register-contact a:hover{color:var(--orange)}
-.register-note{font-family:var(--body-font);font-size:10px;font-weight:400;color:rgba(237,232,223,0.22);letter-spacing:1.5px;text-transform:uppercase;margin-top:12px}
-[data-mode="dark"] .register-note{color:var(--muted)}
-
-/* ── FAQ ── */
-.faq-section{background:var(--bg)}
-.faq-list{margin-top:clamp(28px,5vw,52px);display:flex;flex-direction:column;gap:1px}
-.faq-item{background:var(--bg-mid);border:1px solid var(--rule);overflow:hidden}
-.faq-trigger{width:100%;padding:clamp(18px,3vw,24px) clamp(16px,3vw,32px);display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;text-align:left;transition:background 0.2s;gap:12px}
+/* FAQ */
+.faq-section{background:var(--bg);padding:clamp(60px,8vw,100px) var(--pad)}
+[data-mode="dark"] .faq-section{background:var(--black3)}
+.faq-inner{max-width:1100px;margin:0 auto}
+.faq-list{margin-top:clamp(24px,4vw,44px);display:flex;flex-direction:column;gap:1px}
+.faq-item{background:var(--bg-mid);border:1px solid var(--r);overflow:hidden}
+[data-mode="dark"] .faq-item{background:var(--black2)}
+.faq-trigger{width:100%;padding:clamp(18px,3vw,24px) clamp(16px,3vw,28px);display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;text-align:left;transition:background 0.2s;gap:12px}
 .faq-trigger:hover{background:var(--orange-pale)}
-[data-mode="dark"] .faq-trigger:hover{background:rgba(200,90,0,0.08)}
-.faq-q{font-family:var(--display-font);font-style:italic;font-size:clamp(15px,1.7vw,18px);color:var(--ink);flex:1}
-.faq-arrow{font-size:20px;color:var(--muted);transition:transform 0.3s;display:block;flex-shrink:0}
+.faq-q{font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.7vw,18px);color:var(--text);flex:1}
+.faq-arrow{font-size:20px;color:var(--text-muted);transition:transform 0.3s;display:block;flex-shrink:0}
 .faq-item.open .faq-arrow{transform:rotate(90deg);color:var(--orange)}
 .faq-body{max-height:0;overflow:hidden;transition:max-height 0.4s ease}
 .faq-item.open .faq-body{max-height:320px}
-.faq-inner{padding:0 clamp(16px,3vw,32px) clamp(16px,3vw,24px)}
-.faq-a{font-family:var(--body-font);font-size:clamp(13px,1.3vw,14.5px);font-weight:400;color:var(--ink-light);line-height:1.8}
-.faq-a a{color:var(--orange);text-decoration:none}
+.faq-inner-p{padding:0 clamp(16px,3vw,28px) clamp(16px,3vw,24px)}
+.faq-a{font-family:var(--body);font-size:clamp(13px,1.3vw,14.5px);font-weight:300;color:var(--text-dim);line-height:1.8}
+.faq-a a{color:var(--orange)}
 .faq-a a:hover{text-decoration:underline}
 
-/* ── FOOTER ── */
-footer{padding:clamp(28px,5vw,42px) var(--pad);border-top:1px solid var(--rule);background:var(--bg);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.footer-logo{font-family:var(--display-font);font-size:15px;font-style:italic;color:var(--ink)}
-.footer-logo em{color:var(--orange)}
-.footer-middle{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted-lt);text-align:center}
-.footer-links{display:flex;gap:clamp(16px,3vw,28px);flex-wrap:wrap}
-.footer-links a{font-family:var(--body-font);font-size:9px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--muted);transition:color 0.2s;text-decoration:none}
+/* REGISTER */
+.register-section{background:var(--black);padding:clamp(80px,12vw,130px) var(--pad);text-align:center;position:relative;overflow:hidden}
+.register-section::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(700px,130vw);height:min(700px,130vw);border-radius:50%;border:1px solid rgba(184,79,0,0.07);box-shadow:0 0 0 50px rgba(184,79,0,0.025),0 0 0 100px rgba(184,79,0,0.012);pointer-events:none}
+.register-content{position:relative;z-index:2;max-width:560px;margin:0 auto}
+.register-eyebrow{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:20px}
+.register-title{font-family:var(--display);font-size:clamp(36px,6vw,72px);text-transform:uppercase;color:var(--white);line-height:1;margin-bottom:8px;letter-spacing:1px}
+.register-title em{color:var(--orange);font-style:normal}
+.register-date{font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.6vw,20px);color:rgba(255,255,255,0.55);margin-bottom:28px}
+.register-body{font-family:var(--body);font-size:clamp(13.5px,1.4vw,15px);font-weight:300;color:rgba(255,255,255,0.45);line-height:1.88;margin-bottom:clamp(28px,5vw,44px)}
+.register-main-btn{display:inline-block;padding:18px 40px;background:var(--orange);font-family:var(--body);font-size:12px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:#fff;border:none;cursor:pointer;text-decoration:none;transition:background 0.2s,transform 0.2s;width:100%;max-width:400px;text-align:center}
+.register-main-btn:hover{background:var(--orange-lt);transform:translateY(-1px)}
+.register-or{font-family:var(--body);font-size:11px;font-weight:300;color:rgba(255,255,255,0.25);letter-spacing:2px;text-transform:uppercase;margin:16px 0}
+.register-form{display:flex;flex-direction:column;gap:0;max-width:400px;margin:0 auto 14px;width:100%}
+.register-input{padding:14px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-bottom:none;color:var(--white);font-family:var(--body);font-size:14px;font-weight:300;outline:none;transition:border-color 0.2s}
+.register-input::placeholder{color:rgba(255,255,255,0.25)}
+.register-input:focus{border-color:var(--orange)}
+.register-btn{padding:14px 18px;background:rgba(255,255,255,0.08);font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.12);cursor:pointer;transition:all 0.2s}
+.register-btn:hover{background:rgba(255,255,255,0.14);color:var(--white)}
+.register-contact{margin-top:28px;padding-top:24px;border-top:1px solid var(--rule)}
+.register-contact-label{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:8px}
+.register-contact a{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--orange-lt);transition:color 0.2s}
+.register-contact a:hover{color:var(--orange)}
+.register-note{font-family:var(--body);font-size:10px;font-weight:300;color:rgba(255,255,255,0.2);letter-spacing:1.5px;text-transform:uppercase;margin-top:12px}
+
+/* FOOTER */
+footer{background:var(--black2);border-top:1px solid var(--rule);padding:clamp(32px,5vw,52px) var(--pad)}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
+.footer-logo{font-family:var(--cursive);font-size:18px;font-weight:700;color:var(--white)}
+.footer-logo em{color:var(--orange);font-style:italic}
+.footer-mid{font-family:var(--body);font-size:9px;font-weight:300;letter-spacing:2.5px;text-transform:uppercase;color:var(--grey);text-align:center}
+.footer-links{display:flex;gap:clamp(14px,2.5vw,24px);flex-wrap:wrap}
+.footer-links a{font-family:var(--body);font-size:9px;font-weight:300;letter-spacing:2px;text-transform:uppercase;color:var(--grey);transition:color 0.2s}
 .footer-links a:hover{color:var(--orange)}
 
-/* ── REVEAL ── */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.65s ease,transform 0.65s ease}
-.reveal.up{opacity:1;transform:translateY(0)}
-
-/* ── RESPONSIVE ── */
+/* RESPONSIVE */
 @media(max-width:900px){
-  .nav-links{display:none}
   .hamburger{display:flex}
-  .hero-columns,.hero-halo{display:none}
-  .hero-bottom{grid-template-columns:1fr;gap:20px}
-  .hero-meta{text-align:left}
-  .phil-grid{grid-template-columns:1fr}
-  .month-feature{grid-template-columns:1fr}
-  .next-card{grid-template-columns:1fr}
-  .next-label-col{flex-direction:row;gap:16px;justify-content:flex-start;min-width:unset;padding:clamp(16px,3vw,24px) clamp(20px,4vw,36px)}
+  .nav-cta{display:none}
+  .month-split{grid-template-columns:1fr}
   .themes-grid{grid-template-columns:repeat(2,1fr)}
+  .next-card{grid-template-columns:1fr}
+  .next-num-col{flex-direction:row;gap:16px;justify-content:flex-start;min-width:unset;padding:clamp(16px,3vw,24px) clamp(20px,4vw,36px)}
 }
 @media(max-width:580px){
   :root{--pad:18px}
-  .nav-cta{display:none}
-  .hero-display{font-size:clamp(48px,13vw,72px)}
-  .hero-display .sub-word{font-size:10px;letter-spacing:3px}
-  .pillar-slide{flex-direction:column;gap:12px;padding:28px 20px}
-  .pillar-num{font-size:56px}
-  .month-left,.month-right{padding:28px 18px}
+  .hero-title{font-size:clamp(44px,13vw,66px)}
   .themes-grid{grid-template-columns:1fr}
-  footer{flex-direction:column;align-items:flex-start;gap:14px}
-  .footer-middle{text-align:left}
-  .footer-links{gap:14px}
-  .acc-trigger,.faq-trigger{padding:16px 16px}
-  .acc-inner,.faq-inner{padding:0 16px 20px}
-  .register-main-btn{padding:16px 24px}
+  .pillar-slide{flex-direction:column;gap:12px;padding:28px 18px}
+  footer .footer-inner{flex-direction:column;align-items:flex-start;gap:14px}
+  .faq-trigger,.acc-trigger{padding:16px 16px}
 }
-@media(max-width:380px){
-  .hero-display{font-size:44px}
-}
-@media(prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
-  .dust span{animation:none}
-  .pillar-track{transition:none}
-  *{transition-duration:0.01ms !important}
-}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.pillar-track{transition:none}*{transition-duration:0.01ms !important}}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.up{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
 
-<div class="vignette"></div>
-<div class="dust"><span></span><span></span><span></span><span></span><span></span></div>
-<div class="ghost-quote gq1">"The unexamined life is not worth living."<br>— Socrates</div>
-<div class="ghost-quote gq2">"Wonder is the beginning of wisdom."<br>— Aristotle</div>
-
-<svg class="constellation" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <circle cx="120" cy="180" r="1.5" fill="#1A1713"/><circle cx="380" cy="90" r="1" fill="#1A1713"/>
-  <circle cx="620" cy="240" r="1.5" fill="#1A1713"/><circle cx="880" cy="140" r="1" fill="#1A1713"/>
-  <circle cx="1100" cy="320" r="1.5" fill="#1A1713"/><circle cx="240" cy="420" r="1" fill="#1A1713"/>
-  <circle cx="500" cy="500" r="1.5" fill="#1A1713"/><circle cx="760" cy="380" r="1" fill="#1A1713"/>
-  <circle cx="160" cy="680" r="1.5" fill="#1A1713"/><circle cx="420" cy="750" r="1" fill="#1A1713"/>
-  <circle cx="940" cy="700" r="1.5" fill="#1A1713"/>
-  <line x1="120" y1="180" x2="380" y2="90" stroke="#1A1713" stroke-width="0.4"/>
-  <line x1="380" y1="90" x2="620" y2="240" stroke="#1A1713" stroke-width="0.4"/>
-  <line x1="620" y1="240" x2="880" y2="140" stroke="#1A1713" stroke-width="0.4"/>
-  <line x1="240" y1="420" x2="500" y2="500" stroke="#1A1713" stroke-width="0.4"/>
-  <line x1="500" y1="500" x2="760" y2="380" stroke="#1A1713" stroke-width="0.4"/>
-  <line x1="160" y1="680" x2="420" y2="750" stroke="#1A1713" stroke-width="0.4"/>
-  <line x1="420" y1="750" x2="940" y2="700" stroke="#1A1713" stroke-width="0.4"/>
-  <line x1="380" y1="90" x2="240" y2="420" stroke="#1A1713" stroke-width="0.3"/>
-  <line x1="880" y1="140" x2="760" y2="380" stroke="#1A1713" stroke-width="0.3"/>
-</svg>
-
-<svg class="compass-bg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#1A1713" aria-hidden="true">
-  <circle cx="150" cy="150" r="130" stroke-width="1"/>
-  <circle cx="150" cy="150" r="90" stroke-width="0.5"/>
-  <circle cx="150" cy="150" r="7" stroke-width="1"/>
-  <line x1="150" y1="20" x2="150" y2="280" stroke-width="0.5"/>
-  <line x1="20" y1="150" x2="280" y2="150" stroke-width="0.5"/>
-  <line x1="58" y1="58" x2="242" y2="242" stroke-width="0.3"/>
-  <line x1="242" y1="58" x2="58" y2="242" stroke-width="0.3"/>
-  <polygon points="150,22 144,55 156,55" fill="#1A1713" stroke="none"/>
-</svg>
-
 <!-- NAV -->
-<nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
-  <a class="nav-logo" href="#">Reflections W/ <em>TEA</em></a>
-  <ul class="nav-links" aria-label="Desktop navigation">
-    <li><a href="#philosophy">Philosophy</a></li>
-    <li><a href="#this-month">This Month</a></li>
-    <li><a href="#themes">Themes</a></li>
-    <li><a href="#faq">FAQ</a></li>
-    <li><a href="#register">Register</a></li>
-  </ul>
+<nav class="nav" id="nav">
+  <a class="nav-back" href="theezraanya.html">Theezraanya</a>
+  <div class="nav-logo">Reflections W/ <em>TEA</em></div>
   <div class="nav-right">
     <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
       <span class="icon-sun" aria-hidden="true">☀</span>
       <span class="icon-moon" aria-hidden="true">☽</span>
     </button>
     <button class="nav-cta" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Register Free</button>
-    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="hamburger" id="ham" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
 <!-- MOBILE NAV -->
-<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
-  <a href="#philosophy">Philosophy</a>
+<nav class="mobile-nav" id="mobNav">
   <a href="#this-month">This Month</a>
   <a href="#themes">Themes</a>
   <a href="#faq">FAQ</a>
@@ -582,228 +310,90 @@ footer{padding:clamp(28px,5vw,42px) var(--pad);border-top:1px solid var(--rule);
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="home" aria-label="Hero">
-  <div class="hero-columns" aria-hidden="true"></div>
-  <div class="hero-manuscript" aria-hidden="true"></div>
-  <div class="hero-halo" aria-hidden="true"></div>
-  <div class="hero-inner">
-    <div class="hero-eyebrow reveal">A Monthly Teaching by Ezra Anya · theezraanya.com</div>
-    <h1 class="hero-display reveal">
-      Reflections<br>W/ <span class="accent">TEA</span>
-      <span class="sub-word">Where introspection meets illumination</span>
-    </h1>
-    <div class="hero-rule reveal" aria-hidden="true"></div>
-    <div class="hero-bottom reveal">
-      <p class="hero-premise">
-        Many of us are moving without meaning, pursuing without purpose — not because we lack ambition, but because we are not aligned.
-        <strong>Reflections is the space where that changes.</strong>
-        One hour. One conversation. One question.
-      </p>
-      <div class="hero-meta">
-        <div class="hero-meta-label">Facilitated by</div>
-        <div class="hero-meta-name">Ezra Anya</div>
-        <div class="hero-meta-role">Thinker · Theologian · Teacher</div>
-      </div>
+<section class="hero" id="home">
+  <div class="hero-text reveal">
+    <div class="hero-eyebrow">A Monthly Teaching by Ezra Anya</div>
+    <h1 class="hero-title">REFLECTIONS<br>W/ <em>TEA</em></h1>
+    <p class="hero-sub">Where introspection meets illumination</p>
+    <div class="hero-date">
+      <span class="date-pill">Edition 01 · Reset</span>
+      <span class="date-pill">September 19 · 7:00 PM</span>
+      <span class="date-pill">Free · Online</span>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-fill" href="https://forms.gle/LEg3BuSVerWbdjH67" target="_blank" rel="noopener">Register Now</a>
+      <a class="btn btn-outline" href="#this-month">Learn More</a>
     </div>
   </div>
 </section>
 
-<!-- PHILOSOPHY -->
-<section class="section phil-section" id="philosophy">
-  <div class="si">
-    <div class="s-label reveal">The Philosophy</div>
-    <h2 class="s-title reveal">Why this exists</h2>
-    <p class="s-body reveal">Reflection is that conversation where the beliefs you have held about yourself, life, and God are stress-tested. In an environment free from the noise of your daily life, you are able to think deeply, see clearly, and live truly. Reflections W/ TEA was designed with you in mind and the next generation at heart.</p>
-    <div class="phil-grid reveal">
-      <div class="phil-cell">
-        <div class="phil-cell-label">What it is</div>
-        <div class="phil-cell-text">"A monthly gathering where ambitious people pause long enough to think clearly, challenge assumptions, gain perspective, and leave with practical steps toward meaningful growth."</div>
-      </div>
-      <div class="phil-cell dk">
-        <div class="phil-cell-label">What it is not</div>
-        <div class="phil-cell-text">"Not a motivational talk. Not a church service. Not a workshop. It is a teaching — and the teacher has done the work so the room does not have to start from scratch."</div>
-      </div>
-      <div class="phil-cell dk">
-        <div class="phil-cell-label">The goal</div>
-        <div class="phil-cell-text">"The goal is not inspiration. The goal is clarity. And clarity changes behaviour."</div>
-      </div>
-      <div class="phil-cell">
-        <div class="phil-cell-label">The name</div>
-        <div class="phil-cell-text">"TEA is The Ezra Anya — and also the posture. Tea is what you drink when you are actually talking. When the conversation is honest. When the only agenda is to think well together."</div>
-      </div>
-    </div>
-    <!-- commented out per request -->
-    <!--
-    <div class="phil-belief reveal">
-      <div class="phil-belief-label">The Core Belief</div>
-      <div class="phil-belief-text">People rarely stay stuck because they lack information. They stay stuck because they are not aligned. Every month, Reflections addresses one root of that misalignment.</div>
-    </div>
-    -->
-  </div>
-</section>
-
-<!-- PILLARS CAROUSEL -->
-<section class="section pillars-section">
-  <div class="si">
-    <div class="s-label reveal">The Three Pillars</div>
-    <div class="pillar-carousel reveal" id="pillarCarousel">
-      <div class="pillar-track" id="pillarTrack" role="list">
-        <div class="pillar-slide" role="listitem">
-          <div class="pillar-num" aria-hidden="true">I</div>
-          <div class="pillar-body">
-            <div class="pillar-title">Reflect</div>
-            <div class="pillar-desc">Most people move from season to season without stopping to understand what the season meant. Reflections W/ TEA creates the space to slow down and think honestly about what is actually happening in your life — not the performance of it, the reality of it.</div>
-          </div>
+<!-- FLYER SPACE -->
+<section class="flyer-section" id="flyer">
+  <div class="flyer-inner">
+    <div class="s-label reveal">Edition 01 · Flyer</div>
+    <div class="flyer-frame reveal">
+      Replace this placeholder with: <img class="flyer-img" src="assets/Reset.png" alt="Reset Flyer">
+      <div class="flyer-placeholder">
+        <div class="flyer-placeholder-icon">🖼</div>
+        <div class="flyer-placeholder-text">
+          Drop your flyer here<br>
+          Replace with image tag when ready
         </div>
-        <div class="pillar-slide" role="listitem">
-          <div class="pillar-num" aria-hidden="true">II</div>
-          <div class="pillar-body">
-            <div class="pillar-title">Learn</div>
-            <div class="pillar-desc">Every session is anchored in rigorous thinking — Scripture, research, psychology, philosophy, and the kind of applied wisdom that has survived long enough to be trusted. This is not motivation. It is formation. The kind that stays after the feeling fades.</div>
-          </div>
-        </div>
-        <div class="pillar-slide" role="listitem">
-          <div class="pillar-num" aria-hidden="true">III</div>
-          <div class="pillar-body">
-            <div class="pillar-title">Act</div>
-            <div class="pillar-desc">Every session closes with a reorientation, not a to-do list. You leave knowing something you did not know when you arrived, and you know what to do with it. The action is specific. The direction is clear. Nothing is left vague.</div>
-          </div>
-        </div>
-      </div>
-      <div class="pillar-controls" aria-label="Pillar navigation">
-        <button class="pillar-btn" id="pillarPrev" aria-label="Previous pillar">&#8592;</button>
-        <div class="pillar-dots" role="tablist">
-          <button class="pillar-dot active" data-i="0" role="tab" aria-selected="true" aria-label="Reflect"></button>
-          <button class="pillar-dot" data-i="1" role="tab" aria-selected="false" aria-label="Learn"></button>
-          <button class="pillar-dot" data-i="2" role="tab" aria-selected="false" aria-label="Act"></button>
-        </div>
-        <button class="pillar-btn" id="pillarNext" aria-label="Next pillar">&#8594;</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT TO EXPECT -->
-<section class="section expect-section">
-  <div class="si">
-    <div class="s-label reveal">What to Expect</div>
-    <h2 class="s-title reveal">Every session delivers <em>three things</em></h2>
-    <div class="accordion reveal" id="accordion">
-      <div class="acc-item open">
-        <button class="acc-trigger" aria-expanded="true">
-          <div class="acc-trigger-left">
-            <span class="acc-num">01</span>
-            <span class="acc-title">Perspective — See differently</span>
-          </div>
-          <span class="acc-arrow" aria-hidden="true">›</span>
-        </button>
-        <div class="acc-body">
-          <div class="acc-inner">
-            <ul class="acc-points">
-              <li>Ask better questions about your own life</li>
-              <li>Challenge assumptions you did not know you held</li>
-              <li>Think deeper than the content cycle allows</li>
-              <li>See your situation from outside your own head</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="acc-item">
-        <button class="acc-trigger" aria-expanded="false">
-          <div class="acc-trigger-left">
-            <span class="acc-num">02</span>
-            <span class="acc-title">Practical Wisdom — Think better</span>
-          </div>
-          <span class="acc-arrow" aria-hidden="true">›</span>
-        </button>
-        <div class="acc-body">
-          <div class="acc-inner">
-            <ul class="acc-points">
-              <li>Actionable frameworks, not theories or clichés</li>
-              <li>Mental models grounded in research and lived experience</li>
-              <li>Biblical wisdom applied honestly to real life</li>
-              <li>Leadership lessons from those who actually built things</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="acc-item">
-        <button class="acc-trigger" aria-expanded="false">
-          <div class="acc-trigger-left">
-            <span class="acc-num">03</span>
-            <span class="acc-title">Personal Action — Move forward</span>
-          </div>
-          <span class="acc-arrow" aria-hidden="true">›</span>
-        </button>
-        <div class="acc-body">
-          <div class="acc-inner">
-            <ul class="acc-points">
-              <li>Nobody leaves without a clear next step</li>
-              <li>What needs to change — and the honest reason why</li>
-              <li>How to begin changing it, starting today</li>
-              <li>One decision that shifts the entire trajectory</li>
-            </ul>
-          </div>
-        </div>
+        <div class="flyer-placeholder-dims">1080 × 1350</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- THIS MONTH -->
-<section class="section month-section" id="this-month">
-  <div class="si">
-    <div class="s-label reveal">Edition One · This Month</div>
-    <div class="month-feature reveal">
-      <div class="month-left">
-        <div class="month-edition">Reflections W/ TEA — Edition 01</div>
-        <div class="month-title">Reset</div>
-        <div class="month-subtitle">Coming Out of Being Stuck</div>
-        <p class="month-desc">Stuck is not a personality. It is a posture. And postures can change. If you are a thinker like me — this session is for you. One hour. One conversation. One question that has the potential to shift everything.</p>
-        <div class="month-tags">
-          <span class="month-tag">Why smart people stay stuck</span>
-          <span class="month-tag">The anatomy of a reset</span>
-          <span class="month-tag">Breaking the guilt-inertia loop</span>
-          <span class="month-tag">One decision that changes everything</span>
-        </div>
-      </div>
-      <div class="month-right">
-        <div class="month-right-title">Read, Listen, Join</div>
-        <div class="month-links">
-          <a href="https://substack.com/@theezraanya" target="_blank" rel="noopener" class="month-link-card">
-            <div class="month-link-inner">
-              <div class="month-link-label">Substack</div>
-              <div class="month-link-name">The Ezra Anya — Articles &amp; Essays</div>
-            </div>
-            <span class="month-link-arrow" aria-hidden="true">→</span>
-          </a>
-          <a href="https://whatsapp.com/channel/0029VatWctcHrDZm8Kuch52O" target="_blank" rel="noopener" class="month-link-card">
-            <div class="month-link-inner">
-              <div class="month-link-label">WhatsApp Channel</div>
-              <div class="month-link-name">The Ezra Anya (TEA)</div>
-              <div class="month-wa-desc">Thoughts on theology, psychology, and personal development — sharpened by the Word.</div>
-            </div>
-            <span class="month-link-arrow" aria-hidden="true">→</span>
-          </a>
-        </div>
-        <button class="month-register" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Reserve Your Spot — Free</button>
-      </div>
+<section class="month-split" id="this-month">
+  <div class="month-left">
+    <div class="month-edition">Reflections W/ TEA — Edition 01</div>
+    <div class="month-title">RESET</div>
+    <div class="month-subtitle">Coming Out of Being Stuck</div>
+    <p class="month-desc">Stuck is not a personality. It is a posture. And postures can change. If you are a thinker — this session is for you. One hour. One conversation. One question that has the potential to shift everything.</p>
+    <div class="month-tags">
+      <span class="month-tag">Why smart people stay stuck</span>
+      <span class="month-tag">The anatomy of a reset</span>
+      <span class="month-tag">Breaking the guilt-inertia loop</span>
+      <span class="month-tag">One decision that changes everything</span>
     </div>
+  </div>
+  <div class="month-right">
+    <div class="month-right-title">Read, Listen, Join</div>
+    <div class="month-links">
+      <a href="https://substack.com/@theezraanya" target="_blank" rel="noopener" class="month-link-card">
+        <div class="month-link-inner">
+          <div class="month-link-label">Substack</div>
+          <div class="month-link-name">The Ezra Anya — Articles &amp; Essays</div>
+        </div>
+        <span class="month-link-arrow">→</span>
+      </a>
+      <a href="https://whatsapp.com/channel/0029VatWctcHrDZm8Kuch52O" target="_blank" rel="noopener" class="month-link-card">
+        <div class="month-link-inner">
+          <div class="month-link-label">WhatsApp Channel</div>
+          <div class="month-link-name">The Ezra Anya (TEA)</div>
+          <div class="month-wa-desc">Thoughts on theology, psychology, and personal development — sharpened by the Word.</div>
+        </div>
+        <span class="month-link-arrow">→</span>
+      </a>
+    </div>
+    <button class="month-register" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Reserve Your Spot — Free</button>
   </div>
 </section>
 
-<!-- NEXT MONTH TEASER -->
-<section class="section next-section">
-  <div class="si">
-    <div class="s-label reveal">Coming Next · Edition 02</div>
+<!-- NEXT MONTH -->
+<section class="next-section" id="next">
+  <div class="next-inner">
+    <div class="s-label" style="color:var(--orange)">Coming Next · Edition 02</div>
     <div class="next-card reveal">
-      <div class="next-label-col">
-        <div class="next-label-top">Edition</div>
-        <div class="next-label-num">02</div>
+      <div class="next-num-col">
+        <div class="next-num-label">Edition</div>
+        <div class="next-num">02</div>
       </div>
       <div class="next-body">
         <div class="next-month-label">Next Month · Free</div>
-        <div class="next-title">Renew</div>
+        <div class="next-title">RENEW</div>
         <div class="next-subtitle">Overcoming Addictions and Negative Patterns</div>
         <p class="next-desc">Most people do not struggle with lack of information about their patterns. They struggle with the invisible architecture that keeps the pattern in place. This session is about naming what holds you — and building the framework to finally walk free of it.</p>
       </div>
@@ -811,11 +401,102 @@ footer{padding:clamp(28px,5vw,42px) var(--pad);border-top:1px solid var(--rule);
   </div>
 </section>
 
+<!-- PILLARS -->
+<section class="pillars-section" id="pillars">
+  <div class="pillars-inner">
+    <div class="s-label reveal" style="color:var(--orange)">The Three Pillars</div>
+    <div class="pillar-carousel reveal" id="pillarCarousel">
+      <div class="pillar-track" id="pillarTrack">
+        <div class="pillar-slide">
+          <div class="pillar-num">I</div>
+          <div>
+            <div class="pillar-title">REFLECT</div>
+            <p class="pillar-desc">Most people move from season to season without stopping to understand what the season meant. Reflections W/ TEA creates the space to slow down and think honestly about what is actually happening in your life — not the performance of it, the reality of it.</p>
+          </div>
+        </div>
+        <div class="pillar-slide">
+          <div class="pillar-num">II</div>
+          <div>
+            <div class="pillar-title">LEARN</div>
+            <p class="pillar-desc">Every session is anchored in rigorous thinking — Scripture, research, psychology, philosophy, and the kind of applied wisdom that has survived long enough to be trusted. This is not motivation. It is formation. The kind that stays after the feeling fades.</p>
+          </div>
+        </div>
+        <div class="pillar-slide">
+          <div class="pillar-num">III</div>
+          <div>
+            <div class="pillar-title">ACT</div>
+            <p class="pillar-desc">Every session closes with a reorientation, not a to-do list. You leave knowing something you did not know when you arrived, and you know what to do with it. The action is specific. The direction is clear. Nothing is left vague.</p>
+          </div>
+        </div>
+      </div>
+      <div class="pillar-controls">
+        <button class="pillar-btn" id="pillarPrev">&#8592;</button>
+        <div class="pillar-dots">
+          <button class="pillar-dot active" data-i="0"></button>
+          <button class="pillar-dot" data-i="1"></button>
+          <button class="pillar-dot" data-i="2"></button>
+        </div>
+        <button class="pillar-btn" id="pillarNext">&#8594;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT TO EXPECT -->
+<section class="expect-section" id="expect">
+  <div class="expect-inner">
+    <div class="s-label reveal" style="color:var(--orange)">What to Expect</div>
+    <div class="acc-list reveal" id="accordion">
+      <div class="acc-item open">
+        <button class="acc-trigger" aria-expanded="true">
+          <div class="acc-trigger-left"><span class="acc-num">01</span><span class="acc-title">Perspective — See differently</span></div>
+          <span class="acc-arrow">›</span>
+        </button>
+        <div class="acc-body"><div class="acc-inner">
+          <ul class="acc-points">
+            <li>Ask better questions about your own life</li>
+            <li>Challenge assumptions you did not know you held</li>
+            <li>Think deeper than the content cycle allows</li>
+            <li>See your situation from outside your own head</li>
+          </ul>
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false">
+          <div class="acc-trigger-left"><span class="acc-num">02</span><span class="acc-title">Practical Wisdom — Think better</span></div>
+          <span class="acc-arrow">›</span>
+        </button>
+        <div class="acc-body"><div class="acc-inner">
+          <ul class="acc-points">
+            <li>Actionable frameworks, not theories or clichés</li>
+            <li>Mental models grounded in research and lived experience</li>
+            <li>Biblical wisdom applied honestly to real life</li>
+            <li>Leadership lessons from those who actually built things</li>
+          </ul>
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false">
+          <div class="acc-trigger-left"><span class="acc-num">03</span><span class="acc-title">Personal Action — Move forward</span></div>
+          <span class="acc-arrow">›</span>
+        </button>
+        <div class="acc-body"><div class="acc-inner">
+          <ul class="acc-points">
+            <li>Nobody leaves without a clear next step</li>
+            <li>What needs to change — and the honest reason why</li>
+            <li>How to begin changing it, starting today</li>
+            <li>One decision that shifts the entire trajectory</li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- WHY REFLECTION -->
-<section class="section why-section">
-  <div class="si">
-    <div class="s-label reveal">Why Reflection</div>
-    <h2 class="s-title reveal">Experience alone <em>is not enough</em></h2>
+<section class="why-section">
+  <div class="why-inner">
+    <div class="s-label reveal" style="color:var(--orange)">Why Reflection</div>
     <div class="why-quotes reveal">
       <div class="why-quote">
         <div class="why-quote-main">Experience alone does not produce wisdom. <strong>Reflection on experience does.</strong></div>
@@ -828,184 +509,60 @@ footer{padding:clamp(28px,5vw,42px) var(--pad);border-top:1px solid var(--rule);
 </section>
 
 <!-- THEMES -->
-<section class="section themes-section" id="themes">
-  <div class="si">
-    <div class="s-label reveal">The Year Ahead</div>
-    <h2 class="s-title reveal">Twelve months. <em>Twelve questions your life is already asking.</em></h2>
+<section class="themes-section" id="themes">
+  <div class="themes-inner">
+    <div class="s-label reveal" style="color:var(--orange)">The Year Ahead</div>
     <div class="themes-grid reveal">
-      <div class="theme-card active">
-        <div class="theme-card-month">This Month</div>
-        <div class="theme-card-title">Reset</div>
-        <div class="theme-card-sub">Coming out of being stuck.</div>
-        <div class="theme-free-badge">Free</div>
-      </div>
-      <div class="theme-card next-up">
-        <div class="theme-card-month">Month 02</div>
-        <div class="theme-card-title">Renew</div>
-        <div class="theme-card-sub">Overcoming addictions and negative patterns.</div>
-        <div class="theme-next-badge">Next</div>
-      </div>
-      <div class="theme-card locked">
-        <div class="theme-card-month">Month 03</div>
-        <div class="theme-card-title">Identity</div>
-        <div class="theme-card-sub">Who you actually are versus who you have been performing.</div>
-        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
-      </div>
-      <div class="theme-card locked">
-        <div class="theme-card-month">Month 04</div>
-        <div class="theme-card-title">Discipline</div>
-        <div class="theme-card-sub">Why willpower fails and what actually works.</div>
-        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
-      </div>
-      <div class="theme-card locked">
-        <div class="theme-card-month">Month 05</div>
-        <div class="theme-card-title">Relationships</div>
-        <div class="theme-card-sub">The people question. Who you are with and what it is costing you.</div>
-        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
-      </div>
-      <div class="theme-card locked">
-        <div class="theme-card-month">Month 06</div>
-        <div class="theme-card-title">Money</div>
-        <div class="theme-card-sub">A theology and psychology of stewardship.</div>
-        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
-      </div>
-      <div class="theme-card locked">
-        <div class="theme-card-month">Month 07</div>
-        <div class="theme-card-title">Purpose</div>
-        <div class="theme-card-sub">What it means to have a calling — and what to do when you are not sure you do.</div>
-        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
-      </div>
-      <div class="theme-card locked">
-        <div class="theme-card-month">Month 08</div>
-        <div class="theme-card-title">Communication</div>
-        <div class="theme-card-sub">How you speak determines what you build.</div>
-        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
-      </div>
-      <div class="theme-card locked">
-        <div class="theme-card-month">Month 09</div>
-        <div class="theme-card-title">Faith</div>
-        <div class="theme-card-sub">A serious engagement with what you believe and whether you are living it.</div>
-        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
-      </div>
-      <div class="theme-card locked">
-        <div class="theme-card-month">Month 10</div>
-        <div class="theme-card-title">Leadership</div>
-        <div class="theme-card-sub">The difference between managing and actually leading.</div>
-        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
-      </div>
-      <div class="theme-card locked">
-        <div class="theme-card-month">Month 11</div>
-        <div class="theme-card-title">Decision Making</div>
-        <div class="theme-card-sub">The frameworks that produce better choices.</div>
-        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
-      </div>
-      <div class="theme-card locked">
-        <div class="theme-card-month">Month 12</div>
-        <div class="theme-card-title">Review and Reset</div>
-        <div class="theme-card-sub">The annual reckoning. Where did the year go?</div>
-        <div class="lock-overlay"><div class="lock-badge">Full year</div></div>
-      </div>
+      <div class="theme-card active"><div class="theme-card-month">This Month</div><div class="theme-card-title">RESET</div><div class="theme-card-sub">Coming out of being stuck.</div><div class="theme-free-badge">Free</div></div>
+      <div class="theme-card next-up"><div class="theme-card-month">Month 02</div><div class="theme-card-title">RENEW</div><div class="theme-card-sub">Overcoming addictions and negative patterns.</div><div class="theme-next-badge">Next</div></div>
+      <div class="theme-card locked"><div class="theme-card-month">Month 03</div><div class="theme-card-title">IDENTITY</div><div class="theme-card-sub">Who you actually are versus who you have been performing.</div><div class="lock-overlay"><div class="lock-badge">Full Year</div></div></div>
+      <div class="theme-card locked"><div class="theme-card-month">Month 04</div><div class="theme-card-title">DISCIPLINE</div><div class="theme-card-sub">Why willpower fails and what actually works.</div><div class="lock-overlay"><div class="lock-badge">Full Year</div></div></div>
+      <div class="theme-card locked"><div class="theme-card-month">Month 05</div><div class="theme-card-title">RELATIONSHIPS</div><div class="theme-card-sub">The people question. Who you are with and what it costs.</div><div class="lock-overlay"><div class="lock-badge">Full Year</div></div></div>
+      <div class="theme-card locked"><div class="theme-card-month">Month 06</div><div class="theme-card-title">MONEY</div><div class="theme-card-sub">A theology and psychology of stewardship.</div><div class="lock-overlay"><div class="lock-badge">Full Year</div></div></div>
+      <div class="theme-card locked"><div class="theme-card-month">Month 07</div><div class="theme-card-title">PURPOSE</div><div class="theme-card-sub">What it means to have a calling.</div><div class="lock-overlay"><div class="lock-badge">Full Year</div></div></div>
+      <div class="theme-card locked"><div class="theme-card-month">Month 08</div><div class="theme-card-title">COMMUNICATION</div><div class="theme-card-sub">How you speak determines what you build.</div><div class="lock-overlay"><div class="lock-badge">Full Year</div></div></div>
+      <div class="theme-card locked"><div class="theme-card-month">Month 09</div><div class="theme-card-title">FAITH</div><div class="theme-card-sub">A serious engagement with what you believe.</div><div class="lock-overlay"><div class="lock-badge">Full Year</div></div></div>
+      <div class="theme-card locked"><div class="theme-card-month">Month 10</div><div class="theme-card-title">LEADERSHIP</div><div class="theme-card-sub">Managing versus actually leading.</div><div class="lock-overlay"><div class="lock-badge">Full Year</div></div></div>
+      <div class="theme-card locked"><div class="theme-card-month">Month 11</div><div class="theme-card-title">DECISIONS</div><div class="theme-card-sub">The frameworks that produce better choices.</div><div class="lock-overlay"><div class="lock-badge">Full Year</div></div></div>
+      <div class="theme-card locked"><div class="theme-card-month">Month 12</div><div class="theme-card-title">REVIEW</div><div class="theme-card-sub">The annual reckoning. Where did the year go?</div><div class="lock-overlay"><div class="lock-badge">Full Year</div></div></div>
     </div>
     <p class="themes-unlock">Months 3 to 12 available with full-year access. <a href="#register">Join the waitlist</a> to be notified when it opens.</p>
   </div>
 </section>
 
-<!-- ABOUT: commented out — revisit when ready -->
-<!--
-<section class="section about-section" id="about">
-  <div class="si">
-    <div class="s-label">About the Teacher</div>
-  </div>
-</section>
--->
-
 <!-- FAQ -->
-<section class="section faq-section" id="faq">
-  <div class="si">
-    <div class="s-label reveal">FAQ</div>
-    <h2 class="s-title reveal">Questions you probably <em>already have</em></h2>
+<section class="faq-section" id="faq">
+  <div class="faq-inner">
+    <div class="s-label reveal" style="color:var(--orange)">FAQ</div>
     <div class="faq-list reveal" id="faqList">
-
       <div class="faq-item">
-        <button class="faq-trigger" aria-expanded="false">
-          <span class="faq-q">What exactly is Reflections W/ TEA?</span>
-          <span class="faq-arrow" aria-hidden="true">›</span>
-        </button>
-        <div class="faq-body"><div class="faq-inner">
-          <p class="faq-a">Reflections W/ TEA is a monthly online teaching event hosted by Ezra Anya. Each session focuses on one theme — one question your life is already asking — and explores it with depth, honesty, and practical application. It is not a motivational talk, not a church service, and not a workshop. It is a teaching. You come, you think, you leave with something concrete.</p>
-        </div></div>
+        <button class="faq-trigger" aria-expanded="false"><span class="faq-q">What exactly is Reflections W/ TEA?</span><span class="faq-arrow">›</span></button>
+        <div class="faq-body"><div class="faq-inner-p"><p class="faq-a">A monthly online teaching event hosted by Ezra Anya. One theme per session — one question your life is already asking — explored with depth, honesty, and practical application. Not a motivational talk. Not a church service. A teaching. You come, you think, you leave with something concrete.</p></div></div>
       </div>
-
       <div class="faq-item">
-        <button class="faq-trigger" aria-expanded="false">
-          <span class="faq-q">How long is each session?</span>
-          <span class="faq-arrow" aria-hidden="true">›</span>
-        </button>
-        <div class="faq-body"><div class="faq-inner">
-          <p class="faq-a">Each session is one hour. It opens with a framing question, moves into the core teaching, gives you a reflection prompt to sit with, and closes with a specific action or declaration. Every minute is intentional. The session ends on time — always.</p>
-        </div></div>
+        <button class="faq-trigger" aria-expanded="false"><span class="faq-q">When is Edition 01 and how do I join?</span><span class="faq-arrow">›</span></button>
+        <div class="faq-body"><div class="faq-inner-p"><p class="faq-a">Edition 01: Reset is on <strong>September 19, 2026 at 7:00 PM.</strong> It is completely free. Register via the link on this page and you will receive the session link via email before the event.</p></div></div>
       </div>
-
       <div class="faq-item">
-        <button class="faq-trigger" aria-expanded="false">
-          <span class="faq-q">Is it really free?</span>
-          <span class="faq-arrow" aria-hidden="true">›</span>
-        </button>
-        <div class="faq-body"><div class="faq-inner">
-          <p class="faq-a">The first two editions — Reset and Renew — are completely free. No hidden fees, no upsells on the day. This is the trust-building season. Subsequent months will move to a paid model, and those who have been part of the early community will receive priority access and early-bird pricing.</p>
-        </div></div>
+        <button class="faq-trigger" aria-expanded="false"><span class="faq-q">How long is each session?</span><span class="faq-arrow">›</span></button>
+        <div class="faq-body"><div class="faq-inner-p"><p class="faq-a">One hour. Every minute is intentional. The session ends on time — always.</p></div></div>
       </div>
-
       <div class="faq-item">
-        <button class="faq-trigger" aria-expanded="false">
-          <span class="faq-q">Where does it happen?</span>
-          <span class="faq-arrow" aria-hidden="true">›</span>
-        </button>
-        <div class="faq-body"><div class="faq-inner">
-          <p class="faq-a">Currently online. Once you register, you will receive the session link via email before the event. Physical sessions are being planned depending on where the community is concentrated — registering now helps us understand your location and whether a physical event near you is viable.</p>
-        </div></div>
+        <button class="faq-trigger" aria-expanded="false"><span class="faq-q">Is it really free?</span><span class="faq-arrow">›</span></button>
+        <div class="faq-body"><div class="faq-inner-p"><p class="faq-a">The first two editions — Reset and Renew — are completely free. No hidden fees, no upsells on the day. Subsequent months will move to a paid model and early community members receive priority access.</p></div></div>
       </div>
-
       <div class="faq-item">
-        <button class="faq-trigger" aria-expanded="false">
-          <span class="faq-q">Do I need to register for each session separately?</span>
-          <span class="faq-arrow" aria-hidden="true">›</span>
-        </button>
-        <div class="faq-body"><div class="faq-inner">
-          <p class="faq-a">Yes. Each month has its own registration so we can track who is attending each session, understand the community better, and send you the right information for that specific theme. It takes less than two minutes to register and you only need to do it once per session.</p>
-        </div></div>
+        <button class="faq-trigger" aria-expanded="false"><span class="faq-q">Do I register separately for each session?</span><span class="faq-arrow">›</span></button>
+        <div class="faq-body"><div class="faq-inner-p"><p class="faq-a">Yes. Each month has its own registration so we can understand who is attending and send you the right information for each theme. Under two minutes. One time per session.</p></div></div>
       </div>
-
       <div class="faq-item">
-        <button class="faq-trigger" aria-expanded="false">
-          <span class="faq-q">Will the session be recorded?</span>
-          <span class="faq-arrow" aria-hidden="true">›</span>
-        </button>
-        <div class="faq-body"><div class="faq-inner">
-          <p class="faq-a">Yes. Each session is recorded. Registered attendees will receive access to the recording. In future paid sessions, the recording may be available exclusively to paying members. Attending live is always the richer experience — the energy of a live room is different — but life happens and the recording will be there.</p>
-        </div></div>
+        <button class="faq-trigger" aria-expanded="false"><span class="faq-q">Will it be recorded?</span><span class="faq-arrow">›</span></button>
+        <div class="faq-body"><div class="faq-inner-p"><p class="faq-a">Yes. Registered attendees receive access to the recording. Attending live is always richer — but life happens and the recording will be there.</p></div></div>
       </div>
-
       <div class="faq-item">
-        <button class="faq-trigger" aria-expanded="false">
-          <span class="faq-q">Who is this for?</span>
-          <span class="faq-arrow" aria-hidden="true">›</span>
-        </button>
-        <div class="faq-body"><div class="faq-inner">
-          <p class="faq-a">Anyone in Ezra's community who is serious about their interior life — their thinking, their decisions, and the gap between who they are and who they are becoming. If you are a thinker, a builder, a person of faith navigating a complex world, or simply someone who suspects there is more to your life than what is currently visible — this is for you.</p>
-        </div></div>
+        <button class="faq-trigger" aria-expanded="false"><span class="faq-q">How do I reach Ezra directly?</span><span class="faq-arrow">›</span></button>
+        <div class="faq-body"><div class="faq-inner-p"><p class="faq-a">WhatsApp: <a href="https://wa.me/2349126634636" target="_blank" rel="noopener">+234 912 663 4636</a>. Also via the <a href="https://whatsapp.com/channel/0029VatWctcHrDZm8Kuch52O" target="_blank" rel="noopener">WhatsApp Channel</a> or <a href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Substack</a>.</p></div></div>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-trigger" aria-expanded="false">
-          <span class="faq-q">How do I reach Ezra directly for more information?</span>
-          <span class="faq-arrow" aria-hidden="true">›</span>
-        </button>
-        <div class="faq-body"><div class="faq-inner">
-          <p class="faq-a">You can reach out via WhatsApp at <a href="https://wa.me/2349126634636" target="_blank" rel="noopener">+234 912 663 4636</a> You can also send a message through the <a href="https://whatsapp.com/channel/0029VatWctcHrDZm8Kuch52O" target="_blank" rel="noopener">WhatsApp Channel</a> or find Ezra on <a href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Substack</a>.</p>
-        </div></div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -1014,182 +571,95 @@ footer{padding:clamp(28px,5vw,42px) var(--pad);border-top:1px solid var(--rule);
 <section class="register-section" id="register">
   <div class="register-content reveal">
     <div class="register-eyebrow">Join the next session</div>
-    <h2 class="register-title">Reserve your spot.<br>It is free.</h2>
-    <p class="register-body">The first edition of Reflections W/ TEA is open to everyone in the community. No charge. One hour. Come ready to think — and leave ready to move.</p>
-
-    <div class="register-cta-wrap">
-      <a
-        class="register-main-btn"
-        href="https://forms.gle/LEg3BuSVerWbdjH67"
-        target="_blank"
-        rel="noopener"
-        id="registerMainBtn"
-      >Register Now — Edition 01: Reset</a>
-      <span class="register-or">or drop your email to stay on the list</span>
-    </div>
-
+    <h2 class="register-title">RESERVE<br>YOUR <em>SPOT.</em></h2>
+    <p class="register-date">September 19, 2026 · 7:00 PM · Online · Free</p>
+    <p class="register-body">Edition 01: Reset is open to everyone. No charge. One hour. Come ready to think — and leave ready to move.</p>
+    <a class="register-main-btn" href="https://forms.gle/LEg3BuSVerWbdjH67" target="_blank" rel="noopener">Register Now — Edition 01: Reset</a>
+    <p class="register-or">or drop your email to stay on the list</p>
     <div class="register-form">
-      <input
-        type="email"
-        class="register-input"
-        id="emailInput"
-        placeholder="Your email address"
-        autocomplete="email"
-        inputmode="email"
-      >
+      <input type="email" class="register-input" id="emailInput" placeholder="Your email address" autocomplete="email" inputmode="email">
       <button class="register-btn" id="registerBtn">Notify Me</button>
     </div>
-
     <div class="register-contact">
       <div class="register-contact-label">Questions? Reach out directly</div>
       <a href="https://wa.me/2349126634636" target="_blank" rel="noopener">WhatsApp: +234 912 663 4636</a>
     </div>
-
     <p class="register-note" id="registerNote">Free for this edition · No spam · Unsubscribe anytime</p>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Reflections W/ <em>TEA</em></div>
-  <div class="footer-middle">theezraanya.com · A monthly teaching event · 2026</div>
-  <div class="footer-links">
-    <a href="#philosophy">Philosophy</a>
-    <a href="#this-month">This Month</a>
-    <a href="#themes">Themes</a>
-    <a href="#faq">FAQ</a>
-    <a href="#register">Register</a>
-    <a href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Substack</a>
+  <div class="footer-inner">
+    <div class="footer-logo">Reflections W/ <em>TEA</em></div>
+    <div class="footer-mid">theezraanya.com · A monthly teaching event · 2026</div>
+    <div class="footer-links">
+      <a href="#this-month">This Month</a>
+      <a href="#themes">Themes</a>
+      <a href="#faq">FAQ</a>
+      <a href="#register">Register</a>
+      <a href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Substack</a>
+      <a href="theezraanya.html" target="_blank">Main Site</a>
+    </div>
   </div>
 </footer>
 
 <script>
-/* ── DARK MODE ── */
-const root = document.documentElement;
-const modeBtn = document.getElementById('modeToggle');
-root.setAttribute('data-mode', localStorage.getItem('teaMode') || 'light');
-modeBtn.addEventListener('click', () => {
-  const next = root.getAttribute('data-mode') === 'light' ? 'dark' : 'light';
-  root.setAttribute('data-mode', next);
-  localStorage.setItem('teaMode', next);
-});
+/* DARK MODE */
+const root=document.documentElement,modeBtn=document.getElementById('modeToggle');
+root.setAttribute('data-mode',localStorage.getItem('teaMode')||'light');
+modeBtn.addEventListener('click',()=>{const n=root.getAttribute('data-mode')==='light'?'dark':'light';root.setAttribute('data-mode',n);localStorage.setItem('teaMode',n);});
 
-/* ── NAV SCROLL ── */
-const navEl = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  const dark = root.getAttribute('data-mode') === 'dark';
-  navEl.style.background = window.scrollY > 40
-    ? (dark ? 'rgba(15,13,11,0.98)' : 'rgba(247,243,237,0.98)') : '';
-}, {passive:true});
+/* NAV */
+const navEl=document.getElementById('nav');
+window.addEventListener('scroll',()=>{navEl.style.background=window.scrollY>50?'rgba(10,10,10,0.99)':'rgba(10,10,10,0.96)';},{passive:true});
 
-/* ── HAMBURGER ── */
-const ham = document.getElementById('hamburger');
-const mob = document.getElementById('mobileNav');
-ham.addEventListener('click', () => {
-  const open = mob.classList.toggle('open');
-  ham.classList.toggle('open', open);
-  ham.setAttribute('aria-expanded', open);
-});
-mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  mob.classList.remove('open');
-  ham.classList.remove('open');
-  ham.setAttribute('aria-expanded', 'false');
-}));
-document.addEventListener('click', e => {
-  if (!navEl.contains(e.target) && !mob.contains(e.target)) {
-    mob.classList.remove('open');
-    ham.classList.remove('open');
-    ham.setAttribute('aria-expanded', 'false');
-  }
-});
+/* HAMBURGER */
+const ham=document.getElementById('ham'),mob=document.getElementById('mobNav');
+ham.addEventListener('click',()=>{const o=mob.classList.toggle('open');ham.classList.toggle('open',o);ham.setAttribute('aria-expanded',o);});
+mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mob.classList.remove('open');ham.classList.remove('open');ham.setAttribute('aria-expanded','false');}));
+document.addEventListener('click',e=>{if(!navEl.contains(e.target)&&!mob.contains(e.target)){mob.classList.remove('open');ham.classList.remove('open');ham.setAttribute('aria-expanded','false');}});
 
-/* ── PILLAR CAROUSEL ── */
-const track = document.getElementById('pillarTrack');
-const dots = document.querySelectorAll('.pillar-dot');
-let cur = 0;
-function goTo(i) {
-  cur = ((i % 3) + 3) % 3;
-  track.style.transform = 'translateX(-' + (cur * 100) + '%)';
-  dots.forEach((d, idx) => {
-    d.classList.toggle('active', idx === cur);
-    d.setAttribute('aria-selected', idx === cur);
+/* CAROUSEL */
+const track=document.getElementById('pillarTrack'),dots=document.querySelectorAll('.pillar-dot');
+let cur=0;
+function goTo(i){cur=((i%3)+3)%3;track.style.transform='translateX(-'+(cur*100)+'%)';dots.forEach((d,idx)=>{d.classList.toggle('active',idx===cur);d.setAttribute('aria-selected',idx===cur);});}
+document.getElementById('pillarNext').addEventListener('click',()=>goTo(cur+1));
+document.getElementById('pillarPrev').addEventListener('click',()=>goTo(cur-1));
+dots.forEach(d=>d.addEventListener('click',()=>goTo(+d.dataset.i)));
+let tsX=0;
+track.addEventListener('touchstart',e=>{tsX=e.touches[0].clientX;},{passive:true});
+track.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tsX;if(Math.abs(dx)>40)goTo(dx<0?cur+1:cur-1);},{passive:true});
+
+/* ACCORDIONS */
+function initAcc(id){
+  const c=document.getElementById(id);if(!c)return;
+  c.addEventListener('click',e=>{
+    const t=e.target.closest('.acc-trigger,.faq-trigger');if(!t)return;
+    const item=t.closest('.acc-item,.faq-item'),isOpen=item.classList.contains('open');
+    c.querySelectorAll('.acc-item.open,.faq-item.open').forEach(i=>{i.classList.remove('open');i.querySelector('.acc-trigger,.faq-trigger').setAttribute('aria-expanded','false');});
+    if(!isOpen){item.classList.add('open');t.setAttribute('aria-expanded','true');}
   });
 }
-document.getElementById('pillarNext').addEventListener('click', () => goTo(cur + 1));
-document.getElementById('pillarPrev').addEventListener('click', () => goTo(cur - 1));
-dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.i)));
-let tsX = 0;
-track.addEventListener('touchstart', e => { tsX = e.touches[0].clientX; }, {passive:true});
-track.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - tsX;
-  if (Math.abs(dx) > 40) goTo(dx < 0 ? cur + 1 : cur - 1);
-}, {passive:true});
+initAcc('accordion');initAcc('faqList');
 
-/* ── ACCORDION (shared for both expect + faq) ── */
-function initAccordion(containerId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  container.addEventListener('click', e => {
-    const trigger = e.target.closest('.acc-trigger, .faq-trigger');
-    if (!trigger) return;
-    const item = trigger.closest('.acc-item, .faq-item');
-    const isOpen = item.classList.contains('open');
-    container.querySelectorAll('.acc-item.open, .faq-item.open').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.acc-trigger, .faq-trigger').setAttribute('aria-expanded', 'false');
-    });
-    if (!isOpen) {
-      item.classList.add('open');
-      trigger.setAttribute('aria-expanded', 'true');
-    }
-  });
-}
-initAccordion('accordion');
-initAccordion('faqList');
-
-/* ── EMAIL NOTIFY ── */
-/* 
-  Wired to Google Form prefill.
-  Field IDs extracted from pre-fill URL:
-    entry.2005620554 = Full Name
-    entry.1045781291 = Email
-    entry.1065046570 = Location
-  The Notify Me button pre-fills the email field and opens the form.
-  The user completes their name and location on the form itself.
-*/
-const FORM_BASE = 'https://docs.google.com/forms/d/e/1FAIpQLSfca9MfUGNwg2K08WlIDEdyXaatxxAmnzbHaE2i0qV62tSlJQ/viewform?usp=pp_url';
-const EMAIL_FIELD = 'entry.1045781291';
-
-document.getElementById('registerBtn').addEventListener('click', () => {
-  const email = document.getElementById('emailInput').value.trim();
-  const note = document.getElementById('registerNote');
-  const btn = document.getElementById('registerBtn');
-  if (!email || !email.includes('@')) {
-    note.textContent = 'Please enter a valid email address.';
-    note.style.color = '#E06A10';
-    return;
-  }
-  const prefillURL = FORM_BASE + '&' + EMAIL_FIELD + '=' + encodeURIComponent(email);
-  window.open(prefillURL, '_blank');
-  btn.textContent = 'Continue in Form ✓';
-  btn.style.background = 'rgba(46,125,50,0.4)';
-  btn.disabled = true;
-  document.getElementById('emailInput').disabled = true;
-  note.textContent = 'The form is opening. Your email is already filled in — just complete the rest.';
-  note.style.color = 'rgba(237,232,223,0.45)';
+/* NOTIFY ME */
+const FORM_BASE='https://docs.google.com/forms/d/e/1FAIpQLSfca9MfUGNwg2K08WlIDEdyXaatxxAmnzbHaE2i0qV62tSlJQ/viewform?usp=pp_url';
+const EMAIL_FIELD='entry.1045781291';
+document.getElementById('registerBtn').addEventListener('click',()=>{
+  const email=document.getElementById('emailInput').value.trim();
+  const note=document.getElementById('registerNote'),btn=document.getElementById('registerBtn');
+  if(!email||!email.includes('@')){note.textContent='Please enter a valid email address.';note.style.color='#D05A00';return;}
+  window.open(FORM_BASE+'&'+EMAIL_FIELD+'='+encodeURIComponent(email),'_blank');
+  btn.textContent='Continue in Form ✓';btn.style.background='rgba(46,125,50,0.4)';btn.disabled=true;
+  document.getElementById('emailInput').disabled=true;
+  note.textContent='The form is opening. Your email is already filled in — just complete the rest.';note.style.color='rgba(255,255,255,0.35)';
 });
 
-/* ── SCROLL REVEAL ── */
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('up'), i * 60);
-      observer.unobserve(e.target);
-    }
-  });
-}, {threshold: 0.06});
-reveals.forEach(el => observer.observe(el));
+/* REVEAL */
+const reveals=document.querySelectorAll('.reveal');
+const io=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('up'),i*55);io.unobserve(e.target);}});},{threshold:0.06});
+reveals.forEach(el=>io.observe(el));
 </script>
 </body>
-</html> 
+</html>
