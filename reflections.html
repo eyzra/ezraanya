@@ -33,7 +33,7 @@ a{color:inherit;text-decoration:none}
 /* NAV */
 .nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);height:62px;background:rgba(10,10,10,0.96);border-bottom:1px solid var(--rule);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .nav-logo{font-family:var(--cursive);font-size:18px;font-weight:700;color:var(--white);letter-spacing:0.3px}
-.nav-logo em{color:var(--orange);font-style:italic}
+.nav-logo-img{height:40px;width:auto;object-fit:contain;filter:invert(1);}
 .nav-back{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--grey);transition:color 0.2s;display:flex;align-items:center;gap:8px}
 .nav-back:hover{color:var(--white)}
 .nav-back::before{content:'←';font-size:14px}
@@ -74,7 +74,29 @@ a{color:inherit;text-decoration:none}
 .btn-outline{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.2)}
 .btn-outline:hover{border-color:rgba(255,255,255,0.5)}
 
-/* FLYER SECTION */
+
+/* FLYER + MONTH SPLIT */
+.flyer-month-section{background:var(--black2);padding:clamp(48px,7vw,88px) var(--pad)}
+.flyer-month-inner{max-width:1100px;margin:0 auto;display:flex;gap:clamp(28px,5vw,60px);align-items:flex-start}
+.flyer-col{flex:0 0 auto;width:clamp(200px,32vw,340px)}
+.flyer-frame{width:100%;aspect-ratio:4/5;background:var(--black3);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.flyer-img{width:100%;height:100%;object-fit:cover;display:block}
+.flyer-placeholder{text-align:center;padding:24px}
+.flyer-placeholder-icon{font-size:32px;opacity:0.12;margin-bottom:10px}
+.flyer-placeholder-text{font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--grey);line-height:1.8}
+.month-col{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.month-edition{font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
+.month-title{font-family:var(--display);font-size:clamp(52px,8vw,96px);text-transform:uppercase;color:var(--white);line-height:0.9;margin-bottom:10px;letter-spacing:1px}
+.month-subtitle{font-family:var(--serif);font-style:italic;font-size:clamp(14px,1.5vw,18px);color:var(--orange-lt);margin-bottom:20px}
+.month-desc{font-family:var(--body);font-size:clamp(13px,1.3vw,14.5px);font-weight:300;color:rgba(255,255,255,0.55);line-height:1.85;max-width:440px;margin-bottom:24px}
+.month-tags{display:flex;flex-wrap:wrap;gap:8px}
+.month-tag{font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border:1px solid rgba(184,79,0,0.32);color:var(--orange-lt)}
+@media(max-width:680px){
+  .flyer-month-inner{flex-direction:column}
+  .flyer-col{width:100%;max-width:300px}
+}
+
+/* OLD FLYER CSS - UNUSED */
 .flyer-section{background:var(--black2);padding:clamp(60px,8vw,100px) var(--pad)}
 .flyer-inner{max-width:1100px;margin:0 auto}
 .s-label{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:clamp(28px,4vw,44px);display:flex;align-items:center;gap:14px}
@@ -251,6 +273,18 @@ a{color:inherit;text-decoration:none}
 .register-contact a:hover{color:var(--orange)}
 .register-note{font-family:var(--body);font-size:10px;font-weight:300;color:rgba(255,255,255,0.2);letter-spacing:1.5px;text-transform:uppercase;margin-top:12px}
 
+
+/* COUNTDOWN */
+.countdown{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:32px}
+.cd-block{text-align:center;min-width:64px}
+.cd-num{font-family:var(--display);font-size:clamp(44px,7vw,72px);color:var(--white);line-height:1;letter-spacing:1px}
+.cd-label{font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--grey);margin-top:4px}
+.cd-sep{font-family:var(--display);font-size:clamp(36px,5vw,56px);color:var(--orange);line-height:1;padding-bottom:16px}
+.register-ask{margin-top:20px;margin-bottom:4px}
+.register-ask-link{font-family:var(--body);font-size:12px;font-weight:300;color:rgba(255,255,255,0.4);letter-spacing:0.5px;transition:color 0.2s}
+.register-ask-link:hover{color:var(--orange)}
+@media(max-width:480px){.cd-block{min-width:48px}.cd-num{font-size:36px}}
+
 /* FOOTER */
 footer{background:var(--black2);border-top:1px solid var(--rule);padding:clamp(32px,5vw,52px) var(--pad)}
 .footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px}
@@ -288,8 +322,9 @@ footer{background:var(--black2);border-top:1px solid var(--rule);padding:clamp(3
 
 <!-- NAV -->
 <nav class="nav" id="nav">
-  <a class="nav-back" href="theezraanya.html">Theezraanya</a>
-  <div class="nav-logo">Reflections W/ <em>TEA</em></div>
+  <a class="nav-back" href="index.html">Theezraanya</a>
+  <!-- ★ LOGO: set src to your logo file path below ★ -->
+  <div class="nav-logo"><img src="assets/Tea-Logo.png" alt="Reflections W/ TEA" class="nav-logo-img" onerror="this.style.display='none'"></div>
   <div class="nav-right">
     <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
       <span class="icon-sun" aria-hidden="true">☀</span>
@@ -327,58 +362,32 @@ footer{background:var(--black2);border-top:1px solid var(--rule);padding:clamp(3
   </div>
 </section>
 
-<!-- FLYER SPACE -->
-<section class="flyer-section" id="flyer">
-  <div class="flyer-inner">
-    <div class="s-label reveal">Edition 01 · Flyer</div>
-    <div class="flyer-frame reveal">
-      Replace this placeholder with: <img class="flyer-img" src="assets/Reset.png" alt="Reset Flyer">
-      <div class="flyer-placeholder">
-        <div class="flyer-placeholder-icon">🖼</div>
-        <div class="flyer-placeholder-text">
-          Drop your flyer here<br>
-          Replace with image tag when ready
-        </div>
-        <div class="flyer-placeholder-dims">1080 × 1350</div>
+<!-- FLYER + THIS MONTH — horizontal flexbox -->
+<section class="flyer-month-section" id="this-month">
+  <div class="flyer-month-inner">
+
+    <!-- LEFT: FLYER (1080×1350 = 4:5 ratio) -->
+    <div class="flyer-col">
+           <img class="flyer-img" src="assets/reset.png" alt="Reset — Edition 01 Flyer">
+    </div>
+
+    <!-- RIGHT: THIS MONTH DETAIL -->
+    <div class="month-col">
+      <div class="month-edition">Reflections W/ TEA — Edition 01</div>
+      <div class="month-title">RESET</div>
+      <div class="month-subtitle">Coming Out of Being Stuck</div>
+      <p class="month-desc">Stuck is not a personality. It is a posture. And postures can change. If you are a thinker — this session is for you. One hour. One conversation. One question that has the potential to shift everything.</p>
+      <div class="month-tags">
+        <span class="month-tag">Why smart people stay stuck</span>
+        <span class="month-tag">The anatomy of a reset</span>
+        <span class="month-tag">Breaking the guilt-inertia loop</span>
+        <span class="month-tag">One decision that changes everything</span>
+      </div>
+      <div style="margin-top:28px">
+        <a class="btn btn-fill" href="https://forms.gle/LEg3BuSVerWbdjH67" target="_blank" rel="noopener">Register Now — Free</a>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- THIS MONTH -->
-<section class="month-split" id="this-month">
-  <div class="month-left">
-    <div class="month-edition">Reflections W/ TEA — Edition 01</div>
-    <div class="month-title">RESET</div>
-    <div class="month-subtitle">Coming Out of Being Stuck</div>
-    <p class="month-desc">Stuck is not a personality. It is a posture. And postures can change. If you are a thinker — this session is for you. One hour. One conversation. One question that has the potential to shift everything.</p>
-    <div class="month-tags">
-      <span class="month-tag">Why smart people stay stuck</span>
-      <span class="month-tag">The anatomy of a reset</span>
-      <span class="month-tag">Breaking the guilt-inertia loop</span>
-      <span class="month-tag">One decision that changes everything</span>
-    </div>
-  </div>
-  <div class="month-right">
-    <div class="month-right-title">Read, Listen, Join</div>
-    <div class="month-links">
-      <a href="https://substack.com/@theezraanya" target="_blank" rel="noopener" class="month-link-card">
-        <div class="month-link-inner">
-          <div class="month-link-label">Substack</div>
-          <div class="month-link-name">The Ezra Anya — Articles &amp; Essays</div>
-        </div>
-        <span class="month-link-arrow">→</span>
-      </a>
-      <a href="https://whatsapp.com/channel/0029VatWctcHrDZm8Kuch52O" target="_blank" rel="noopener" class="month-link-card">
-        <div class="month-link-inner">
-          <div class="month-link-label">WhatsApp Channel</div>
-          <div class="month-link-name">The Ezra Anya (TEA)</div>
-          <div class="month-wa-desc">Thoughts on theology, psychology, and personal development — sharpened by the Word.</div>
-        </div>
-        <span class="month-link-arrow">→</span>
-      </a>
-    </div>
-    <button class="month-register" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Reserve Your Spot — Free</button>
   </div>
 </section>
 
@@ -493,21 +502,6 @@ footer{background:var(--black2);border-top:1px solid var(--rule);padding:clamp(3
   </div>
 </section>
 
-<!-- WHY REFLECTION -->
-<section class="why-section">
-  <div class="why-inner">
-    <div class="s-label reveal" style="color:var(--orange)">Why Reflection</div>
-    <div class="why-quotes reveal">
-      <div class="why-quote">
-        <div class="why-quote-main">Experience alone does not produce wisdom. <strong>Reflection on experience does.</strong></div>
-      </div>
-      <div class="why-quote">
-        <div class="why-quote-main">Clarity is not given. It is carved — through the discipline of stopping long enough to think. <strong>That is what this is for.</strong></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- THEMES -->
 <section class="themes-section" id="themes">
   <div class="themes-inner">
@@ -573,16 +567,19 @@ footer{background:var(--black2);border-top:1px solid var(--rule);padding:clamp(3
     <div class="register-eyebrow">Join the next session</div>
     <h2 class="register-title">RESERVE<br>YOUR <em>SPOT.</em></h2>
     <p class="register-date">September 19, 2026 · 7:00 PM · Online · Free</p>
-    <p class="register-body">Edition 01: Reset is open to everyone. No charge. One hour. Come ready to think — and leave ready to move.</p>
-    <a class="register-main-btn" href="https://forms.gle/LEg3BuSVerWbdjH67" target="_blank" rel="noopener">Register Now — Edition 01: Reset</a>
-    <p class="register-or">or drop your email to stay on the list</p>
-    <div class="register-form">
-      <input type="email" class="register-input" id="emailInput" placeholder="Your email address" autocomplete="email" inputmode="email">
-      <button class="register-btn" id="registerBtn">Notify Me</button>
+    <!-- COUNTDOWN -->
+    <div class="countdown" id="countdown">
+      <div class="cd-block"><div class="cd-num" id="cd-days">00</div><div class="cd-label">Days</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-block"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Hours</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-block"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">Minutes</div></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-block"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">Seconds</div></div>
     </div>
-    <div class="register-contact">
-      <div class="register-contact-label">Questions? Reach out directly</div>
-      <a href="https://wa.me/2349126634636" target="_blank" rel="noopener">WhatsApp: +234 912 663 4636</a>
+    <a class="register-main-btn" href="https://forms.gle/LEg3BuSVerWbdjH67" target="_blank" rel="noopener">Register Now — It is Free</a>
+    <div class="register-ask">
+      <a href="https://wa.me/2349126634636?text=Hi%20Ezra%2C%20I%20have%20a%20question%20about%20Reflections%20W%2F%20TEA" target="_blank" rel="noopener" class="register-ask-link">Have a question? Ask Ezra on WhatsApp →</a>
     </div>
     <p class="register-note" id="registerNote">Free for this edition · No spam · Unsubscribe anytime</p>
   </div>
@@ -591,7 +588,8 @@ footer{background:var(--black2);border-top:1px solid var(--rule);padding:clamp(3
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">Reflections W/ <em>TEA</em></div>
+    <!-- ★ LOGO: set src to your logo file path below ★ -->
+    <img src="assets/Tea-Logo.png" alt="Reflections W/ TEA" style="height:40px;width:auto;filter:invert(1);display:block" onerror="this.style.display='none'">
     <div class="footer-mid">theezraanya.com · A monthly teaching event · 2026</div>
     <div class="footer-links">
       <a href="#this-month">This Month</a>
@@ -606,9 +604,14 @@ footer{background:var(--black2);border-top:1px solid var(--rule);padding:clamp(3
 
 <script>
 /* DARK MODE */
-const root=document.documentElement,modeBtn=document.getElementById('modeToggle');
+const root=document.documentElement;
 root.setAttribute('data-mode',localStorage.getItem('teaMode')||'light');
-modeBtn.addEventListener('click',()=>{const n=root.getAttribute('data-mode')==='light'?'dark':'light';root.setAttribute('data-mode',n);localStorage.setItem('teaMode',n);});
+const modeBtn=document.getElementById('modeToggle');
+if(modeBtn)modeBtn.addEventListener('click',()=>{
+  const n=root.getAttribute('data-mode')==='light'?'dark':'light';
+  root.setAttribute('data-mode',n);
+  localStorage.setItem('teaMode',n);
+});
 
 /* NAV */
 const navEl=document.getElementById('nav');
@@ -624,8 +627,9 @@ document.addEventListener('click',e=>{if(!navEl.contains(e.target)&&!mob.contain
 const track=document.getElementById('pillarTrack'),dots=document.querySelectorAll('.pillar-dot');
 let cur=0;
 function goTo(i){cur=((i%3)+3)%3;track.style.transform='translateX(-'+(cur*100)+'%)';dots.forEach((d,idx)=>{d.classList.toggle('active',idx===cur);d.setAttribute('aria-selected',idx===cur);});}
-document.getElementById('pillarNext').addEventListener('click',()=>goTo(cur+1));
-document.getElementById('pillarPrev').addEventListener('click',()=>goTo(cur-1));
+const pNext=document.getElementById('pillarNext'),pPrev=document.getElementById('pillarPrev');
+if(pNext)pNext.addEventListener('click',()=>goTo(cur+1));
+if(pPrev)pPrev.addEventListener('click',()=>goTo(cur-1));
 dots.forEach(d=>d.addEventListener('click',()=>goTo(+d.dataset.i)));
 let tsX=0;
 track.addEventListener('touchstart',e=>{tsX=e.touches[0].clientX;},{passive:true});
@@ -643,18 +647,32 @@ function initAcc(id){
 }
 initAcc('accordion');initAcc('faqList');
 
-/* NOTIFY ME */
-const FORM_BASE='https://docs.google.com/forms/d/e/1FAIpQLSfca9MfUGNwg2K08WlIDEdyXaatxxAmnzbHaE2i0qV62tSlJQ/viewform?usp=pp_url';
-const EMAIL_FIELD='entry.1045781291';
-document.getElementById('registerBtn').addEventListener('click',()=>{
-  const email=document.getElementById('emailInput').value.trim();
-  const note=document.getElementById('registerNote'),btn=document.getElementById('registerBtn');
-  if(!email||!email.includes('@')){note.textContent='Please enter a valid email address.';note.style.color='#D05A00';return;}
-  window.open(FORM_BASE+'&'+EMAIL_FIELD+'='+encodeURIComponent(email),'_blank');
-  btn.textContent='Continue in Form ✓';btn.style.background='rgba(46,125,50,0.4)';btn.disabled=true;
-  document.getElementById('emailInput').disabled=true;
-  note.textContent='The form is opening. Your email is already filled in — just complete the rest.';note.style.color='rgba(255,255,255,0.35)';
-});
+/* COUNTDOWN */
+(function(){
+  const target = new Date('2026-09-19T19:00:00+01:00');
+  function tick(){
+    const now = new Date();
+    const diff = target - now;
+    if(diff <= 0){
+      document.getElementById('cd-days').textContent='00';
+      document.getElementById('cd-hours').textContent='00';
+      document.getElementById('cd-mins').textContent='00';
+      document.getElementById('cd-secs').textContent='00';
+      return;
+    }
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    document.getElementById('cd-days').textContent=String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent=String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent=String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent=String(s).padStart(2,'0');
+  }
+  tick();setInterval(tick,1000);
+})();
+
+/* Registration handled via Google Form link above */
 
 /* REVEAL */
 const reveals=document.querySelectorAll('.reveal');
