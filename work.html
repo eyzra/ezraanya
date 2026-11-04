@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work With Ezra — Ezra Anya</title>
+<meta name="description" content="Work with Ezra Anya — Brand Strategy, Communications, Speaking and more.">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ── SERVICES ────────────────────────────────────────── */
+.services { background: var(--white); }
+.services-inner { max-width: 1400px; margin: 0 auto; padding: 0 var(--pad); }
+.services-head {
+  padding: clamp(60px,8vw,100px) 0 clamp(40px,5vw,60px);
+  border-bottom: 1px solid var(--rule-lt);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+}
+.services-head-title {
+  font-family: var(--display); font-size: clamp(40px,6vw,88px);
+  text-transform: uppercase; line-height: 1;
+  color: var(--black); letter-spacing: 1px;
+}
+.services-head-title em { color: var(--orange); font-style: normal; }
+.services-grid { display: grid; grid-template-columns: repeat(2,1fr); }
+.service-item {
+  padding: clamp(36px,5vw,60px) clamp(28px,4vw,52px);
+  border-bottom: 1px solid var(--rule-lt); border-right: 1px solid var(--rule-lt);
+  transition: background 0.25s;
+}
+.service-item:nth-child(even) { border-right: none; }
+.service-item:nth-last-child(-n+2) { border-bottom: none; }
+.service-item:hover { background: #F7F3EE; }
+.service-num {
+  font-family: var(--display); font-size: 20px; color: var(--orange);
+  line-height: 1; margin-bottom: 12px;
+}
+.service-title {
+  font-family: var(--display); font-size: clamp(22px,3vw,36px);
+  text-transform: uppercase; color: var(--black);
+  line-height: 1; margin-bottom: 12px; letter-spacing: 0.5px;
+}
+.service-body {
+  font-family: var(--body); font-size: 14px; font-weight: 300;
+  color: rgba(10,10,10,0.52); line-height: 1.8; margin-bottom: 20px;
+}
+.service-list {
+  list-style: none; display: flex; flex-direction: column; gap: 6px;
+}
+.service-list li {
+  font-family: var(--body); font-size: 12px; font-weight: 500;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(10,10,10,0.4); display: flex; align-items: center; gap: 8px;
+}
+.service-list li::before { content: '—'; color: var(--orange); }
+
+/* ── TEA ADVISORY ───────────────────────────────────── */
+.tea-advisory { background: var(--black); padding: clamp(60px,8vw,100px) 0; }
+.tea-advisory-inner {
+  max-width: 1400px; margin: 0 auto; padding: 0 var(--pad);
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(44px,7vw,100px);
+  align-items: center;
+}
+.tea-advisory-title {
+  font-family: var(--display); font-size: clamp(36px,5vw,72px);
+  text-transform: uppercase; line-height: 1;
+  color: var(--white); letter-spacing: 1px; margin-bottom: 20px;
+}
+.tea-advisory-title em { color: var(--orange); font-style: normal; }
+.tea-advisory-body {
+  font-family: var(--body); font-size: 14px; font-weight: 300;
+  color: var(--white-dim); line-height: 1.8; margin-bottom: 28px;
+}
+.tea-pillars { display: flex; flex-direction: column; gap: 2px; }
+.tea-pillar {
+  display: flex; align-items: center; gap: 20px;
+  padding: 18px 20px; border: 1px solid var(--rule);
+  transition: border-color 0.2s, background 0.2s;
+}
+.tea-pillar:hover { border-color: var(--orange); background: var(--orange-pale); }
+.tea-pillar-num {
+  font-family: var(--display); font-size: 32px; color: var(--orange);
+  line-height: 1; flex-shrink: 0; min-width: 40px;
+}
+.tea-pillar-label {
+  font-family: var(--display); font-size: clamp(16px,2vw,22px);
+  text-transform: uppercase; color: var(--white);
+  line-height: 1; letter-spacing: 0.5px;
+}
+
+/* ── SPEAKING ────────────────────────────────────────── */
+.speaking-work { background: var(--black2); padding: clamp(60px,8vw,100px) 0; }
+.speaking-work-inner { max-width: 1400px; margin: 0 auto; padding: 0 var(--pad); }
+.speaking-work-head { margin-bottom: clamp(36px,5vw,60px); }
+.speaking-work-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px,5vw,60px);
+}
+.speaking-topics-list { display: flex; flex-direction: column; }
+.speaking-topic-row {
+  padding: 18px 0; border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 20px;
+  font-family: var(--display); font-size: clamp(18px,2.2vw,28px);
+  text-transform: uppercase; color: var(--white); letter-spacing: 0.5px;
+  line-height: 1; transition: color 0.2s;
+}
+.speaking-topic-row:hover { color: var(--orange); }
+.speaking-topic-row::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--orange); flex-shrink: 0;
+}
+.speaking-right { }
+.speaking-approach {
+  background: var(--black); border: 1px solid var(--rule);
+  padding: clamp(28px,4vw,44px); margin-bottom: 20px;
+}
+.speaking-approach-title {
+  font-family: var(--display); font-size: clamp(20px,2.5vw,30px);
+  text-transform: uppercase; color: var(--white);
+  line-height: 1; letter-spacing: 0.5px; margin-bottom: 14px;
+}
+.speaking-approach-body {
+  font-family: var(--body); font-size: 14px; font-weight: 300;
+  color: var(--white-dim); line-height: 1.8;
+}
+
+/* ── WORK FAQ ───────────────────────────────────────── */
+.work-faq { background: var(--white); padding: clamp(60px,8vw,100px) 0; }
+.work-faq-inner { max-width: 1400px; margin: 0 auto; padding: 0 var(--pad); }
+.work-faq-head { margin-bottom: clamp(36px,5vw,60px); }
+.work-faq-list { max-width: 760px; }
+.work-faq-item { border-bottom: 1px solid var(--rule-lt); }
+.work-faq-trigger {
+  width: 100%; padding: 20px 0; background: none; border: none;
+  cursor: pointer; display: flex; align-items: center;
+  justify-content: space-between; gap: 16px; text-align: left;
+}
+.work-faq-q {
+  font-family: var(--body); font-size: 15px; font-weight: 500;
+  color: var(--black); line-height: 1.4;
+}
+.work-faq-arrow { color: var(--orange); font-size: 20px; flex-shrink: 0; transition: transform 0.3s; }
+.acc-item.open .work-faq-arrow { transform: rotate(45deg); }
+.work-faq-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.work-faq-inner-body {
+  padding: 0 24px 20px 0;
+  font-family: var(--body); font-size: 14px; font-weight: 300;
+  color: rgba(10,10,10,0.55); line-height: 1.8;
+}
+
+/* ── TESTI ───────────────────────────────────────────── */
+.testimonials { background: var(--black); padding: clamp(60px,8vw,100px) 0; }
+.testimonials-inner { max-width: 1400px; margin: 0 auto; padding: 0 var(--pad); }
+.testimonials-head { margin-bottom: clamp(36px,5vw,60px); }
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 900px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .service-item { border-right: none !important; }
+  .service-item:nth-last-child(-n+2) { border-bottom: 1px solid var(--rule-lt); }
+  .service-item:last-child { border-bottom: none; }
+  .tea-advisory-inner { grid-template-columns: 1fr; }
+  .speaking-work-grid { grid-template-columns: 1fr; }
+  .services-head { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-name">WORK <em>WITH EZRA</em></div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- CURSOR -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="index.html">
+    <img src="assets/theezraanya-logo.png" alt="Ezra Anya" onerror="this.style.display='none'">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="work.html" class="active">Work</a></li>
+    <li><a href="writing.html">Writing</a></li>
+    <li><a href="reflections.html">Reflections</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px">
+    <a class="nav-cta" href="https://calendly.com/ezraanya/talk-w-tea" target="_blank">Book a Call</a>
+    <button class="hamburger" id="ham" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav" id="mobNav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="work.html">Work</a>
+  <a href="writing.html">Writing</a>
+  <a href="reflections.html">Reflections W/TEA</a>
+  <a href="https://calendly.com/ezraanya/talk-w-tea" target="_blank">Book a Call</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-eyebrow reveal">What We Build Together</div>
+  <h1 class="page-hero-title reveal">WORK WITH<br><em>EZRA.</em></h1>
+  <p class="page-hero-sub reveal">Strategy, communication, speaking, and formation. The mandate is always the same: help people and organisations see clearly, think honestly, and act with courage.</p>
+</div>
+
+<!-- SERVICES -->
+<section class="services">
+  <div class="services-inner">
+    <div class="services-head">
+      <div class="services-head-title reveal">TEA <em>ADVISORY</em></div>
+      <a class="btn btn-fill reveal" href="https://calendly.com/ezraanya/talk-w-tea" target="_blank" rel="noopener">Book a Discovery Call</a>
+    </div>
+    <div class="services-grid">
+      <div class="service-item reveal">
+        <div class="service-num">01</div>
+        <div class="service-title">Brand Strategy</div>
+        <p class="service-body">Your brand is not your logo — it's the story the market tells about you when you're not in the room. We help you shape that story with clarity, consistency, and conviction.</p>
+        <ul class="service-list">
+          <li>Brand Positioning</li>
+          <li>Messaging Architecture</li>
+          <li>Brand Identity Direction</li>
+          <li>Tone &amp; Voice Guidelines</li>
+        </ul>
+      </div>
+      <div class="service-item reveal">
+        <div class="service-num">02</div>
+        <div class="service-title">Corporate Communications</div>
+        <p class="service-body">What you say, when you say it, and how you say it determines whether people trust you. We build the frameworks and content that make organisations communicate with confidence.</p>
+        <ul class="service-list">
+          <li>Communication Strategy</li>
+          <li>Internal Communications</li>
+          <li>Stakeholder Messaging</li>
+          <li>Crisis Communication</li>
+        </ul>
+      </div>
+      <div class="service-item reveal">
+        <div class="service-num">03</div>
+        <div class="service-title">Media &amp; PR</div>
+        <p class="service-body">Media is not just about coverage — it's about how you show up in the culture. We help you think through media strategy, press presence, and narrative ownership.</p>
+        <ul class="service-list">
+          <li>Media Strategy</li>
+          <li>Press &amp; Editorial</li>
+          <li>Thought Leadership</li>
+          <li>Social Presence</li>
+        </ul>
+      </div>
+      <div class="service-item reveal">
+        <div class="service-num">04</div>
+        <div class="service-title">Product Design</div>
+        <p class="service-body">Strategy and design should speak the same language. We work with teams to align product vision with communication — so what you build and how you describe it are coherent.</p>
+        <ul class="service-list">
+          <li>Product Narrative</li>
+          <li>UX Writing &amp; Content</li>
+          <li>Launch Strategy</li>
+          <li>User Communication</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEA ADVISORY SECTION -->
+<section class="tea-advisory">
+  <div class="tea-advisory-inner">
+    <div class="reveal">
+      <div class="tea-advisory-title">THE <em>TEA</em><br>ADVISORY<br>APPROACH.</div>
+      <p class="tea-advisory-body">We don't do templates. We start with your situation, understand what actually needs to change, and build from there. Every engagement is shaped by three things:</p>
+      <a class="btn btn-fill" href="https://calendly.com/ezraanya/talk-w-tea" target="_blank" rel="noopener" style="margin-top:16px">Start the Conversation</a>
+    </div>
+    <div class="tea-pillars reveal">
+      <div class="tea-pillar">
+        <div class="tea-pillar-num">01</div>
+        <div class="tea-pillar-label">Clarity — Before Strategy</div>
+      </div>
+      <div class="tea-pillar">
+        <div class="tea-pillar-num">02</div>
+        <div class="tea-pillar-label">Honesty — Before Output</div>
+      </div>
+      <div class="tea-pillar">
+        <div class="tea-pillar-num">03</div>
+        <div class="tea-pillar-label">Movement — Not Just Messaging</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKING -->
+<section class="speaking-work">
+  <div class="speaking-work-inner">
+    <div class="speaking-work-head">
+      <div class="s-label">Invite to Speak</div>
+      <h2 class="s-heading">SPEAKING<br><em>ENGAGEMENTS.</em></h2>
+    </div>
+    <div class="speaking-work-grid">
+      <div>
+        <div class="speaking-topics-list stagger">
+          <div class="speaking-topic-row">Leadership &amp; Formation</div>
+          <div class="speaking-topic-row">AI &amp; The Future of Work</div>
+          <div class="speaking-topic-row">Purpose &amp; Identity</div>
+          <div class="speaking-topic-row">Faith &amp; Apologetics</div>
+          <div class="speaking-topic-row">Branding &amp; Strategy</div>
+          <div class="speaking-topic-row">Communication</div>
+        </div>
+      </div>
+      <div class="speaking-right reveal">
+        <div class="speaking-approach">
+          <div class="speaking-approach-title">The Approach</div>
+          <p class="speaking-approach-body">Not pop motivation. A teaching — influenced by learning, informed by research, and inspired to make you see, think and believe. Ezra brings the scholarship of a theologian, the craft of a storyteller, and the practicality of a builder to every platform he stands on.</p>
+        </div>
+        <a class="btn btn-fill" href="https://calendly.com/ezraanya/talk-w-tea" target="_blank" rel="noopener">Book Ezra to Speak</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-head">
+      <div class="s-label">What People Say</div>
+      <h2 class="s-heading">VOICES<br><em>FROM THE ROOM.</em></h2>
+    </div>
+    <div class="testi-grid stagger">
+      <div class="testi-card">
+        <p class="testi-quote">"Ezra doesn't just speak — he teaches. By the time he's done, you feel like you understand something you've always known but never had words for."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">EA</div>
+          <div>
+            <div class="testi-name">Event Attendee</div>
+            <div class="testi-role">Leadership Conference</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">"The strategy session with Ezra changed how we think about our brand. It wasn't just advice — it was a reframe that made everything clearer."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">BN</div>
+          <div>
+            <div class="testi-name">Brand Director</div>
+            <div class="testi-role">Pan-African Firm</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-quote">"He brings a rare combination of intellectual rigor and genuine pastoral care. Everyone in the room leaves feeling both challenged and held."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">FK</div>
+          <div>
+            <div class="testi-name">Church Leader</div>
+            <div class="testi-role">Ministry Event</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK FAQ -->
+<section class="work-faq">
+  <div class="work-faq-inner">
+    <div class="work-faq-head">
+      <div class="s-label">Common Questions</div>
+      <h2 class="s-heading" style="color:var(--black)">FREQUENTLY<br><em>ASKED.</em></h2>
+    </div>
+    <div class="work-faq-list" id="workFaqAcc">
+      <div class="acc-item">
+        <button class="work-faq-trigger">
+          <span class="work-faq-q">What kinds of clients do you work with?</span>
+          <span class="work-faq-arrow">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="work-faq-inner-body">Organisations and individuals who want to communicate and position themselves with clarity — from startups and NGOs to established firms and personal brands. The common thread is a commitment to doing meaningful work and wanting that work to be seen and understood.</div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="work-faq-trigger">
+          <span class="work-faq-q">How does an engagement typically begin?</span>
+          <span class="work-faq-arrow">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="work-faq-inner-body">With a conversation. Book a discovery call and we'll spend 30 minutes understanding your situation, what you're trying to achieve, and whether we're the right fit. No pressure — just an honest conversation about what you need.</div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="work-faq-trigger">
+          <span class="work-faq-q">Do you offer ongoing retainer work?</span>
+          <span class="work-faq-arrow">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="work-faq-inner-body">Yes. Some engagements are one-time projects (a brand audit, a speaking engagement, a launch campaign). Others are ongoing partnerships — especially for communications and strategic advisory. We'll design the engagement to fit what you actually need.</div>
+        </div>
+      </div>
+      <div class="acc-item">
+        <button class="work-faq-trigger">
+          <span class="work-faq-q">How do I book you to speak?</span>
+          <span class="work-faq-arrow">+</span>
+        </button>
+        <div class="faq-body">
+          <div class="work-faq-inner-body">Use the form at the bottom of the homepage or book a call through Calendly. The earlier you reach out, the better — especially for large events. Include a brief description of your event, the audience, and what you're hoping the audience will walk away with.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <div class="cta-band-title reveal">READY TO<br>START?</div>
+  <p class="cta-band-sub reveal">Book a 30-minute discovery call and let's figure out what your situation actually needs.</p>
+  <a class="btn btn-white reveal" href="https://calendly.com/ezraanya/talk-w-tea" target="_blank" rel="noopener">Book a Call</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main max-w">
+    <div class="footer-brand">
+      <img src="assets/theezraanya-logo.png" alt="Ezra Anya" class="footer-logo" onerror="this.style.display='none'">
+      <p class="footer-tagline">Theologian · Storyteller · Builder. Helping people see, think and believe.</p>
+      <div class="footer-socials">
+        <a class="footer-social" href="https://substack.com/@theezraanya" target="_blank">Substack</a>
+        <a class="footer-social" href="https://instagram.com/theezraanya" target="_blank">Instagram</a>
+        <a class="footer-social" href="https://linkedin.com/in/theezraanya" target="_blank">LinkedIn</a>
+        <a class="footer-social" href="https://youtube.com/@theezraanya" target="_blank">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-label">Navigate</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="work.html">Work</a>
+        <a href="writing.html">Writing</a>
+        <a href="reflections.html">Reflections W/TEA</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-label">Platform</div>
+      <div class="footer-links">
+        <a href="https://substack.com/@theezraanya" target="_blank">Substack</a>
+        <a href="https://youtube.com/@theezraanya" target="_blank">YouTube</a>
+        <a href="https://whatsapp.com/channel/0029VatWctcHrDZm8Kuch52O" target="_blank">WhatsApp Channel</a>
+        <a href="https://selar.com/m/ezra-anya" target="_blank">Selar Books</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-label">Contact</div>
+      <div class="footer-links">
+        <a href="https://calendly.com/ezraanya/talk-w-tea" target="_blank">Book a Call</a>
+        <a href="https://wa.me/2349126634636" target="_blank">WhatsApp</a>
+        <a href="mailto:hello@theezraanya.com">Email Ezra</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom max-w">
+    <span class="footer-copy">© 2026 Ezra Anya. All rights reserved.</span>
+    <span class="footer-copy">theezraanya.com</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initAccordion('workFaqAcc');
+  });
+</script>
+</body>
+</html>

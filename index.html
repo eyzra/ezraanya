@@ -1,492 +1,290 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ezra Anya — Thinker. Theologian. Teacher.</title>
-<meta name="description" content="Ezra Anya helps people see, think and believe. Theologian. Storyteller. Builder.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ezra Anya · Thinker, Storyteller, Builder</title>
+<meta name="description" content="Ezra Anya helps people see, think and believe. Brand, communications and AI strategist, host of Reflections W/ TEA and founder of TheThriveTribe.">
+<meta name="theme-color" content="#0B0B0B">
+<link rel="canonical" href="https://theezraanya.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ezra Anya">
+<meta property="og:title" content="Ezra Anya · Thinker, Storyteller, Builder">
+<meta property="og:description" content="Ezra Anya helps people see, think and believe. Brand, communications and AI strategist, host of Reflections W/ TEA and founder of TheThriveTribe.">
+<meta property="og:url" content="https://theezraanya.com/">
+<meta property="og:image" content="https://theezraanya.com/assets/img/hero-stage.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lexend:wght@300;400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-:root{
-  --black:#0A0A0A;--black2:#111111;--black3:#1A1A1A;
-  --white:#FFFFFF;--white-dim:rgba(255,255,255,0.55);--white-faint:rgba(255,255,255,0.07);
-  --orange:#B84F00;--orange-lt:#D05A00;
-  --grey:#666;--grey-lt:#999;
-  --rule:rgba(255,255,255,0.08);--rule-lt:rgba(10,10,10,0.1);
-  --pad:clamp(20px,5vw,64px);
-  --display:'Bebas Neue',sans-serif;
-  --cursive:'Dancing Script',cursive;
-  --body:'Lexend',sans-serif;
-}
-body{background:var(--black);color:var(--white);font-family:var(--body);font-weight:300;line-height:1.65;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%}
-
-/* NAV */
-.nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);height:62px;background:rgba(10,10,10,0.95);border-bottom:1px solid var(--rule);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.nav-logo{width: 45px;         
-  height: 45px;        
-  border-radius: 100%;
-  overflow: hidden;
-  background-color:#FFFFFF;
-}
-.nav-links{display:flex;gap:clamp(16px,3vw,36px);list-style:none}
-.nav-links a{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--grey);transition:color 0.2s}
-.nav-links a:hover{color:var(--white)}
-.nav-cta{font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:8px 20px;border:1px solid var(--orange);color:var(--orange);background:transparent;cursor:pointer;transition:all 0.2s;white-space:nowrap}
-.nav-cta:hover{background:var(--orange);color:var(--white)}
-.hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
-.hamburger span{display:block;width:22px;height:1.5px;background:var(--white);transition:all 0.3s}
-.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-.hamburger.open span:nth-child(2){opacity:0}
-.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
-.mobile-nav{display:none;position:fixed;top:62px;left:0;right:0;z-index:190;background:var(--black2);border-bottom:1px solid var(--rule);padding:20px var(--pad) 28px;flex-direction:column}
-.mobile-nav.open{display:flex}
-.mobile-nav a{font-family:var(--body);font-size:13px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--grey);padding:14px 0;border-bottom:1px solid var(--rule);transition:color 0.2s}
-.mobile-nav a:last-child{border-bottom:none}
-.mobile-nav a:hover{color:var(--white)}
-
-/* HERO */
-.hero{height:100vh;height:100svh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;text-align:center;padding-top:62px}
-.hero-photo-col{position:absolute;inset:0;z-index:0}
-.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
-.hero-slide.active{opacity:1}
-.hero-slide img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:grayscale(100%) contrast(1.05);display:block}
-.hero-photo-col::after{content:'';position:absolute;inset:0;z-index:1;background:rgba(10,10,10,0.80);pointer-events:none}
-.hero-text-col{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(32px,6vw,80px) var(--pad);width:100%}
-.hero-role{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:clamp(12px,2vw,20px);display:flex;align-items:center;justify-content:center;gap:12px}
-.hero-role::before,.hero-role::after{content:'';width:24px;height:1px;background:var(--orange);flex-shrink:0}
-.hero-name{font-family:var(--display);font-size:clamp(52px,8vw,110px);line-height:1;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:clamp(12px,2vw,20px);white-space:nowrap}
-.hero-name em{color:var(--orange);font-style:normal}
-.hero-tagline{font-family:var(--body);font-size:clamp(13px,1.4vw,16px);font-weight:300;color:rgba(255,255,255,0.58);max-width:480px;line-height:1.6;margin-bottom:clamp(24px,4vw,40px)}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-.btn{font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:13px 26px;cursor:pointer;transition:all 0.2s;display:inline-block;border:none}
-.btn-fill{background:var(--orange);color:var(--white)}
-.btn-fill:hover{background:var(--orange-lt)}
-.btn-outline{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.25)}
-.btn-outline:hover{border-color:var(--white)}
-
-/* ABOUT */
-.about-split{display:grid;grid-template-columns:1fr 1fr;min-height:80vh}
-.about-img-half{position:relative;overflow:hidden}
-.about-img-half img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:grayscale(100%) contrast(1.08)}
-.about-img-half::after{content:'';position:absolute;top:0;right:0;bottom:0;width:25%;background:linear-gradient(to right,transparent,var(--black2));pointer-events:none}
-.about-text-half{background:var(--black2);display:flex;flex-direction:column;justify-content:center;padding:clamp(48px,7vw,96px) clamp(32px,5vw,64px)}
-.s-label{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
-.s-heading{font-family:var(--display);font-weight:900;font-size:clamp(28px,4vw,52px);text-transform:uppercase;line-height:1;color:var(--white);margin-bottom:clamp(16px,2.5vw,24px);letter-spacing:0.5px}
-.s-heading em{color:var(--orange);font-style:normal}
-.s-body{font-family:var(--body);font-size:clamp(13.5px,1.4vw,15px);font-weight:300;color:var(--white-dim);line-height:1.82;max-width:460px;margin-bottom:16px}
-.s-body+.s-body{margin-top:0}
-
-/* VALUES */
-.values{background:var(--white)}
-.values-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-.val-item{padding:clamp(40px,5vw,64px) clamp(28px,4vw,52px);border-right:1px solid var(--rule-lt)}
-.val-item:last-child{border-right:none}
-.val-num{font-family:var(--display);font-size:56px;color:var(--orange);line-height:1;margin-bottom:16px;letter-spacing:-1px}
-.val-title{font-family:var(--display);font-size:clamp(20px,2.5vw,28px);text-transform:uppercase;color:var(--black);margin-bottom:12px;letter-spacing:0.5px;line-height:1}
-.val-body{font-family:var(--body);font-size:14px;font-weight:300;color:rgba(10,10,10,0.58);line-height:1.7}
-
-/* WHAT I BUILD */
-.build{background:var(--black3)}
-.build-inner{max-width:1400px;margin:0 auto;padding:0 var(--pad)}
-.build-head{padding:clamp(60px,8vw,100px) 0 clamp(40px,5vw,60px);border-bottom:1px solid var(--rule)}
-.build-head-title{font-family:var(--display);font-size:clamp(36px,6vw,80px);text-transform:uppercase;line-height:1;color:var(--white);letter-spacing:0.5px}
-.build-head-title em{color:var(--orange);font-style:normal}
-.build-cards{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule)}
-.build-card{padding:clamp(36px,5vw,64px) clamp(28px,4vw,52px);background:var(--black3);position:relative;overflow:hidden;transition:background 0.25s}
-.build-card:hover{background:var(--black2)}
-.build-num{font-family:var(--display);font-size:clamp(80px,12vw,160px);color:rgba(255,255,255,0.03);position:absolute;bottom:-20px;right:-10px;line-height:1;letter-spacing:-3px;pointer-events:none}
-.build-eyebrow{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
-.build-title{font-family:var(--display);font-size:clamp(28px,4vw,52px);text-transform:uppercase;line-height:1;color:var(--white);margin-bottom:16px;letter-spacing:0.5px}
-.build-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-.build-tag{font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:5px 11px;border:1px solid var(--rule);color:var(--grey-lt)}
-.build-body{font-family:var(--body);font-size:14px;font-weight:300;color:var(--white-dim);line-height:1.75;max-width:380px;margin-bottom:28px}
-.build-link{font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--orange);display:inline-flex;align-items:center;gap:10px;transition:gap 0.2s}
-.build-card:hover .build-link{gap:18px}
-
-/* WRITING */
-.writing{background:var(--white)}
-.writing-inner{max-width:1400px;margin:0 auto;padding:0 var(--pad)}
-.writing-head{padding:clamp(60px,8vw,100px) 0 clamp(40px,5vw,60px);border-bottom:1px solid var(--rule-lt);display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.writing-head-title{font-family:var(--display);font-size:clamp(36px,6vw,80px);text-transform:uppercase;line-height:1;color:var(--black);letter-spacing:0.5px}
-.writing-head-title em{color:var(--orange);font-style:normal}
-.articles{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule-lt)}
-.article{padding:clamp(28px,4vw,44px) clamp(20px,3vw,36px);background:var(--white);border-top:3px solid transparent;transition:all 0.2s}
-.article:hover{background:#F7F3EE;border-top-color:var(--orange)}
-.article-tag{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
-.article-title{font-family:var(--display);font-size:clamp(18px,2.2vw,24px);text-transform:uppercase;color:var(--black);line-height:1.1;margin-bottom:12px;letter-spacing:0.3px}
-.article-excerpt{font-family:var(--body);font-size:13px;font-weight:300;color:rgba(10,10,10,0.55);line-height:1.7;margin-bottom:20px}
-.article-cta{font-family:var(--body);font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--black);display:inline-flex;align-items:center;gap:8px;transition:gap 0.2s,color 0.2s}
-.article:hover .article-cta{color:var(--orange);gap:14px}
-.writing-footer{padding:clamp(28px,4vw,44px) 0;border-top:1px solid var(--rule-lt);display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-
-/* COMMUNITY */
-.community{background:var(--black)}
-.community-inner{max-width:1400px;margin:0 auto;padding:clamp(60px,8vw,100px) var(--pad);display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:center}
-.community-body{font-family:var(--body);font-size:clamp(13.5px,1.4vw,15px);font-weight:300;color:var(--white-dim);line-height:1.82;max-width:460px;margin-bottom:32px}
-.channel-box{border:1px solid var(--rule);padding:clamp(24px,4vw,40px);background:var(--black2)}
-.channel-box-label{font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:4px;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
-.channel-box-name{font-family:var(--display);font-size:clamp(22px,3vw,32px);text-transform:uppercase;color:var(--white);line-height:1;margin-bottom:14px;letter-spacing:0.5px}
-.channel-box-desc{font-family:var(--body);font-size:13px;font-weight:300;color:var(--white-dim);line-height:1.7;margin-bottom:20px}
-.channel-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
-.channel-tag{font-family:var(--body);font-size:9px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid var(--rule);color:var(--grey-lt)}
-
-/* BOOKS */
-.books{background:var(--black2)}
-.books-inner{max-width:1400px;margin:0 auto;padding:clamp(60px,8vw,100px) var(--pad);display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
-.books-title{font-family:var(--display);font-size:clamp(36px,6vw,80px);text-transform:uppercase;line-height:1;color:var(--white);letter-spacing:0.5px}
-.books-title em{color:var(--orange);font-style:normal}
-.books-sub{font-family:var(--body);font-size:14px;font-weight:300;color:var(--white-dim);line-height:1.7;max-width:360px;margin-bottom:24px}
-
-/* SPEAKING */
-.speaking{background:var(--white)}
-.speaking-inner{max-width:1400px;margin:0 auto;padding:0 var(--pad)}
-.speaking-head{padding:clamp(60px,8vw,100px) 0 clamp(40px,5vw,60px);border-bottom:1px solid var(--rule-lt)}
-.speaking-head-title{font-family:var(--display);font-size:clamp(36px,6vw,80px);text-transform:uppercase;line-height:1;color:var(--black);letter-spacing:0.5px;margin-bottom:12px}
-.speaking-head-title em{color:var(--orange);font-style:normal}
-.speaking-head-sub{font-family:var(--body);font-size:14px;font-weight:300;color:rgba(10,10,10,0.5);max-width:580px;line-height:1.7}
-.speaking-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule-lt)}
-.speaking-topics-col{padding:clamp(36px,5vw,56px) clamp(28px,4vw,52px) clamp(36px,5vw,56px) 0}
-.speaking-topic-item{padding:16px 0;border-bottom:1px solid var(--rule-lt);font-family:var(--display);font-size:clamp(16px,2vw,22px);text-transform:uppercase;color:var(--black);letter-spacing:0.3px;display:flex;align-items:center;gap:14px}
-.speaking-topic-item::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
-.speaking-form-col{background:var(--black);padding:clamp(36px,5vw,56px) clamp(28px,4vw,44px)}
-.speaking-form-title{font-family:var(--display);font-size:clamp(22px,3vw,34px);text-transform:uppercase;line-height:1;color:var(--white);margin-bottom:24px;letter-spacing:0.5px}
-.f-input{width:100%;padding:14px 16px;background:var(--white-faint);border:none;border-bottom:1px solid var(--rule);color:var(--white);font-family:var(--body);font-size:14px;font-weight:300;outline:none;transition:border-color 0.2s;display:block;margin-bottom:1px}
-.f-input::placeholder{color:rgba(255,255,255,0.28)}
-.f-input:focus{border-bottom-color:var(--orange)}
-.f-textarea{width:100%;padding:14px 16px;height:90px;resize:none;background:var(--white-faint);border:none;border-bottom:1px solid var(--rule);color:var(--white);font-family:var(--body);font-size:14px;font-weight:300;outline:none;margin-bottom:1px;display:block}
-.f-textarea::placeholder{color:rgba(255,255,255,0.28)}
-.f-submit{width:100%;padding:15px;margin-top:1px;background:var(--orange);border:none;font-family:var(--body);font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--white);cursor:pointer;transition:background 0.2s}
-.f-submit:hover{background:var(--orange-lt)}
-
-/* FOOTER */
-footer{background:var(--black);border-top:1px solid var(--rule)}
-.footer-main{max-width:1400px;margin:0 auto;padding:clamp(44px,6vw,72px) var(--pad);display:grid;grid-template-columns:1fr auto;gap:40px;align-items:start}
-.footer-name{font-family:var(--cursive);font-size:26px;color:var(--white);margin-bottom:6px}
-.footer-role{font-family:var(--body);font-size:11px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--grey);margin-bottom:20px}
-.footer-socials{display:flex;gap:16px;flex-wrap:wrap}
-.footer-social{font-family:var(--body);font-size:10px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--grey);transition:color 0.2s}
-.footer-social:hover{color:var(--orange)}
-.footer-nav{display:flex;flex-direction:column;gap:10px;text-align:right}
-.footer-nav a{font-family:var(--body);font-size:12px;font-weight:300;color:var(--grey);transition:color 0.2s}
-.footer-nav a:hover{color:var(--white)}
-.footer-bottom{max-width:1400px;margin:0 auto;padding:16px var(--pad);border-top:1px solid var(--rule);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.footer-copy{font-family:var(--body);font-size:11px;font-weight:300;color:var(--grey)}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  .nav-links,.nav-cta{display:none}
-  .hamburger{display:flex}
-  .hero-name{font-size:clamp(40px,11vw,72px);white-space:nowrap}
-  .hero-tagline{font-size:13px}
-  .about-split{grid-template-columns:1fr}
-  .about-img-half{height:50vw;max-height:380px}
-  .about-img-half img{height:100%}
-  .values-inner{grid-template-columns:1fr}
-  .val-item{border-right:none;border-bottom:1px solid var(--rule-lt)}
-  .val-item:last-child{border-bottom:none}
-  .build-cards{grid-template-columns:1fr}
-  .articles{grid-template-columns:1fr}
-  .community-inner{grid-template-columns:1fr}
-  .speaking-grid{grid-template-columns:1fr}
-  .writing-head{flex-direction:column;align-items:flex-start}
-  .books-inner{flex-direction:column;gap:24px}
-  .footer-main{grid-template-columns:1fr}
-  .footer-nav{text-align:left}
-}
-@media(max-width:580px){
-  :root{--pad:20px}
-  .hero-name{font-size:clamp(36px,13vw,60px)}
-  .footer-bottom{flex-direction:column}
-}
-@media(prefers-reduced-motion:reduce){*{transition:none !important}}
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist:wght@400..700&family=GFS+Didot&family=Playfair+Display:ital,wght@1,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>(function(d){var c='js';try{if(!sessionStorage.getItem('ea-visited'))c+=' first-visit'}catch(e){}d.className=c})(document.documentElement)</script>
+<noscript><style>.curtain,.loader{display:none}[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}.split .ln>span{transform:none!important}</style></noscript>
 </head>
-<body>
-
-<!-- NAV -->
-<nav class="nav" id="nav">
-   <div class="nav-logo"><img src="assets/Tea-Logo.png" alt="Reflections W/ TEA" class="nav-logo-img" onerror="this.style.display='none'"></div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#build">Work</a></li>
-    <li><a href="#writing">Writing</a></li>
-    <li><a href="#community">Community</a></li>
-    <li><a href="#speaking">Speaking</a></li>
-  </ul>
-  <div style="display:flex;align-items:center;gap:12px">
-    <button class="nav-cta" onclick="document.getElementById('speaking').scrollIntoView({behavior:'smooth'})">Invite to Speak</button>
-    <button class="hamburger" id="ham" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+<body class="page-index">
+<a class="skip" href="#main">Skip to content</a>
+<div class="loader" aria-hidden="true">
+  <div class="loader__top"><span>The Ezra Anya</span><span>Thinker · Storyteller · Builder</span></div>
+  <div class="loader__count"><span>03</span></div>
+  <div class="loader__bot"><span>See · Think · Believe</span><span>WAT</span></div>
+  <div class="loader__bar"></div>
+</div>
+<div class="curtain" aria-hidden="true"><img src="assets/img/wordmark-light.png" alt=""></div>
+<div class="progress" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
+<header class="nav">
+  <div class="wrap">
+    <a class="nav-logo" href="index.html" aria-label="Ezra Anya, home"><img src="assets/img/wordmark-light.png" alt="theezraanya" width="160" height="34"></a>
+    <nav aria-label="Main"><ul class="nav-links"><li><a href="about.html">About</a></li><li><a href="work-with-ezra.html">Work With Ezra</a></li><li><a href="thrivetribe.html">ThriveTribe</a></li><li><a href="reflections.html">Reflections</a></li><li><a href="writing.html">Writing</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    <div class="nav-right">
+      <span class="clock" aria-label="Time in Nigeria"><b>WAT</b> <span data-time>00:00:00</span></span>
+      <a class="btn btn--orange" href="strategy-session.html">Book a session <span class="arr">→</span></a>
+      <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    </div>
   </div>
-</nav>
-
-<!-- MOBILE NAV -->
-<nav class="mobile-nav" id="mobNav">
-  <a href="#about">About</a>
-  <a href="#build">Work</a>
-  <a href="#writing">Writing</a>
-  <a href="#community">Community</a>
-  <a href="#books">Books</a>
-  <a href="#speaking">Invite to Speak</a>
-</nav>
-
+</header>
+<div class="menu dark dark--hot" id="menu">
+  <ul><li><a href="index.html">Home<span>01</span></a></li><li><a href="about.html">About<span>02</span></a></li><li><a href="work-with-ezra.html">Work With Ezra<span>03</span></a></li><li><a href="thrivetribe.html">ThriveTribe<span>04</span></a></li><li><a href="reflections.html">Reflections<span>05</span></a></li><li><a href="writing.html">Writing<span>06</span></a></li><li><a href="contact.html">Contact<span>07</span></a></li><li><a href="strategy-session.html">Strategy Session<span>08</span></a></li></ul>
+  <div class="menu-foot"><a href="mailto:message.theezraanya@gmail.com">message.theezraanya@gmail.com</a><a href="https://wa.me/2347012954115" target="_blank" rel="noopener">WhatsApp +234 701 295 4115</a></div>
+</div>
+<main id="main">
 <!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-photo-col" id="heroSlider">
-    <div class="hero-slide active"><img src="assets/heroimage.png" alt="Ezra Anya speaking"></div>
-    <div class="hero-slide"><img src="assets/slide3.png" alt="Ezra Anya"></div>
-    <div class="hero-slide"><img src="assets/aboutimage.jpg" alt="Ezra Anya"></div>
-  </div>
-  <div class="hero-text-col">
-    <div class="hero-role">Theologian · Storyteller · Builder</div>
-    <h1 class="hero-name">EZRA <em>ANYA</em></h1>
-    <p class="hero-tagline">I help people see, think and believe.</p>
-    <div class="hero-actions">
-      <a class="btn btn-fill" href="#writing">Read My Writing</a>
-      <a class="btn btn-outline" href="reflections.html" target="_blank" rel="noopener">Register for Reflections</a>
+<section class="hero hero-home dark dark--hot">
+  <figure class="hero-bg" aria-hidden="true">
+    <picture><source srcset="assets/img/hero-stage.webp" type="image/webp"><img src="assets/img/hero-stage.jpg" alt="" fetchpriority="high"></picture>
+  </figure>
+  <a class="tag-float" href="reflections.html">Reflections W/ TEA · Edition 03<small>Relationships · Sat 21 Nov · 7PM WAT →</small></a>
+  <div class="wrap">
+    <p class="eyebrow">Thinker · Storyteller · Builder</p>
+    <h1 class="h1 split split--load hero-title" aria-label="I help people see, think, believe, build and become."><span class="ln"><span>I help people</span></span><span class="ln"><span>see, think</span></span><span class="ln"><span>and <span class="flip" aria-hidden="true"><span class="on">believe.</span><span>build.</span><span>become.</span></span></span></span></h1>
+    <div class="hero-row">
+      <p class="lead" data-reveal data-delay="2">Ezra Anya is a brand, communications and AI strategist. He shapes how growing organisations are understood, helps leaders adopt AI with integrity, hosts Reflections W/ TEA every month and mentors young leaders through TheThriveTribe.</p>
+      <div class="btn-row" data-reveal data-delay="3">
+        <a class="btn btn--orange" href="work-with-ezra.html">Work with Ezra <span class="arr">→</span></a>
+        <a class="btn btn--ghost" href="reflections.html">Register for Reflections <span class="arr">→</span></a>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <span class="scroll-cue"><i></i>Scroll</span>
+      <span class="countline">3 . . 2 . . 1 . . <b>see</b> . . <b>think</b> . . <b>believe</b></span>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about-split" id="about">
-  <div class="about-img-half">
-    <img src="assets/aboutimage2.jpg" alt="Ezra Anya">
-  </div>
-  <div class="about-text-half">
-    <div class="s-label">About</div>
-    <h2 class="s-heading">THINKER.<br>STORYTELLER.<br><em>BUILDER.</em></h2>
-    <p class="s-body">Ezra speaks, tells stories, and brings things to life. Products that need a strategy. People who need structure. Perspectives that deserve to be seen.</p>
-    <p class="s-body">Beyond his professional work, He founded TheThriveTribe, a mentorship platform for young people focused on self-leadership and personal development, and He writes and speaks regularly on psychology, personal development, and philosophy. He is particularly interested in global brand communications, narrative strategy, the evolving role of AI...</p>
-  </div>
-</section>
-
-<!-- VALUES -->
-<div class="values">
-  <div class="values-inner">
-    <div class="val-item">
-      <div class="val-num">01.</div>
-      <div class="val-title">Illumination</div>
-      <p class="val-body">Make all men see. The first work is always light — giving people the clarity to perceive what was always there but never named.</p>
-    </div>
-    <div class="val-item">
-      <div class="val-num">02.</div>
-      <div class="val-title">Impact</div>
-      <p class="val-body">Make all men do. Clarity without action is decoration. Every teaching, every story, every strategy is designed to move people — not just motivate them.</p>
-    </div>
-    <div class="val-item">
-      <div class="val-num">03.</div>
-      <div class="val-title">Influence</div>
-      <p class="val-body">Make all men become. The deepest work is formation — the slow, faithful shaping of who a person is becoming, one conversation at a time.</p>
+<!-- CREDENTIALS TICKER -->
+<div class="band band--tilt" aria-label="Credentials">
+  <div class="marquee" style="--speed:46s">
+    <div class="marquee__track">
+      <span class="item">Brand Strategist</span><span class="item">Communications Strategist</span><span class="item">AI Ethics Advisor</span><span class="item">AI Workflow Architect</span><span class="item">Public Speaker</span><span class="item">Author</span><span class="item">Host, Reflections W/ TEA</span><span class="item">Founder, TheThriveTribe</span><span class="item">100+ Mentored</span><span class="item">First-Class Cybersecurity</span><span class="item">Oxford Saïd · AI and Media</span>
     </div>
   </div>
 </div>
 
-<!-- WHAT I BUILD -->
-<section class="build" id="build">
-  <div class="build-inner">
-    <div class="build-head">
-      <div class="s-label" style="color:var(--orange)">What I Build</div>
-      <div class="build-head-title">TWO ORGANISATIONS.<br><em>ONE MANDATE.</em></div>
+<!-- ABOUT INTRO -->
+<section class="section">
+  <div class="wrap">
+    <div class="grid-2">
+      <div class="frame frame--tall" data-reveal="clip">
+        <picture><source srcset="assets/img/headshot.webp" type="image/webp"><img src="assets/img/headshot.jpg" alt="Portrait of Ezra Anya in a dark suit, arms folded" loading="lazy"></picture>
+        <div class="frame-badge"><b>4×</b>Vice Chancellor's Award<br>Academic and Leadership Excellence</div>
+      </div>
+      <div>
+        <p class="eyebrow" data-reveal>Who is Ezra Anya?</p>
+        <h2 class="h2" data-reveal data-delay="1">A clear voice for <em>people</em> and the brands they build.</h2>
+        <p class="body" data-reveal data-delay="2" style="margin-top:28px">Ezra leads brand strategy and messaging for a pan-African consulting firm and a digital telecommunications company. Founders, institutions and personal brands come to him for counsel on corporate communications, media and PR, and on bringing AI into their work responsibly.</p>
+        <p class="body" data-reveal data-delay="2">Outside the boardroom he teaches. He writes on theology, psychology and personal growth, hosts a monthly gathering for serious thinkers and has walked more than a hundred young people through his mentorship programme.</p>
+        <div class="btn-row" data-reveal data-delay="3" style="margin-top:34px;gap:28px">
+          <a class="link" href="about.html">More about Ezra <span class="arr">→</span></a>
+          <a class="link" href="work-with-ezra.html#press-kit">Press kit <span class="arr">→</span></a>
+        </div>
+      </div>
     </div>
-    <div class="build-cards">
-      <div class="build-card">
-        <div class="build-eyebrow">Ministry · Intercontinental</div>
-        <div class="build-title">PHOTIZO GLOBAL</div>
-        <div class="build-tags">
-          <span class="build-tag">Christology</span>
-          <span class="build-tag">Hermeneutics</span>
-          <span class="build-tag">Apologetics</span>
-        </div>
-        <p class="build-body">An apostolic ministry built on the conviction that the Church must invest in the life of the mind. Anchored in Christology, Hermeneutics, and Apologetics — Photizo brings light through the rigorous, faithful handling of Scripture.</p>
-        <div class="build-num">01</div>
+    <div class="stats" style="margin-top:clamp(56px,8vw,112px)" data-reveal>
+      <div class="stat"><div class="stat__n"><span data-count="100">0</span><sup>+</sup></div><div class="stat__l">People mentored</div></div>
+      <div class="stat"><div class="stat__n"><span data-count="3" data-pad="2">00</span></div><div class="stat__l">Reflections editions</div></div>
+      <div class="stat"><div class="stat__n"><span data-count="4">0</span><sup>×</sup></div><div class="stat__l">Vice Chancellor's Award</div></div>
+      <div class="stat"><div class="stat__n">1<sup>st</sup></div><div class="stat__l">Class honours, B.Tech Cybersecurity</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="section dark">
+  <div class="wrap">
+    <div class="why-head"><p class="eyebrow">Why work with Ezra</p><span class="quote-mark" aria-hidden="true">“</span></div>
+    <p class="quote" data-words>Clarity without action is decoration. Every teaching, story and strategy I build is designed to move people.</p><span class="quote-src">Ezra Anya</span>
+    <div class="btn-row" style="margin-top:48px"><a class="btn btn--orange" href="work-with-ezra.html">Work with Ezra <span class="arr">→</span></a><a class="btn btn--ghost" href="about.html">How Ezra works <span class="arr">→</span></a></div>
+  </div>
+</section>
+
+<!-- WAYS TO WORK -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow" data-reveal>Ways to work together</p>
+        <h2 class="h2" data-reveal data-delay="1">Pick the room<br>you need <em>Ezra</em> in.</h2>
       </div>
-      <div class="build-card">
-        <div class="build-eyebrow">Monthly Teaching · Online</div>
-        <div class="build-title">REFLECTIONS W/ TEA</div>
-        <div class="build-tags">
-          <span class="build-tag">Philosophy</span>
-          <span class="build-tag">Psychology</span>
-          <span class="build-tag">Deep Thinking</span>
-        </div>
-        <p class="build-body">A monthly online gathering for serious thinkers. One theme. One hour. One conversation at the intersection of faith, growth, and the deep questions need to answer</p>
-        <a class="build-link" href="reflections.html" target="_blank" rel="noopener">Visit Reflections W/ TEA →</a>
-        <div class="build-num">02</div>
+      <p class="body" data-reveal data-delay="2">Each engagement starts with a conversation about what you need. You get a written proposal with a fixed fee before any work begins.</p>
+    </div>
+    <div class="offers offers--6">
+      <a class="offer" href="strategy-session.html" data-reveal data-delay="1"><span class="offer__n">01</span><span class="offer__go" aria-hidden="true">↗</span><span class="offer__big" aria-hidden="true">01</span><h3 class="h3 offer__t">Strategy Session</h3><p class="offer__d">One focused session on a brand, media, communications or AI question. Book it one to one, as a group or as the start of a consulting engagement.</p></a>
+      <a class="offer" href="work-with-ezra.html#ai" data-reveal data-delay="2"><span class="offer__n">02</span><span class="offer__go" aria-hidden="true">↗</span><span class="offer__big" aria-hidden="true">02</span><h3 class="h3 offer__t">AI Ethics and Workflow</h3><p class="offer__d">Bring AI into your organisation with clear rules. Responsible-use policy, workflow design and team training, built around human judgment.</p></a>
+      <a class="offer" href="work-with-ezra.html#project" data-reveal data-delay="3"><span class="offer__n">03</span><span class="offer__go" aria-hidden="true">↗</span><span class="offer__big" aria-hidden="true">03</span><h3 class="h3 offer__t">Brand Projects</h3><p class="offer__d">A fixed scope with a clear finish line. Brand strategy, a campaign or a communications plan, delivered with a handover.</p></a>
+      <a class="offer" href="work-with-ezra.html#retainer" data-reveal data-delay="1"><span class="offer__n">04</span><span class="offer__go" aria-hidden="true">↗</span><span class="offer__big" aria-hidden="true">04</span><h3 class="h3 offer__t">Monthly Retainer</h3><p class="offer__d">A senior communications and AI partner on call, with content reviews and a monthly look at what worked.</p></a>
+      <a class="offer" href="work-with-ezra.html#speaking" data-reveal data-delay="2"><span class="offer__n">05</span><span class="offer__go" aria-hidden="true">↗</span><span class="offer__big" aria-hidden="true">05</span><h3 class="h3 offer__t">Speaking and Training</h3><p class="offer__d">Keynotes for your event, or training for your team on communications, brand and responsible AI.</p></a>
+      <a class="offer" href="thrivetribe.html" data-reveal data-delay="3"><span class="offer__n">06</span><span class="offer__go" aria-hidden="true">↗</span><span class="offer__big" aria-hidden="true">06</span><h3 class="h3 offer__t">TheThriveTribe</h3><p class="offer__d">A 90-day mentorship sprint for young people who want to lead themselves well. Three months, one cohort, ₦250,000.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- ON STAGE -->
+<section class="section dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">On stage</p>
+        <h2 class="h2">A teaching,<br><em>every time.</em></h2>
       </div>
+      <div>
+        <p class="body">Ezra speaks at conferences, company events, universities and leadership forums. Each talk is built on research and ends with something the room can do on Monday.</p>
+        <a class="link" href="work-with-ezra.html#speaking" style="margin-top:22px">Invite Ezra to speak <span class="arr">→</span></a>
+      </div>
+    </div>
+    <ul class="topics">
+      <li class="topic" data-img="assets/img/hero-stage.jpg"><span class="topic__n">01</span><span class="topic__t">AI Ethics and Responsible Use</span><span class="topic__k">Keynote · Panel</span></li>
+      <li class="topic" data-img="assets/img/tent-session.jpg"><span class="topic__n">02</span><span class="topic__t">AI and the Future of Work</span><span class="topic__k">Talk · Workshop</span></li>
+      <li class="topic" data-img="assets/img/field-talk.jpg"><span class="topic__n">03</span><span class="topic__t">Brand, Narrative and Influence</span><span class="topic__k">Keynote · Masterclass</span></li>
+      <li class="topic" data-img="assets/img/teaching-outdoor.jpg"><span class="topic__n">04</span><span class="topic__t">Leadership and Personal Formation</span><span class="topic__k">Keynote · Workshop</span></li>
+      <li class="topic" data-img="assets/img/crowd.jpg"><span class="topic__n">05</span><span class="topic__t">Purpose and Identity</span><span class="topic__k">Talk · Teaching</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- TRUSTED BY -->
+<section class="section section--tight">
+  <div class="wrap"><p class="eyebrow" data-reveal>Trusted by</p></div>
+  <div class="marquee sectors" style="--speed:52s">
+    <div class="marquee__track"><span class="item">Consulting Firms</span><span class="item">Digital Telecoms</span><span class="item">NGO Outreaches</span><span class="item">Churches</span><span class="item">Schools</span><span class="item">Startup Banks</span></div>
+  </div>
+</section>
+
+<!-- FLAGSHIP: THRIVETRIBE -->
+<section class="section dark dark--hot">
+  <div class="wrap">
+    <div class="feature">
+      <div class="frame frame--bw" data-reveal="clip">
+        <picture><source srcset="assets/img/teaching-outdoor.webp" type="image/webp"><img src="assets/img/teaching-outdoor.jpg" alt="Ezra teaching a group outdoors with a laptop in hand" loading="lazy"></picture>
+      </div>
+      <div class="feature__body">
+        <span class="pill pill--hot" style="align-self:flex-start">Flagship programme</span>
+        <h2 class="h2" style="margin-top:22px">The<br>Thrive<em>Tribe</em></h2>
+        <p class="body" style="margin-top:22px">A three-month mentorship for young people who want to lead themselves before they lead anyone else. Ninety days of honest work on how you think, how you spend your time and where you are going.</p>
+        <div class="price"><b>₦250,000</b><span>90-day sprint · 3 months</span></div>
+        <div style="margin-bottom:28px"><span class="pill">Mentorship</span><span class="pill">Self-leadership</span><span class="pill">Cohort</span><span class="pill">100+ mentored</span></div>
+        <div class="btn-row"><a class="btn btn--orange" href="thrivetribe.html#register">Register now <span class="arr">→</span></a><a class="btn btn--ghost" href="thrivetribe.html">See the programme <span class="arr">→</span></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFLECTIONS STRIP -->
+<section class="section section--tight">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>Reflections W/ TEA · Edition 03 · This month</p>
+    <div class="strip" data-reveal>
+      <div class="strip__date">21<small>Nov · Sat · 7PM WAT</small></div>
+      <div>
+        <h3 class="h3">Relationships</h3>
+        <p class="body" style="margin-top:10px">The people question. Who you are with and what it costs. One hour, one conversation, online.</p>
+        <div class="countdown countdown--sm" data-countdown="2026-11-21T19:00:00+01:00" style="margin-top:18px">
+          <div class="cd"><b data-d>00</b><span>Days</span></div><div class="cd"><b data-h>00</b><span>Hrs</span></div><div class="cd"><b data-m>00</b><span>Min</span></div><div class="cd"><b data-s>00</b><span>Sec</span></div>
+        </div>
+      </div>
+      <a class="btn btn--ink" href="reflections.html#register">Save my seat <span class="arr">→</span></a>
     </div>
   </div>
 </section>
 
 <!-- WRITING -->
-<section class="writing" id="writing">
-  <div class="writing-inner">
-    <div class="writing-head">
-      <div class="writing-head-title">WRITING &<br><em>ESSAYS</em></div>
-      <a class="btn" style="background:var(--black);color:var(--white);border:1px solid var(--black)" href="https://substack.com/@theezraanya" target="_blank" rel="noopener">All Essays on Substack</a>
+<section class="section paper-2">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow" data-reveal>From the journal</p>
+        <h2 class="h2" data-reveal data-delay="1">Latest <em>essays</em></h2>
+      </div>
+      <a class="btn btn--ghost" href="writing.html" data-reveal data-delay="2">All writing <span class="arr">→</span></a>
     </div>
-    <div class="articles">
-      <div class="article">
-        <div class="article-tag">Faith &amp; Formation</div>
-        <div class="article-title">LESSONS OF A RECOVERING PERFECTIONIST</div>
-        <p class="article-excerpt">The standard we hold ourselves to is rarely our own. This is the story of embracing uncertainty, and learning to begin again.</p>
-        <a class="article-cta" href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Read on Substack →</a>
-      </div>
-      <div class="article">
-        <div class="article-tag">Faith &amp; Formation</div>
-        <div class="article-title">EVERYTHING IS LEARNABLE</div>
-        <p class="article-excerpt">Most people assume that some things are simply beyond them. They are wrong. The limitation is almost always a belief, not a fact.</p>
-        <a class="article-cta" href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Read on Substack →</a>
-      </div>
-      <div class="article">
-        <div class="article-tag">Theology</div>
-        <div class="article-title">CONSIDER JESUS</div>
-        <p class="article-excerpt">Who is Jesus? Are we still in touch with the Jesus of the Bible or have we created one through our biases, prejudices, and assumptions?</p>
-        <a class="article-cta" href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Read on Substack →</a>
-      </div>
-    </div>
-    <div class="writing-footer">
-      <a class="btn" style="background:var(--black);color:var(--white);border:1px solid var(--black)" href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Subscribe on Substack</a>
-      <span style="font-family:var(--body);font-size:13px;font-weight:300;color:rgba(10,10,10,0.45);font-style:italic">Published on Substack — free to read.</span>
+    <div class="posts" data-posts="3">
+      <div class="post"><div class="post__img skel"></div><div class="skel" style="height:22px;width:70%"></div><div class="skel" style="height:60px"></div></div>
+      <div class="post"><div class="post__img skel"></div><div class="skel" style="height:22px;width:70%"></div><div class="skel" style="height:60px"></div></div>
+      <div class="post"><div class="post__img skel"></div><div class="skel" style="height:22px;width:70%"></div><div class="skel" style="height:60px"></div></div>
     </div>
   </div>
 </section>
 
-<!-- COMMUNITY -->
-<section class="community" id="community">
-  <div class="community-inner">
-    <div>
-      <div class="s-label">Community</div>
-      <h2 class="s-heading">JOIN THE<br><em>CONVERSATION.</em></h2>
-      <p class="community-body">This online journal is where he shares his thoughts and musings. Here, you'll find perspectives on theology, psychology, and personal development, all sharpened by the Word. The goal is to provide thought-provoking content that inspires you to become a better version of yourself. And, as a bonus, you'll also expand your vocabulary!🤗</p>
-      <a class="btn btn-fill" href="https://whatsapp.com/channel/0029VatWctcHrDZm8Kuch52O" target="_blank" rel="noopener">Join the WhatsApp Channel</a>
+<!-- GALLERY -->
+<section class="section dark dark--quiet">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="eyebrow">In frame</p><h2 class="h2">Rooms,<br>fields and <em>stages</em></h2></div>
+      <p class="label">Drag to explore →</p>
     </div>
-    <div class="listen-box">
-      <div class="channel-box-label">Listen to Ezra</div>
-      <div class="channel-box-name">ON YOUTUBE &amp; SPOTIFY</div>
-      <p class="channel-box-desc">Teachings, conversations, and reflections — in audio and video. Subscribe and listen wherever you are.</p>
-      <div class="listen-links">
-        <a class="listen-link" href="https://youtube.com/@theezraanya" target="_blank" rel="noopener">
-          <div class="listen-link-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.55 3.5 12 3.5 12 3.5s-7.55 0-9.38.55A3.02 3.02 0 0 0 .5 6.19C0 8.04 0 12 0 12s0 3.96.5 5.81a3.02 3.02 0 0 0 2.12 2.14C4.45 20.5 12 20.5 12 20.5s7.55 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14C24 15.96 24 12 24 12s0-3.96-.5-5.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
-          </div>
-          <div>
-            <div class="listen-link-label">YouTube</div>
-            <div class="listen-link-name">@theezraanya</div>
-          </div>
-          <span class="listen-arrow">→</span>
-        </a>
-        <a class="listen-link" href="https://open.spotify.com/show/theezraanya" target="_blank" rel="noopener">
-          <div class="listen-link-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-          </div>
-          <div>
-            <div class="listen-link-label">Spotify Podcast</div>
-            <div class="listen-link-name">The Ezra Anya</div>
-          </div>
-          <span class="listen-arrow">→</span>
-        </a>
-      </div>
+  </div>
+  <div class="gallery" aria-label="Photo gallery">
+    <figure><img src="assets/img/hero-stage.webp" alt="Ezra speaking on stage with a microphone" loading="lazy" width="2000" height="1116"><figcaption>On stage</figcaption></figure>
+    <figure><img src="assets/img/tent-session.webp" alt="Ezra teaching an evening session under a tent" loading="lazy" width="1280" height="720"><figcaption>Evening session</figcaption></figure>
+    <figure><img src="assets/img/headshot.webp" alt="Portrait of Ezra Anya" loading="lazy" width="992" height="1072"><figcaption>Portrait</figcaption></figure>
+    <figure><img src="assets/img/field-talk.jpg" alt="Ezra speaking to a seated group in a field" loading="lazy" width="1400" height="788"><figcaption>Field talk</figcaption></figure>
+    <figure><img src="assets/img/crowd.jpg" alt="A large seated audience listening to a speaker" loading="lazy" width="1500" height="837"><figcaption>Outreach</figcaption></figure>
+    <figure><img src="assets/img/teaching-outdoor.webp" alt="Ezra teaching outdoors with a laptop" loading="lazy" width="1600" height="1280"><figcaption>Mentorship</figcaption></figure>
+  </div>
+</section>
+
+<!-- CLOSING CTA -->
+<section class="section cta-big">
+  <div class="wrap">
+    <p class="eyebrow" data-reveal style="justify-content:center">Tell me what you are working on</p>
+    <h2 class="h1 split"><span class="ln"><span>Start a</span></span><span class="ln"><span><em>conversation.</em></span></span></h2>
+    <div class="btn-row" data-reveal data-delay="2">
+      <a class="btn btn--ink" href="contact.html">Send a message <span class="arr">→</span></a>
+      <a class="btn btn--ghost" href="strategy-session.html">Book a strategy session <span class="arr">→</span></a>
     </div>
   </div>
 </section>
 
-<!-- BOOKS -->
-<section class="books" id="books">
-  <div class="books-inner">
-    <div class="books-title">BOOKS &<br><em>RESOURCES</em></div>
-    <div>
-      <p class="books-sub">Explicated thoughts that go deeper than a conversation allows. Frameworks for thinking, for reflecting, and for living the life you were assigned.</p>
-      <a class="btn btn-fill" href="https://selar.com/m/ezra-anya" target="_blank" rel="noopener">Browse All Books on Selar</a>
-    </div>
-  </div>
-</section>
-
-<!-- SPEAKING -->
-<section class="speaking" id="speaking">
-  <div class="speaking-inner">
-    <div class="speaking-head">
-      <div class="speaking-head-title">INVITE EZRA<br>TO <em>SPEAK.</em></div>
-      <p class="speaking-head-sub">Not pop motivation. A teaching — influenced by learning, informed by research, inspired to make you see, think and believe.</p>
-    </div>
-    <div class="speaking-grid">
-      <div class="speaking-topics-col">
-        <div class="speaking-topic-item">Leadership and Personal Formation</div>
-        <div class="speaking-topic-item">AI and the Future of Work</div>
-        <div class="speaking-topic-item">Purpose and Identity</div>
-        <div class="speaking-topic-item">Branding and Strategy</div>
-        <div class="speaking-topic-item">Faith and Apologetics</div>
+</main>
+<footer class="footer dark">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/img/wordmark-light.png" alt="theezraanya" width="200" height="44" loading="lazy">
+        <p>Thinker, storyteller and builder. Helping people see, think and believe.</p>
+        <div class="socials"><a href="https://theezraanya.substack.com" target="_blank" rel="noopener" aria-label="Substack"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h18v2.7H3zm0 5.1h18v2.7H3zM3 13.2h18V21l-9-5-9 5z"/></svg></a><a href="https://instagram.com/theezraanya" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="https://linkedin.com/in/theezraanya" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6V21h-4z"/></svg></a><a href="https://youtube.com/@theezraanya" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.75 15.5v-7l6.25 3.5z"/></svg></a><a href="https://facebook.com/theezraanya" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V6.6c0-.9.6-1.1 1-1.1h2.6V1.6L14 1.5c-4 0-4.9 3-4.9 4.9v2.1H6.8v4h2.3V22.5H14V12.5h3.3l.4-4z"/></svg></a><a href="https://whatsapp.com/channel/0029VatWctcHrDZm8Kuch52O" target="_blank" rel="noopener" aria-label="WhatsApp Channel"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3z"/></svg></a></div>
       </div>
-      <div class="speaking-form-col">
-        <div class="speaking-form-title">TELL ME ABOUT YOUR EVENT</div>
-        <form onsubmit="handleSpeak(event)">
-          <input class="f-input" type="text" placeholder="Your name" required>
-          <input class="f-input" type="email" placeholder="Email address" required>
-          <input class="f-input" type="text" placeholder="Organisation or event name">
-          <input class="f-input" type="text" placeholder="Event type">
-          <textarea class="f-textarea" placeholder="Brief description of your event and what you need"></textarea>
-          <button class="f-submit" type="submit" id="speakBtn">SEND ENQUIRY</button>
-        </form>
+      <div>
+        <h4>Explore</h4>
+        <ul><li><a href="about.html">About</a></li><li><a href="work-with-ezra.html">Work With Ezra</a></li><li><a href="work-with-ezra.html#speaking">Speaking</a></li><li><a href="work-with-ezra.html#press-kit">Press Kit</a></li><li><a href="writing.html">Writing</a></li></ul>
+      </div>
+      <div>
+        <h4>Programmes</h4>
+        <ul><li><a href="strategy-session.html">Strategy Session</a></li><li><a href="thrivetribe.html">TheThriveTribe</a></li><li><a href="reflections.html">Reflections W/ TEA</a></li><li><a href="https://selar.com/m/ezra-anya" target="_blank" rel="noopener">Books on Selar</a></li><li><a href="contact.html">Contact</a></li></ul>
+      </div>
+      <div>
+        <h4>The journal</h4>
+        <p style="color:var(--on-dark-2);font-size:15px">Essays on theology, psychology and personal growth. Free on Substack.</p>
+        <form class="sub-form" data-substack><label class="sr-only" for="sub-email">Email address</label><input id="sub-email" type="email" placeholder="Your email" required autocomplete="email"><button type="submit">Subscribe →</button></form>
+        <ul style="margin-top:26px"><li><a href="mailto:message.theezraanya@gmail.com">message.theezraanya@gmail.com</a></li></ul>
       </div>
     </div>
   </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-main">
-    <div>
-      <div class="footer-name">Theezraanya</div>
-      <div class="footer-role">Theologian · Storyteller · Builder</div>
-      <div class="footer-socials">
-        <a class="footer-social" href="https://substack.com/@theezraanya" target="_blank" rel="noopener">Substack</a>
-        <a class="footer-social" href="https://instagram.com/theezraanya" target="_blank" rel="noopener">Instagram</a>
-        <a class="footer-social" href="https://facebook.com/theezraanya" target="_blank" rel="noopener">Facebook</a>
-        <a class="footer-social" href="https://linkedin.com/in/theezraanya" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="footer-social" href="https://youtube.com/@theezraanya" target="_blank" rel="noopener">YouTube</a>
-        <a class="footer-social" href="https://whatsapp.com/channel/0029VatWctcHrDZm8Kuch52O" target="_blank" rel="noopener">WhatsApp</a>
-        <a class="footer-social" href="https://selar.com/m/ezra-anya" target="_blank" rel="noopener">Selar</a>
-      </div>
-    </div>
-    <nav class="footer-nav">
-      <a href="#about">About</a>
-      <a href="#build">Work</a>
-      <a href="#writing">Writing</a>
-      <a href="#community">Community</a>
-      <a href="#books">Books</a>
-      <a href="#speaking">Speaking</a>
-      <a href="reflections.html" target="_blank">Reflections W/ TEA</a>
-    </nav>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 Ezra Anya. All rights reserved.</span>
-    <span class="footer-copy">theezraanya.com</span>
-  </div>
+  <div class="footer-giant" aria-hidden="true">Ezra Anya</div>
+  <div class="footer-bottom"><div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><span>© <span data-year>2026</span> Ezra Anya. All rights reserved.</span><span>theezraanya.com</span><a class="to-top" href="#main">Back to top ↑</a></div></div>
 </footer>
-
-<script>
-const navEl=document.getElementById('nav');
-window.addEventListener('scroll',()=>{navEl.style.background=window.scrollY>60?'rgba(10,10,10,0.99)':'rgba(10,10,10,0.95)';},{passive:true});
-const ham=document.getElementById('ham'),mob=document.getElementById('mobNav');
-ham.addEventListener('click',()=>{const o=mob.classList.toggle('open');ham.classList.toggle('open',o);ham.setAttribute('aria-expanded',o);});
-mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mob.classList.remove('open');ham.classList.remove('open');ham.setAttribute('aria-expanded','false');}));
-document.addEventListener('click',e=>{if(!navEl.contains(e.target)&&!mob.contains(e.target)){mob.classList.remove('open');ham.classList.remove('open');ham.setAttribute('aria-expanded','false');}});
-/* HERO SLIDESHOW */
-(function(){
-  const slides=document.querySelectorAll('.hero-slide');
-  if(!slides.length)return;
-  let cur=0;
-  setInterval(()=>{
-    slides[cur].classList.remove('active');
-    cur=(cur+1)%slides.length;
-    slides[cur].classList.add('active');
-  },4000);
-})();
-
-function handleSpeak(e){e.preventDefault();const b=document.getElementById('speakBtn');b.textContent='ENQUIRY SENT ✓';b.style.background='#2E7D32';b.disabled=true;}
-</script>
+<div class="hover-img" aria-hidden="true"><img src="" alt=""></div>
+<script src="js/main.js" defer></script>
 </body>
 </html>
