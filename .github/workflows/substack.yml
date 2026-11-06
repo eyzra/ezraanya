@@ -4,9 +4,17 @@ on:
   schedule:
     - cron: '17 */6 * * *'   # every six hours
   workflow_dispatch:          # run it by hand from the Actions tab
+  push:
+    paths:
+      - 'scripts/fetch-substack.mjs'
+      - '.github/workflows/substack.yml'
 
 permissions:
   contents: write
+
+concurrency:
+  group: substack-sync
+  cancel-in-progress: true
 
 jobs:
   sync:
@@ -16,10 +24,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: node scripts/fetch-substack.mjs
+      - name: Fetch posts
+        run: node scripts/fetch-substack.mjs
       - name: Commit if posts changed
         run: |
           git config user.name "substack-sync"
-          git config user.email "actions@users.noreply.github.com"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/posts.json
-          git diff --cached --quiet || (git commit -m "Update Substack posts" && git push)
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+          else
+            git commit -m "Update Substack posts"
+            git pull --rebase
+            git push
+          fi

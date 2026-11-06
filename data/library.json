@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "slug": "the-15-minute-brand-audit",
+      "title": "The 15-Minute Brand Audit",
+      "type": "Brand strategy guide",
+      "summary": "Five checkpoints Ezra uses to see whether a brand communicates its value: positioning, audience, messaging, differentiation and calls to action. Each one ends with a quick test you can run today.",
+      "file": "library/the-15-minute-brand-audit.pdf",
+      "cover": "library/the-15-minute-brand-audit.jpg",
+      "pages": 7
+    },
+    {
+      "slug": "three-questions-for-content-marketing",
+      "title": "Three Questions for Content Marketing",
+      "type": "Content strategy guide",
+      "summary": "Before you create content for a business, get clear on three things: the business outcome, the exact audience and the value of the offer. Those answers shape the message, the platforms and how success is measured.",
+      "file": "library/three-questions-for-content-marketing.pdf",
+      "cover": "library/three-questions-for-content-marketing.jpg",
+      "pages": 8
+    },
+    {
+      "slug": "nobody-trusts-what-they-cant-see",
+      "title": "Nobody Trusts What They Can't See",
+      "type": "Visibility guide",
+      "summary": "Trust grows through consistent visibility. Why people believe the expert they have watched prove it, post after post, and why your value has to be seen before it can be trusted.",
+      "file": "library/nobody-trusts-what-they-cant-see.pdf",
+      "cover": "library/nobody-trusts-what-they-cant-see.jpg",
+      "pages": 7
+    }
+  ]
+}

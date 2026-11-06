@@ -8,39 +8,100 @@ Multipage portfolio for Ezra Anya. Plain HTML, CSS and JavaScript with no build 
 |---|---|
 | `index.html` | Home |
 | `about.html` | About |
-| `work-with-ezra.html` | Offers, Speaking (`#speaking`), Press Kit (`#press-kit`), FAQ |
-| `strategy-session.html` | Strategy Session: 1:1, group and consulting, with booking form |
+| `work-with-ezra.html` | Overview: Clarity Conversation, Growth Advisory and the specialist services |
+| `advisory.html` | Growth Advisory: Strategy, Structure and Synergy, plus the five practice areas |
+| `clarity.html` | The Clarity Conversation: discovery form first, then the Calendly booking calendar |
+| `strategy.html` | Strategy (₦20,000) |
+| `structure.html` | Structure (₦100,000 a month or ₦250,000 for three months) |
+| `synergy.html` | Synergy (from ₦2,000,000, minimum six months) |
+| `ai-advisory.html` | AI Ethics and Workflow |
+| `speaking.html` | Speaking and Training, with the event enquiry form |
+| `press-kit.html` | Press Kit: bios, facts, real photos and logos |
 | `thrivetribe.html` | TheThriveTribe mentorship and registration |
-| `reflections.html` | Reflections W/ TEA, Edition 04: Relationships |
+| `reflections.html` | Reflections W/ TEA |
 | `writing.html` | Substack essays, YouTube and Spotify, books |
+| `essay.html` | Reads a full Substack essay on the site |
+| `reader.html` | Reads a guide PDF page by page in the browser |
+| `library.html` | Full list of guides (the same guides also show on the Writing page under Guides) |
 | `contact.html` | Contact form and details |
+| `strategy-session.html`, `retainer.html`, `brand-projects.html` | Retired pages that forward visitors to Strategy and Synergy |
 | `404.html` | Not-found page |
 
 Shared files live in `css/style.css` and `js/main.js`. Every page loads them, so a change there updates the whole site.
 
-## Deploy on GitHub Pages
+## Booking and the discovery form
 
-1. Upload everything in this folder to the root of your repository, including the hidden `.github` folder and the `.nojekyll` file.
-2. In the repository, go to **Settings → Pages**. Set the source to **Deploy from a branch** and pick `main` and `/ (root)`.
-3. The `CNAME` file holds `theezraanya.com`. Keep it if the domain already points to GitHub Pages. If you deploy to `username.github.io` instead, delete it.
+Every "Book a session" button leads to `clarity.html`. Visitors answer the 14-question discovery form in six short steps. Answers save on their device as they type, so a closed tab loses nothing. On submit:
 
-## Forms (one-time activation)
+1. The answers go to message.theezraanya@gmail.com as a numbered table, with the visitor's name in the subject line and their email set as the reply-to address.
+2. The Calendly calendar (`https://calendly.com/ezraanya/talk-w-tea`) opens on the same page with the visitor's name and email already filled in.
 
-All forms send to **message.theezraanya@gmail.com** through FormSubmit. That service works on GitHub Pages and needs no account or server.
+If the email step ever fails, the visitor still gets the calendar plus a link that opens their email app with every answer filled in, so nothing is lost.
 
-- The **first** time anyone submits a form, FormSubmit emails an activation link to that inbox. Click it once and every form on the site starts delivering.
-- Every submission arrives as a tidy table email with the page name and enquiry type in the subject line.
-- If FormSubmit is ever down, the form shows a link that opens the visitor's email app with the message already filled in.
+To change the Calendly link, edit `CALENDLY` in `build` or search the HTML files for `calendly.com/ezraanya/talk-w-tea`. Rename the Calendly event to "The Clarity Conversation" and set it to 30 to 45 minutes so the booking page matches the site.
 
-To change the receiving address, edit `EMAIL` near the top of `js/main.js`.
+## Forms (one-time activation, please do this first)
+
+The contact, speaking, ThriveTribe and Reflections forms send to **message.theezraanya@gmail.com** through FormSubmit. It works on GitHub Pages with no account.
+
+FormSubmit holds every form until the inbox owner confirms it once:
+
+1. Open the live site and send a test message through the contact form.
+2. In the message.theezraanya@gmail.com inbox, look for an email from FormSubmit titled "Action Required: Activate FormSubmit". Check Spam and Promotions too.
+3. Click **Activate Form**. From then on, every form on the site delivers to that inbox.
+
+Until that click, visitors see a note that the form is waiting for activation and a link that opens their email app with the message already filled in.
+
+To change the receiving address, edit `EMAIL` near the top of `js/main.js`, then activate again from the new inbox.
 
 ## Substack posts
 
-The Writing page and the home page show the latest essays from `theezraanya.substack.com`. The site gets them in this order:
+The Writing page and the home page show the latest essays from `theezraanya.substack.com`. The site tries these in order:
 
-1. `data/posts.json`. A GitHub Action (`.github/workflows/substack.yml`) refreshes this file every six hours. To run it straight away, open the **Actions** tab, choose **Sync Substack posts** and click **Run workflow**. If the Action can't push, go to **Settings → Actions → General → Workflow permissions** and choose **Read and write permissions**.
-2. If that file is empty, the browser asks rss2json.com for the feed directly.
-3. If both fail, three featured essays show, each linking to Substack.
+1. `data/posts.json`, refreshed every six hours by the GitHub Action in `.github/workflows/substack.yml`.
+2. rss2json.com, straight from the visitor's browser.
+3. Two public feed relays (allorigins and corsproxy), also from the browser.
+4. Three featured essays that link to Substack, if everything else fails.
+
+The Action tries Substack's feed, then Substack's archive API, then rss2json. Substack sometimes blocks GitHub's servers, so the Action no longer fails when that happens. It logs which source it tried and keeps the last good list.
+
+To run it now, open the **Actions** tab, choose **Sync Substack posts**, then **Run workflow**. If the log says it could not push, go to **Settings → Actions → General → Workflow permissions**, choose **Read and write permissions** and save.
+
+## Reading essays on the site
+
+Essay cards on the home and Writing pages open `essay.html`, which shows the full essay in a clean reading layout with a subscribe box at the end. The text comes from the same Substack sources as the cards, and the GitHub Action stores the full text of each post in `data/posts.json`. Substack widgets and scripts are stripped before display. If a post has only a teaser (a paid post, for example), the page shows the teaser and a button to finish reading on Substack.
+
+## AI image note
+
+The footer on every page says some photographs are AI-assisted renderings, and that press kit photos are unaltered. When real event photos replace the AI ones, delete the note from `build` or from each page's footer, and keep the press kit limited to real photographs.
+
+## Guides: adding a PDF
+
+Guides show on the Writing page (`writing.html#guides`) and on `library.html`. Carousel PDFs exported from design tools are often huge, so compress them before uploading. GitHub refuses files over 100MB, and visitors on mobile data will not wait for them. The three current guides were reduced from about 99MB to 1 to 2MB each with no visible loss.
+
+## Library: adding a playbook
+
+1. Put the PDF in the `library/` folder, for example `library/ai-policy-playbook.pdf`.
+2. Optional: add a cover image, for example `library/ai-policy-playbook.jpg`, at 3:4.
+3. Add an entry to `data/library.json`:
+
+```json
+{
+  "items": [
+    {
+      "slug": "ai-policy-playbook",
+      "title": "The AI Policy Playbook",
+      "type": "Playbook",
+      "summary": "A step-by-step guide to writing an AI responsible-use policy your team will follow.",
+      "file": "library/ai-policy-playbook.pdf",
+      "cover": "library/ai-policy-playbook.jpg",
+      "pages": 18
+    }
+  ]
+}
+```
+
+The guide then appears on the Writing page and the library page, with **Read online** and **Download PDF** buttons. Read online opens `reader.html`, which shows every page in the browser on phones and laptops.
 
 ## Updating Reflections each month
 
@@ -55,7 +116,7 @@ In `reflections.html`:
 
 - Headlines use **Archivo** at its widest setting (`wdth 125`). That gives the wide block grotesk look, because Geist has no wide cut.
 - Labels, navigation and buttons use **Geist**.
-- Body text uses **Didot**. Macs show the system Didot, and every other device loads GFS Didot from Google Fonts.
-- The italic accent words inside headlines use Didot italic on Macs and Playfair Display italic everywhere else, because GFS Didot has no italic.
+- Body text uses **Lora**.
+- The italic accent words inside headlines use **Times New Roman** italic. Phones and computers without Times New Roman get **Tinos** from Google Fonts, which has the same letter widths.
 
 All three load from Google Fonts. To set headlines in Geist, change `--display` at the top of `css/style.css`.

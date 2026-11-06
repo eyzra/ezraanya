@@ -18,7 +18,7 @@
 <link rel="apple-touch-icon" href="assets/img/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist:wght@400..700&family=GFS+Didot&family=Playfair+Display:ital,wght@1,400..600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist:wght@400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Tinos:ital,wght@1,400;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <script>(function(d){var c='js';try{if(!sessionStorage.getItem('ea-visited'))c+=' first-visit'}catch(e){}d.className=c})(document.documentElement)</script>
 <noscript><style>.curtain,.loader{display:none}[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important}.split .ln>span{transform:none!important}</style></noscript>
@@ -37,17 +37,17 @@
 <header class="nav">
   <div class="wrap">
     <a class="nav-logo" href="index.html" aria-label="Ezra Anya, home"><img src="assets/img/wordmark-light.png" alt="theezraanya" width="160" height="34"></a>
-    <nav aria-label="Main"><ul class="nav-links"><li><a href="about.html">About</a></li><li><a href="work-with-ezra.html">Work With Ezra</a></li><li><a href="thrivetribe.html" aria-current="page">ThriveTribe</a></li><li><a href="reflections.html">Reflections</a></li><li><a href="writing.html">Writing</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+    <nav aria-label="Main"><ul class="nav-links"><li><a href="about.html">About</a></li><li class="has-drop"><a href="work-with-ezra.html" aria-haspopup="true">Work With Ezra<i class="caret" aria-hidden="true"></i></a><div class="drop" role="menu"><div class="drop__inner"><a href="work-with-ezra.html"><b>Overview</b><span>How working together works</span></a><a href="clarity.html"><b>Clarity Conversation</b><span>Start here: 30 to 45 minutes</span></a><a href="advisory.html"><b>Growth Advisory</b><span>Strategy, structure and partnership</span></a><a href="ai-advisory.html"><b>AI Ethics and Workflow</b><span>Adopt AI with clear rules</span></a><a href="speaking.html"><b>Speaking and Training</b><span>Keynotes and team sessions</span></a><a href="thrivetribe.html" class="on"><b>TheThriveTribe</b><span>90-day mentorship sprint</span></a><a href="press-kit.html"><b>Press Kit</b><span>Bios, photos and logos</span></a></div></div></li><li><a href="thrivetribe.html" aria-current="page">ThriveTribe</a></li><li><a href="reflections.html">Reflections</a></li><li><a href="writing.html">Writing</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
     <div class="nav-right">
       <span class="clock" aria-label="Time in Nigeria"><b>WAT</b> <span data-time>00:00:00</span></span>
-      <a class="btn btn--orange" href="strategy-session.html">Book a session <span class="arr">→</span></a>
+      <a class="btn btn--orange" href="clarity.html">Book a session <span class="arr">→</span></a>
       <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
 <div class="menu dark dark--hot" id="menu">
-  <ul><li><a href="index.html">Home<span>01</span></a></li><li><a href="about.html">About<span>02</span></a></li><li><a href="work-with-ezra.html">Work With Ezra<span>03</span></a></li><li><a href="thrivetribe.html">ThriveTribe<span>04</span></a></li><li><a href="reflections.html">Reflections<span>05</span></a></li><li><a href="writing.html">Writing<span>06</span></a></li><li><a href="contact.html">Contact<span>07</span></a></li><li><a href="strategy-session.html">Strategy Session<span>08</span></a></li></ul>
-  <div class="menu-foot"><a href="mailto:message.theezraanya@gmail.com">message.theezraanya@gmail.com</a><a href="https://wa.me/2347012954115" target="_blank" rel="noopener">WhatsApp +234 701 295 4115</a></div>
+  <ul><li><a href="index.html">Home<span>01</span></a></li><li><a href="about.html">About<span>02</span></a></li><li><a href="work-with-ezra.html">Work With Ezra<span>03</span></a><div class="menu-sub"><a href="clarity.html">Clarity Conversation</a><a href="advisory.html">Growth Advisory</a><a href="ai-advisory.html">AI Ethics and Workflow</a><a href="speaking.html">Speaking and Training</a><a href="thrivetribe.html">TheThriveTribe</a><a href="press-kit.html">Press Kit</a></div></li><li><a href="thrivetribe.html">ThriveTribe<span>04</span></a></li><li><a href="reflections.html">Reflections<span>05</span></a></li><li><a href="writing.html">Writing<span>06</span></a></li><li><a href="contact.html">Contact<span>07</span></a></li></ul>
+  <div class="menu-foot"><a class="btn btn--orange" href="clarity.html">Book a session <span class="arr">→</span></a><a href="mailto:message.theezraanya@gmail.com">message.theezraanya@gmail.com</a><a href="https://wa.me/2347012954115" target="_blank" rel="noopener">WhatsApp +234 701 295 4115</a></div>
 </div>
 <main id="main">
 <!-- HERO -->
@@ -194,11 +194,11 @@
       </div>
       <div>
         <h4>Explore</h4>
-        <ul><li><a href="about.html">About</a></li><li><a href="work-with-ezra.html">Work With Ezra</a></li><li><a href="work-with-ezra.html#speaking">Speaking</a></li><li><a href="work-with-ezra.html#press-kit">Press Kit</a></li><li><a href="writing.html">Writing</a></li></ul>
+        <ul><li><a href="about.html">About</a></li><li><a href="work-with-ezra.html">Work With Ezra</a></li><li><a href="speaking.html">Speaking</a></li><li><a href="press-kit.html">Press Kit</a></li><li><a href="writing.html">Writing</a></li><li><a href="writing.html#guides">Guides</a></li></ul>
       </div>
       <div>
-        <h4>Programmes</h4>
-        <ul><li><a href="strategy-session.html">Strategy Session</a></li><li><a href="thrivetribe.html">TheThriveTribe</a></li><li><a href="reflections.html">Reflections W/ TEA</a></li><li><a href="https://selar.com/m/ezra-anya" target="_blank" rel="noopener">Books on Selar</a></li><li><a href="contact.html">Contact</a></li></ul>
+        <h4>Services</h4>
+        <ul><li><a href="clarity.html">Clarity Conversation</a></li><li><a href="advisory.html">Growth Advisory</a></li><li><a href="ai-advisory.html">AI Ethics and Workflow</a></li><li><a href="speaking.html">Speaking and Training</a></li><li><a href="thrivetribe.html">TheThriveTribe</a></li><li><a href="reflections.html">Reflections W/ TEA</a></li><li><a href="https://selar.com/m/ezra-anya" target="_blank" rel="noopener">Books on Selar</a></li></ul>
       </div>
       <div>
         <h4>The journal</h4>
@@ -209,7 +209,7 @@
     </div>
   </div>
   <div class="footer-giant" aria-hidden="true">Ezra Anya</div>
-  <div class="footer-bottom"><div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><span>© <span data-year>2026</span> Ezra Anya. All rights reserved.</span><span>theezraanya.com</span><a class="to-top" href="#main">Back to top ↑</a></div></div>
+  <div class="footer-bottom"><div class="wrap" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap"><p class="ai-note">Image note: some photographs on this site are AI-assisted renderings made from real photos of Ezra. They are being replaced with event photography. Photos in the press kit are unaltered.</p><span>© <span data-year>2026</span> Ezra Anya. All rights reserved.</span><span>theezraanya.com</span><a class="to-top" href="#main">Back to top ↑</a></div></div>
 </footer>
 <div class="hover-img" aria-hidden="true"><img src="" alt=""></div>
 <script src="js/main.js" defer></script>
