@@ -4,8 +4,10 @@
 // and exits cleanly if none answer, leaving the last good posts.json in place.
 import { writeFile, mkdir, readFile } from 'node:fs/promises';
 
-const SITE = 'https://theezraanya.substack.com';
-const FEED = SITE + '/feed';
+// Every Substack publication to show on the site. Add a line for each new newsletter.
+const PUBLICATIONS = [
+  { site: 'https://theezraanya.substack.com', label: 'Letters' }
+];
 const LIMIT = 12;
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36';
 
@@ -36,15 +38,9 @@ function fromRss(xml) {
   });
 }
 
-const sources = [
-  {
-    name: 'Substack feed',
-    run: async () => {
-      const r = await fetch(FEED, { headers: { 'User-Agent': UA, Accept: 'application/rss+xml, application/xml, text/xml' } });
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return fromRss(await r.text());
-    }
-  },
+// Substack sections (e.g. Authentic Intelligence) come through the archive API only, so it runs first.
+const secName = o => (o && (o.section_name || (o.section && o.section.name) || (o.sections && o.sections[0] && o.sections[0].name))) || '';
+const sourcesFor = (SITE, FEED) => [
   {
     name: 'Substack archive API',
     run: async () => {
@@ -53,18 +49,26 @@ const sources = [
       const list = await r.json();
       const out = [];
       for (const p of list) {
-        let content = '';
+        let content = '', section = secName(p);
         try {
           const d = await fetch(`${SITE}/api/v1/posts/${p.slug}`, { headers: { 'User-Agent': UA, Accept: 'application/json' } });
-          if (d.ok) content = (await d.json()).body_html || '';
+          if (d.ok) { const dj = await d.json(); content = dj.body_html || ''; section = section || secName(dj); }
         } catch {}
         out.push({
-          title: p.title, link: p.canonical_url || `${SITE}/p/${p.slug}`, slug: p.slug, content,
+          title: p.title, link: p.canonical_url || `${SITE}/p/${p.slug}`, slug: p.slug, content, section,
           date: new Date(p.post_date).toISOString(),
           excerpt: (p.subtitle || p.description || '').slice(0, 260), image: p.cover_image || ''
         });
       }
       return out;
+    }
+  },
+  {
+    name: 'Substack feed',
+    run: async () => {
+      const r = await fetch(FEED, { headers: { 'User-Agent': UA, Accept: 'application/rss+xml, application/xml, text/xml' } });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return fromRss(await r.text());
     }
   },
   {
@@ -84,15 +88,22 @@ const sources = [
 ];
 
 let posts = [];
-for (const s of sources) {
-  try {
-    posts = (await s.run()).filter(p => p.title && p.link);
-    if (posts.length) { console.log(`Got ${posts.length} posts from ${s.name}.`); break; }
-    console.log(`${s.name}: no posts.`);
-  } catch (e) {
-    console.log(`${s.name} failed: ${e.message}`);
+for (const pub of PUBLICATIONS) {
+  const FEED = pub.site + '/feed';
+  let got = [];
+  for (const s of sourcesFor(pub.site, FEED)) {
+    try {
+      got = (await s.run()).filter(p => p.title && p.link);
+      if (got.length) { console.log(`${pub.site}: ${got.length} posts from ${s.name}.`); break; }
+      console.log(`${pub.site}: ${s.name} returned no posts.`);
+    } catch (e) {
+      console.log(`${pub.site}: ${s.name} failed: ${e.message}`);
+    }
   }
+  got.forEach(p => { p.tag = p.section || pub.label; p.publication = pub.site; });
+  posts.push(...got);
 }
+posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 if (!posts.length) {
   console.log('No source answered. Keeping the current posts.json.');
@@ -103,7 +114,7 @@ await mkdir('data', { recursive: true });
 let previous = '';
 try { previous = await readFile('data/posts.json', 'utf8'); } catch {}
 
-const body = JSON.stringify({ source: SITE, posts }, null, 2) + '\n';
+const body = JSON.stringify({ sources: PUBLICATIONS.map(p => p.site), posts }, null, 2) + '\n';
 if (body === previous) { console.log('No changes.'); process.exit(0); }
 await writeFile('data/posts.json', body);
 console.log(`Wrote ${posts.length} posts.`);

@@ -7,6 +7,28 @@
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const EMAIL = 'message.theezraanya@gmail.com';
   const FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + EMAIL;
+  // Google Sheet receiver (see google-apps-script/Code.gs). Paste the Web app URL between the quotes.
+  // While it is empty, forms fall back to FormSubmit.
+  const SHEET_ENDPOINT = window.EA_SHEET_ENDPOINT || '';
+  const formName = () => (location.pathname.split('/').pop() || 'index.html').replace('.html', '') || 'index';
+  async function sendForm(data) {
+    data._form = data._form || formName();
+    data.page = data.page || location.pathname;
+    if (SHEET_ENDPOINT) {
+      const res = await fetch(SHEET_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data), redirect: 'follow' });
+      const json = await res.json().catch(() => ({ ok: res.ok }));
+      if (!json.ok) throw new Error(json.error || 'Sheet send failed');
+      return;
+    }
+    const res = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok || String(json.success) === 'false') {
+      const er = new Error(String(json.message || 'Send failed'));
+      if (/activat/i.test(er.message)) er.activation = true;
+      throw er;
+    }
+  }
+  window.EA_sendForm = sendForm;
   const SUBSTACK = 'https://theezraanya.substack.com';
 
   /* ---------- Preloader (first visit per session) + curtain ---------- */
@@ -261,13 +283,7 @@
       data._captcha = 'false';
       data.page = location.pathname;
       try {
-        const res = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
-        const json = await res.json().catch(() => ({}));
-        if (!res.ok || json.success === 'false' || json.success === false) {
-          const msg = String(json.message || '');
-          if (/activat/i.test(msg)) { const er = new Error(msg); er.activation = true; throw er; }
-          throw new Error(msg || 'Send failed');
-        }
+        await sendForm(data);
         form.classList.add('sent');
         const done = form.nextElementSibling;
         if (done) { done.setAttribute('tabindex', '-1'); done.focus({ preventScroll: true }); done.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }
@@ -320,33 +336,45 @@
         const r = await fetch('data/posts.json', { cache: 'no-cache' });
         if (r.ok) { const j = await r.json(); posts = (j.posts || []).filter(p => p.title && p.link); }
       } catch (e) {}
+      const pubs = (window.EA_SUBSTACKS && window.EA_SUBSTACKS.length) ? window.EA_SUBSTACKS : [{ site: SUBSTACK, label: 'Letters' }];
       if (!posts.length) {
-        try {
-          const r = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(SUBSTACK + '/feed'));
-          const j = await r.json();
-          if (j.status === 'ok') posts = j.items.map(it => ({
-            title: it.title, link: it.link, date: it.pubDate,
-            image: (it.enclosure && it.enclosure.link) || it.thumbnail || firstImg(it.content || ''),
-            excerpt: strip(it.description || it.content || '').slice(0, 260),
-            content: it.content || ''
-          }));
-        } catch (e) {}
-      }
+        for (const { site, label } of pubs) {
+          let got = await (async () => {
+            let posts = [];
       if (!posts.length) {
-        for (const proxy of ['https://api.allorigins.win/raw?url=', 'https://corsproxy.io/?url=']) {
-          try {
-            const r = await fetch(proxy + encodeURIComponent(SUBSTACK + '/feed'));
-            if (!r.ok) continue;
-            const xml = new DOMParser().parseFromString(await r.text(), 'text/xml');
-            posts = [...xml.querySelectorAll('item')].map(it => {
-              const g = n => (it.getElementsByTagName(n)[0] || {}).textContent || '';
-              const enc = it.querySelector('enclosure');
-              const content = g('content:encoded');
-              return { title: g('title'), link: g('link'), date: g('pubDate'), image: enc ? enc.getAttribute('url') : firstImg(content), excerpt: strip(g('description') || content).slice(0, 260), content };
-            }).filter(p => p.title && p.link);
-            if (posts.length) break;
-          } catch (e) {}
+              try {
+                const r = await fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(site + '/feed'));
+                const j = await r.json();
+                if (j.status === 'ok') posts = j.items.map(it => ({
+                  title: it.title, link: it.link, date: it.pubDate,
+                  image: (it.enclosure && it.enclosure.link) || it.thumbnail || firstImg(it.content || ''),
+                  excerpt: strip(it.description || it.content || '').slice(0, 260),
+                  content: it.content || ''
+                }));
+              } catch (e) {}
+            }
+            if (!posts.length) {
+              for (const proxy of ['https://api.allorigins.win/raw?url=', 'https://corsproxy.io/?url=']) {
+                try {
+                  const r = await fetch(proxy + encodeURIComponent(site + '/feed'));
+                  if (!r.ok) continue;
+                  const xml = new DOMParser().parseFromString(await r.text(), 'text/xml');
+                  posts = [...xml.querySelectorAll('item')].map(it => {
+                    const g = n => (it.getElementsByTagName(n)[0] || {}).textContent || '';
+                    const enc = it.querySelector('enclosure');
+                    const content = g('content:encoded');
+                    return { title: g('title'), link: g('link'), date: g('pubDate'), image: enc ? enc.getAttribute('url') : firstImg(content), excerpt: strip(g('description') || content).slice(0, 260), content };
+                  }).filter(p => p.title && p.link);
+                  if (posts.length) break;
+                } catch (e) {}
+              }
+            }
+                  return posts;
+          })();
+          got.forEach(p => { p.tag = p.tag || label; });
+          posts.push(...got);
         }
+        posts.sort((x, y) => new Date(y.date) - new Date(x.date));
       }
       posts.forEach(p => { p.slug = p.slug || slugOf(p.link); });
       return { posts, live: posts.length > 0 };
@@ -359,13 +387,32 @@
     const limit = +postsEl.dataset.posts || 3;
     const { posts, live } = await getPosts();
     const list = live ? posts : FALLBACK_POSTS;
-    postsEl.innerHTML = list.slice(0, limit).map(card).join('');
-    postsEl.classList.toggle('few', Math.min(limit, list.length) <= 3);
+    const draw = items => {
+      postsEl.innerHTML = items.slice(0, limit).map(card).join('');
+      postsEl.classList.toggle('few', Math.min(limit, items.length) <= 3);
+      $$('.post', postsEl).forEach(p => p.classList.add('in'));
+    };
+    draw(list);
+    const tags = [...new Set(list.map(tagOf))];
+    if (postsEl.hasAttribute('data-posts-filter') && tags.length > 1) {
+      const bar = document.createElement('div');
+      bar.className = 'post-filter'; bar.setAttribute('role', 'tablist');
+      bar.innerHTML = ['All', ...tags].map((t, i) => `<button type="button" role="tab" aria-selected="${i === 0}">${esc(t)}</button>`).join('');
+      postsEl.before(bar);
+      bar.addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b) return;
+        $$('button', bar).forEach(x => x.setAttribute('aria-selected', String(x === b)));
+        const t = b.textContent;
+        draw(t === 'All' ? list : list.filter(p => tagOf(p) === t));
+      });
+    }
     const note = $('[data-posts-note]');
     if (note) note.hidden = live;
     $$('.post', postsEl).forEach((p, i) => { p.setAttribute('data-reveal', ''); p.dataset.delay = String(i % 3 + 1); io.observe(p); });
   })();
 
+  // Display names for Substack labels and sections (set in js/config.js)
+  function tagOf(p) { const map = window.EA_TAG_LABELS || {}; const t = p.tag || 'Letters'; return map[t] || t; }
   function firstImg(html) { const m = String(html).match(/<img[^>]+src="([^"]+)"/); return m ? m[1] : ''; }
   function strip(html) { const d = document.createElement('div'); d.innerHTML = html; return (d.textContent || '').replace(/\s+/g, ' ').trim(); }
   function esc(s) { return String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
@@ -377,7 +424,7 @@
     const img = p.image
       ? `<div class="post__img"><img src="${esc(p.image)}" alt="" loading="lazy"></div>`
       : `<div class="post__img post__img--type"><span>${esc(p.title)}</span></div>`;
-    return `<a class="post" href="${esc(href)}"${ext}>${img}<div><div class="post__meta"><b>${esc(p.tag || 'Essay')}</b>${date ? `<span>${date}</span>` : ''}</div><h3 class="post__t" style="margin:12px 0 10px">${esc(p.title)}</h3><p class="post__x">${esc(p.excerpt)}</p><span class="post-link-sub">Read the essay →</span></div></a>`;
+    return `<a class="post" href="${esc(href)}"${ext}>${img}<div><div class="post__meta"><b>${esc(tagOf(p))}</b>${date ? `<span>${date}</span>` : ''}</div><h3 class="post__t" style="margin:12px 0 10px">${esc(p.title)}</h3><p class="post__x">${esc(p.excerpt)}</p><span class="post-link-sub">Read ${tagOf(p) === 'Letters' ? 'the letter' : 'now'} →</span></div></a>`;
   }
 
   /* ---------- Essay page: read a Substack post on the site ---------- */
@@ -389,7 +436,7 @@
     const post = posts[i];
     const T = $('[data-essay-title]'), M = $('[data-essay-meta]'), C = $('[data-essay-cover]'), S = $('[data-essay-source]');
     if (!post) {
-      T.textContent = 'Essay not found';
+      T.textContent = 'Letter not found';
       M.innerHTML = '';
       essayEl.innerHTML = `<p>This essay may have moved. <a href="writing.html">Browse all essays</a> or <a href="${SUBSTACK}" target="_blank" rel="noopener">read on Substack</a>.</p>`;
       return;
@@ -398,7 +445,7 @@
     T.textContent = post.title;
     const clean = sanitize(post.content || '');
     const words = strip(clean).split(' ').filter(Boolean).length;
-    M.innerHTML = `<b>Essay</b>${post.date ? `<span>${fmtDate(post.date)}</span>` : ''}${words > 80 ? `<span>${Math.max(1, Math.round(words / 230))} min read</span>` : ''}<span>By Ezra Anya</span>`;
+    M.innerHTML = `<b>${esc(tagOf(post))}</b>${post.date ? `<span>${fmtDate(post.date)}</span>` : ''}${words > 80 ? `<span>${Math.max(1, Math.round(words / 230))} min read</span>` : ''}<span>By Ezra Anya</span>`;
     if (post.image && C) { C.innerHTML = `<img src="${esc(post.image)}" alt="">`; C.hidden = false; }
     if (S) S.href = post.link;
     if (words > 80) {
@@ -490,42 +537,99 @@ document.querySelectorAll('[data-pick]').forEach(a => a.addEventListener('click'
           <span class="label">${esc(i.type || 'Playbook')}${i.pages ? ' · ' + esc(i.pages) + ' pages' : ''}</span>
           <h3 class="h4">${esc(i.title)}</h3>
           <p>${esc(i.summary)}</p>
-          <div class="lib-actions"><a class="link" href="reader.html?doc=${encodeURIComponent(i.slug)}">Read online <span class="arr">→</span></a><a class="link" href="${esc(i.file)}" download>Download PDF <span class="arr">↓</span></a></div>
+          <div class="lib-actions"><a class="link" href="reader.html?doc=${encodeURIComponent(i.slug)}">Flip through <span class="arr">→</span></a><a class="link" href="${esc(i.file)}" download>Download PDF <span class="arr">↓</span></a></div>
         </div>
       </article>`).join('');
     grid.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('in'));
   }).catch(() => {});
 })();
 
-/* Reader: renders a library PDF page by page with PDF.js */
+/* Reader: turns a library PDF into a flipbook (PDF.js renders, StPageFlip turns the pages) */
 (() => {
   const host = document.querySelector('[data-reader]');
   if (!host) return;
   const slug = new URLSearchParams(location.search).get('doc');
   const title = document.querySelector('[data-reader-title]');
   const dl = document.querySelector('[data-reader-download]');
+  const msg = html => { host.innerHTML = `<p class="lead reader-msg">${html}</p>`; };
+  const esc = v => String(v || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   fetch('data/library.json', { cache: 'no-cache' }).then(r => r.json()).then(async j => {
     const doc = (j.items || []).find(i => i.slug === slug);
-    if (!doc) { host.innerHTML = '<p class="lead" style="color:var(--on-dark);text-align:center">That document could not be found. <a class="link" href="writing.html#guides">Back to the guides</a></p>'; return; }
+    if (!doc) { msg('That document could not be found. <a class="link" href="writing.html#playbooks">Back to the playbooks</a>'); return; }
     document.title = doc.title + ' · Ezra Anya';
     if (title) title.textContent = doc.title;
     if (dl) { dl.href = doc.file; dl.setAttribute('download', ''); }
     const lib = window['pdfjs-dist/build/pdf'];
-    if (!lib) { host.innerHTML = `<p class="lead" style="color:var(--on-dark);text-align:center">The reader could not load. <a class="link" href="${doc.file}" download>Download the PDF</a></p>`; return; }
+    if (!lib) { msg(`The reader could not load. <a class="link" href="${doc.file}" download>Download the PDF</a>`); return; }
     lib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    msg('Opening the book…');
     const pdf = await lib.getDocument(doc.file).promise;
-    const width = Math.min(host.clientWidth, 920);
+    const first = (await pdf.getPage(1)).getViewport({ scale: 1 });
+    const ratio = first.height / first.width;
+    const renderW = Math.min(1100, Math.round(560 * Math.min(2, window.devicePixelRatio || 1)));
+    const imgs = [];
     for (let n = 1; n <= pdf.numPages; n++) {
+      msg(`Preparing page ${n} of ${pdf.numPages}…`);
       const page = await pdf.getPage(n);
-      const vp1 = page.getViewport({ scale: 1 });
-      const scale = (width / vp1.width) * (window.devicePixelRatio || 1);
-      const vp = page.getViewport({ scale });
-      const c = document.createElement('canvas');
-      c.width = vp.width; c.height = vp.height; c.style.width = width + 'px';
-      host.appendChild(c);
+      const vp = page.getViewport({ scale: renderW / page.getViewport({ scale: 1 }).width });
+      const c = document.createElement('canvas'); c.width = vp.width; c.height = vp.height;
       await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
+      imgs.push(c.toDataURL('image/jpeg', 0.9));
     }
-  }).catch(() => { host.innerHTML = '<p class="lead" style="color:var(--on-dark);text-align:center">The document could not load right now.</p>'; });
+    host.innerHTML = `
+      <div class="flip-stage"><div class="flip-book" data-book></div></div>
+      <div class="flip-ctrl">
+        <button type="button" class="flip-btn" data-flip-prev aria-label="Previous page">←</button>
+        <span class="flip-count" data-flip-count aria-live="polite"></span>
+        <button type="button" class="flip-btn" data-flip-next aria-label="Next page">→</button>
+      </div>
+      <p class="flip-hint">Drag a corner, tap the arrows or use your arrow keys to turn the page.</p>`;
+    const book = host.querySelector('[data-book]');
+    imgs.forEach((src, i) => {
+      const d = document.createElement('div');
+      d.className = 'flip-page';
+      if (i === 0 || i === imgs.length - 1) d.dataset.density = 'hard';
+      d.innerHTML = `<img src="${src}" alt="${esc(doc.title)}, page ${i + 1}" draggable="false">`;
+      book.appendChild(d);
+    });
+    const count = host.querySelector('[data-flip-count]');
+    if (!window.St || !window.St.PageFlip) {
+      // Library missing: show the pages one at a time with the same controls
+      const pages = [...book.children]; let at = 0;
+      book.classList.add('flip-fallback');
+      const show = () => { pages.forEach((p, i) => p.hidden = i !== at); count.textContent = `${at + 1} / ${pages.length}`; };
+      host.querySelector('[data-flip-prev]').onclick = () => { at = Math.max(0, at - 1); show(); };
+      host.querySelector('[data-flip-next]').onclick = () => { at = Math.min(pages.length - 1, at + 1); show(); };
+      show(); return;
+    }
+    // Fit a whole spread, with the controls, inside the screen height
+    const availH = Math.max(380, window.innerHeight - 290);
+    const maxPW = Math.max(260, Math.min(900, Math.floor(availH / ratio)));
+    const pw = Math.min(560, maxPW), ph = Math.round(pw * ratio);
+    const flip = new St.PageFlip(book, {
+      width: pw, height: ph, size: 'stretch',
+      minWidth: 260, maxWidth: maxPW, minHeight: Math.round(260 * ratio), maxHeight: Math.round(maxPW * ratio),
+      showCover: true, usePortrait: true, maxShadowOpacity: 0.45,
+      mobileScrollSupport: true, flippingTime: 800, autoSize: true
+    });
+    flip.loadFromHTML(book.querySelectorAll('.flip-page'));
+    const total = imgs.length;
+    const update = () => {
+      const i = flip.getCurrentPageIndex();
+      const spread = flip.getOrientation() === 'landscape' && i > 0 && i < total - 1;
+      count.textContent = spread ? `${i + 1}–${Math.min(i + 2, total)} / ${total}` : `${i + 1} / ${total}`;
+      host.querySelector('[data-flip-prev]').disabled = i === 0;
+      host.querySelector('[data-flip-next]').disabled = i >= total - (spread ? 2 : 1);
+    };
+    flip.on('flip', update); flip.on('changeOrientation', update); update();
+    host.querySelector('[data-flip-prev]').onclick = () => flip.flipPrev();
+    host.querySelector('[data-flip-next]').onclick = () => flip.flipNext();
+    document.addEventListener('keydown', e => {
+      if (e.target.closest('input,textarea')) return;
+      if (e.key === 'ArrowRight') flip.flipNext();
+      if (e.key === 'ArrowLeft') flip.flipPrev();
+    });
+  }).catch(() => msg('The document could not load right now.'));
 })();
 
 /* ---------- Clarity Conversation: discovery form, then Calendly ---------- */
@@ -637,9 +741,7 @@ document.querySelectorAll('[data-pick]').forEach(a => a.addEventListener('click'
     data._replyto = email;
     const label0 = submit.innerHTML; submit.disabled = true; submit.innerHTML = 'Sending…'; err.classList.remove('on');
     try {
-      const res = await fetch('https://formsubmit.co/ajax/' + EMAIL, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) });
-      const json = await res.json().catch(() => ({}));
-      if (!res.ok || String(json.success) === 'false') throw new Error(String(json.message || 'failed'));
+      await window.EA_sendForm(data);
       try { localStorage.removeItem(KEY); } catch (x) {}
       openCalendar(name, email);
     } catch (ex) {
@@ -651,4 +753,34 @@ document.querySelectorAll('[data-pick]').forEach(a => a.addEventListener('click'
   });
 
   show(step);
+})();
+
+/* ---------- Microsoft Clarity with cookie consent ----------
+   Clarity loads on every page. Until a visitor accepts, it runs in no-consent mode:
+   no cookies, page-level data only. Accepting switches on full session tracking. */
+(() => {
+  const id = window.EA_CLARITY_ID;
+  if (!id) return;
+  const KEY = 'ea-cookie-consent';
+  let choice = null;
+  try { choice = localStorage.getItem(KEY); } catch (e) {}
+  (function (c, l, a, r, i, t, y) {
+    c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+    t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i;
+    y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+  })(window, document, 'clarity', 'script', id);
+  const signal = granted => window.clarity('consentv2', { ad_Storage: 'denied', analytics_Storage: granted ? 'granted' : 'denied' });
+  signal(choice === 'accepted');
+  const banner = document.querySelector('.cookie');
+  if (!banner) return;
+  if (!choice) setTimeout(() => banner.classList.add('on'), 1800);
+  const decide = v => {
+    try { localStorage.setItem(KEY, v); } catch (e) {}
+    signal(v === 'accepted');
+    if (v !== 'accepted') { try { window.clarity('consent', false); } catch (e) {} }
+    banner.classList.remove('on');
+  };
+  banner.querySelector('[data-accept]').addEventListener('click', () => decide('accepted'));
+  banner.querySelector('[data-decline]').addEventListener('click', () => decide('declined'));
+  document.querySelectorAll('[data-cookie-settings]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); banner.classList.add('on'); }));
 })();

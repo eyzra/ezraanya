@@ -120,3 +120,35 @@ In `reflections.html`:
 - The italic accent words inside headlines use **Times New Roman** italic. Phones and computers without Times New Roman get **Tinos** from Google Fonts, which has the same letter widths.
 
 All three load from Google Fonts. To set headlines in Geist, change `--display` at the top of `css/style.css`.
+
+## Forms into a Google Sheet (recommended)
+
+All forms (Clarity, contact, speaking, ThriveTribe, Reflections) go to a Google Sheet once `js/config.js` has a web app URL. Until then they fall back to FormSubmit.
+
+1. Create a new Google Sheet called "Website responses".
+2. In the Sheet: Extensions → Apps Script. Delete what is there and paste everything from `google-apps-script/Code.gs`. Save.
+3. Deploy → New deployment → gear icon → Web app. Execute as: **Me**. Who has access: **Anyone**. Deploy, then approve the Google permission screens (Advanced → Go to project if Google warns you).
+4. Copy the Web app URL. It ends in `/exec`.
+5. Open `js/config.js` and paste it between the quotes of `EA_SHEET_ENDPOINT`. Commit.
+
+Each form gets its own tab. New questions add their own columns. You also get an email for every submission, and replying to that email replies to the person.
+
+If you edit Code.gs later: Deploy → Manage deployments → pencil → Version: New version. The URL stays the same.
+
+## Settings in js/config.js
+
+- `EA_SHEET_ENDPOINT` the Apps Script URL above.
+- `EA_CLARITY_ID` Microsoft Clarity project (za12929qoy). Clarity only records after a visitor taps Accept on the cookie notice. Dashboard: clarity.microsoft.com.
+- `EA_SUBSTACKS` every Substack publication to pull into Writing. Add one line per publication, and add the same entry to `PUBLICATIONS` in `scripts/fetch-substack.mjs`.
+
+## Privacy
+
+`privacy.html` explains what the forms and Clarity collect. Read it and change anything that does not match how you actually handle data, especially the retention period.
+
+## Writing labels
+
+Posts in the main Substack show as **Letters**. Posts in the Authentic Intelligence section (theezraanya.substack.com/s/authenticintelligence) show as **Publications**. To rename either, edit `EA_TAG_LABELS` in `js/config.js`.
+
+## Workbooks and playbooks (flipbook)
+
+`reader.html` turns each PDF into a flipbook. PDF.js draws the pages and StPageFlip (MIT licence, saved in `js/vendor/`) turns them. Two-page spreads show on wide screens and single pages on phones. The type shown on each card (Workbook or Playbook) is the `type` field in `data/library.json`.
