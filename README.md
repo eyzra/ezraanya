@@ -152,3 +152,17 @@ Posts in the main Substack show as **Letters**. Posts in the Authentic Intellige
 ## Workbooks and playbooks (flipbook)
 
 `reader.html` turns each PDF into a flipbook. PDF.js draws the pages and StPageFlip (MIT licence, saved in `js/vendor/`) turns them. Two-page spreads show on wide screens and single pages on phones. The type shown on each card (Workbook or Playbook) is the `type` field in `data/library.json`.
+
+## Automatic replies and email templates
+
+`google-apps-script/Code.gs` now also:
+- sends each person a branded confirmation email when they submit a form (edit the wording in `AUTO_REPLIES` near the top),
+- adds an **Ezra** menu to the Sheet. Use "Set up the Templates tab" once, write an email in a new row of the Templates tab, open a tab such as Reflections, then choose "Email everyone on this tab". An "Emails sent" column stops anyone getting the same email twice.
+
+Emails come from the Google account that owns the script, shown with the name "Ezra Anya", and replies go to message.theezraanya@gmail.com. To send from a different address, add it in Gmail under Settings > Accounts > Send mail as, then fill in `FROM_ALIAS`.
+
+Every change to Code.gs needs Deploy > Manage deployments > pencil > Version: New version.
+
+## Umami
+
+The Umami tag sits in the `<head>` of every page (set in `build/build.py`). It also records a "Form sent" event with the form name and nothing else. Dashboard: cloud.umami.is.

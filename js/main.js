@@ -29,6 +29,9 @@
     }
   }
   window.EA_sendForm = sendForm;
+  // Umami: count successful form sends (no personal details are sent)
+  const tracked = sendForm;
+  window.EA_sendForm = async d => { await tracked(d); try { window.umami && window.umami.track('Form sent', { form: d._form || formName() }); } catch (e) {} };
   const SUBSTACK = 'https://theezraanya.substack.com';
 
   /* ---------- Preloader (first visit per session) + curtain ---------- */
@@ -283,7 +286,7 @@
       data._captcha = 'false';
       data.page = location.pathname;
       try {
-        await sendForm(data);
+        await window.EA_sendForm(data);
         form.classList.add('sent');
         const done = form.nextElementSibling;
         if (done) { done.setAttribute('tabindex', '-1'); done.focus({ preventScroll: true }); done.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }
@@ -741,7 +744,7 @@ document.querySelectorAll('[data-pick]').forEach(a => a.addEventListener('click'
     data._replyto = email;
     const label0 = submit.innerHTML; submit.disabled = true; submit.innerHTML = 'Sending…'; err.classList.remove('on');
     try {
-      await window.EA_sendForm(data);
+      data._form = 'clarity'; await window.EA_sendForm(data);
       try { localStorage.removeItem(KEY); } catch (x) {}
       openCalendar(name, email);
     } catch (ex) {
