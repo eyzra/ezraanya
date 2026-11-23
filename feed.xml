@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authentic Intelligence by Ezra Anya</title>
+    <link>https://theezraanya.com/writing.html</link>
+    <atom:link href="https://theezraanya.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Ezra Anya on AI, branding, psychology and personal development. The Art of Thinking Clearly.</description>
+    <language>en</language>
+    <item>
+      <title>Are we getting smarter with AI, or simply thinking less?</title>
+      <link>https://theezraanya.com/essay.html?p=the-intelligence-paradox</link>
+      <guid isPermaLink="false">theezraanya-the-intelligence-paradox</guid>
+      <description>What the research says about AI, productivity and learning, and how to use AI in a way that keeps your own thinking sharp.</description>
+      <enclosure url="https://theezraanya.com/assets/img/articles/intelligence-paradox.jpg" type="image/jpeg" length="0"/>
+      <category>Authentic Intelligence</category>
+    </item>
+    <item>
+      <title>Why Good Products Fail: The Psychology of What People Choose to Buy</title>
+      <link>https://theezraanya.com/essay.html?p=why-good-products-fail</link>
+      <guid isPermaLink="false">theezraanya-why-good-products-fail</guid>
+      <description>Why customers choose what feels safe, familiar and easy to buy, and what a business should study before it spends on another campaign.</description>
+      <enclosure url="https://theezraanya.com/assets/img/articles/why-good-products-fail.jpg" type="image/jpeg" length="0"/>
+      <category>Authentic Intelligence</category>
+    </item>
+  </channel>
+</rss>

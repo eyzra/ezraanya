@@ -18,3 +18,7 @@ window.EA_TAG_LABELS = {
   'Essay': 'Letters',
   'Authentic Intelligence': 'Publications'
 };
+
+// Which Substack posts appear on the site. Theology letters stay on Substack only.
+// Articles in the /articles folder always appear.
+window.EA_SHOW_TAGS = ['Authentic Intelligence'];

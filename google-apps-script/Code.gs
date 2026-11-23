@@ -23,11 +23,6 @@ const SENDER_NAME = 'Ezra Anya';
 // When someone presses Reply on an automatic email, it goes here.
 const REPLY_TO = 'message.theezraanya@gmail.com';
 
-// Leave empty to send from the Google account that owns this script.
-// To send from another address, first add it in Gmail: Settings > Accounts > Send mail as.
-// Then put that address here, save, and approve the new permission when Google asks.
-const FROM_ALIAS = '';
-
 // Turn automatic confirmation emails on (true) or off (false).
 const AUTO_REPLY = true;
 
@@ -154,8 +149,26 @@ function doPost(e) {
   }
 }
 
+const VERSION = 'v3 with automatic replies';
+
+// Open the Web app URL in a browser: if you see this version, the new code is live.
 function doGet() {
-  return json_({ ok: true, service: 'theezraanya.com forms' });
+  return json_({ ok: true, service: 'theezraanya.com forms', version: VERSION, autoReply: AUTO_REPLY });
+}
+
+/*
+ * Run this from the editor (choose testAutoReply in the toolbar, then Run).
+ * It sends you a sample of every automatic reply, and Google asks for permission the first time.
+ */
+function testAutoReply() {
+  const me = Session.getActiveUser().getEmail() || NOTIFY_EMAIL;
+  const sample = {
+    name: 'Test Person', email: me, '1. Full name': 'Test Person', '2. Email address': me,
+    enquiry: 'Reflections W/ TEA Edition 03: Relationships', session: 'Saturday 21 November at 7PM WAT',
+    programme_fee: 'NGN 250,000'
+  };
+  Object.keys(AUTO_REPLIES).forEach(function (k) { autoReply_(k, sample); });
+  console.log('Sent ' + Object.keys(AUTO_REPLIES).length + ' sample emails to ' + me + '. Emails left today: ' + MailApp.getRemainingDailyQuota());
 }
 
 // Works out which form sent the data, even if the page address is unusual.
@@ -308,13 +321,7 @@ function render_(tpl, row) {
 
 function send_(to, subject, c) {
   const html = layout_(c);
-  const options = { htmlBody: html, name: SENDER_NAME, replyTo: REPLY_TO };
-  if (FROM_ALIAS) {
-    options.from = FROM_ALIAS;
-    GmailApp.sendEmail(to, subject, plain_(html), options);
-  } else {
-    MailApp.sendEmail(to, subject, plain_(html), options);
-  }
+  MailApp.sendEmail(to, subject, plain_(html), { htmlBody: html, name: SENDER_NAME, replyTo: REPLY_TO });
 }
 
 function layout_(c) {

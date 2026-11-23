@@ -324,22 +324,27 @@
   });
 
   /* ---------- Substack posts: shared loader ---------- */
-  const FALLBACK_POSTS = [
-    { title: 'Lessons of a Recovering Perfectionist', slug: '', excerpt: 'The standard we hold ourselves to is rarely our own. This is the story of embracing uncertainty and learning to begin again.', link: SUBSTACK, tag: 'Faith & Formation' },
-    { title: 'Everything Is Learnable', slug: '', excerpt: 'Most people assume some things sit beyond them. The limit is almost always a belief, and beliefs can be unlearned.', link: SUBSTACK, tag: 'Faith & Formation' },
-    { title: 'Consider Jesus', slug: '', excerpt: 'Who is Jesus? Are we still in touch with the Jesus of the Bible, or have we built one from our biases, prejudices and assumptions?', link: SUBSTACK, tag: 'Theology' }
-  ];
+  // Articles now live on the site (data/articles.json, built from /articles). Nothing to fall back to.
+  const FALLBACK_POSTS = [];
   const slugOf = link => { const m = String(link || '').match(/\/p\/([^/?#]+)/); return m ? m[1] : ''; };
   let postsPromise = null;
   function getPosts() {
     if (postsPromise) return postsPromise;
     postsPromise = (async () => {
+      // Only these Substack labels or sections appear on the site (js/config.js)
+      const SHOW = window.EA_SHOW_TAGS || ['Authentic Intelligence'];
+      const shown = p => SHOW.includes(p.tag || 'Letters');
+      let local = [];
+      try {
+        const r = await fetch('data/articles.json', { cache: 'no-cache' });
+        if (r.ok) local = ((await r.json()).articles || []).filter(p => p.title && p.slug);
+      } catch (e) {}
       let posts = [];
       try {
         const r = await fetch('data/posts.json', { cache: 'no-cache' });
-        if (r.ok) { const j = await r.json(); posts = (j.posts || []).filter(p => p.title && p.link); }
+        if (r.ok) { const j = await r.json(); posts = (j.posts || []).filter(p => p.title && p.link).filter(shown); }
       } catch (e) {}
-      const pubs = (window.EA_SUBSTACKS && window.EA_SUBSTACKS.length) ? window.EA_SUBSTACKS : [{ site: SUBSTACK, label: 'Letters' }];
+      const pubs = ((window.EA_SUBSTACKS && window.EA_SUBSTACKS.length) ? window.EA_SUBSTACKS : [{ site: SUBSTACK, label: 'Letters' }]).filter(p => SHOW.includes(p.label));
       if (!posts.length) {
         for (const { site, label } of pubs) {
           let got = await (async () => {
@@ -380,7 +385,13 @@
         posts.sort((x, y) => new Date(y.date) - new Date(x.date));
       }
       posts.forEach(p => { p.slug = p.slug || slugOf(p.link); });
-      return { posts, live: posts.length > 0 };
+      // Site articles first; skip a Substack copy of an article that already lives on the site
+      const key = t => String(t || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+      const have = new Set(local.map(p => key(p.title)));
+      const all = [...local, ...posts.filter(p => !have.has(key(p.title)))];
+      const time = p => { const t = Date.parse(String(p.date || '').replace(' ', 'T')); return isNaN(t) ? Infinity : t; };
+      all.sort((x, y) => time(y) - time(x));
+      return { posts: all, live: all.length > 0 };
     })();
     return postsPromise;
   }
@@ -390,7 +401,10 @@
     const limit = +postsEl.dataset.posts || 3;
     const { posts, live } = await getPosts();
     const list = live ? posts : FALLBACK_POSTS;
+    const feature = postsEl.classList.contains('posts--feature');
     const draw = items => {
+      // the large first-card layout needs at least three articles to look balanced
+      if (feature) postsEl.classList.toggle('posts--feature', Math.min(limit, items.length) >= 3);
       postsEl.innerHTML = items.slice(0, limit).map(card).join('');
       postsEl.classList.toggle('few', Math.min(limit, items.length) <= 3);
       $$('.post', postsEl).forEach(p => p.classList.add('in'));
@@ -427,7 +441,7 @@
     const img = p.image
       ? `<div class="post__img"><img src="${esc(p.image)}" alt="" loading="lazy"></div>`
       : `<div class="post__img post__img--type"><span>${esc(p.title)}</span></div>`;
-    return `<a class="post" href="${esc(href)}"${ext}>${img}<div><div class="post__meta"><b>${esc(tagOf(p))}</b>${date ? `<span>${date}</span>` : ''}</div><h3 class="post__t" style="margin:12px 0 10px">${esc(p.title)}</h3><p class="post__x">${esc(p.excerpt)}</p><span class="post-link-sub">Read ${tagOf(p) === 'Letters' ? 'the letter' : 'now'} →</span></div></a>`;
+    return `<a class="post" href="${esc(href)}"${ext}>${img}<div><div class="post__meta"><b>${esc(tagOf(p))}</b>${date ? `<span>${date}</span>` : ''}</div><h3 class="post__t" style="margin:12px 0 10px">${esc(p.title)}</h3><p class="post__x">${esc(p.excerpt)}</p><span class="post-link-sub">Read the article →</span></div></a>`;
   }
 
   /* ---------- Essay page: read a Substack post on the site ---------- */
@@ -439,9 +453,9 @@
     const post = posts[i];
     const T = $('[data-essay-title]'), M = $('[data-essay-meta]'), C = $('[data-essay-cover]'), S = $('[data-essay-source]');
     if (!post) {
-      T.textContent = 'Letter not found';
+      T.textContent = 'Article not found';
       M.innerHTML = '';
-      essayEl.innerHTML = `<p>This essay may have moved. <a href="writing.html">Browse all essays</a> or <a href="${SUBSTACK}" target="_blank" rel="noopener">read on Substack</a>.</p>`;
+      essayEl.innerHTML = `<p>This article may have moved. <a href="writing.html">Browse all articles</a>.</p>`;
       return;
     }
     document.title = post.title + ' · Ezra Anya';
@@ -450,7 +464,11 @@
     const words = strip(clean).split(' ').filter(Boolean).length;
     M.innerHTML = `<b>${esc(tagOf(post))}</b>${post.date ? `<span>${fmtDate(post.date)}</span>` : ''}${words > 80 ? `<span>${Math.max(1, Math.round(words / 230))} min read</span>` : ''}<span>By Ezra Anya</span>`;
     if (post.image && C) { C.innerHTML = `<img src="${esc(post.image)}" alt="">`; C.hidden = false; }
-    if (S) S.href = post.link;
+    if (S) {
+      if (!post.local) S.href = post.link;
+      else if (post.linkedin) { S.href = post.linkedin; S.innerHTML = 'Read on LinkedIn <span class="arr">↗</span>'; }
+      else { S.href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(location.href); S.innerHTML = 'Share on LinkedIn <span class="arr">↗</span>'; }
+    }
     if (words > 80) {
       essayEl.innerHTML = clean;
     } else {

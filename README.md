@@ -159,10 +159,25 @@ Posts in the main Substack show as **Letters**. Posts in the Authentic Intellige
 - sends each person a branded confirmation email when they submit a form (edit the wording in `AUTO_REPLIES` near the top),
 - adds an **Ezra** menu to the Sheet. Use "Set up the Templates tab" once, write an email in a new row of the Templates tab, open a tab such as Reflections, then choose "Email everyone on this tab". An "Emails sent" column stops anyone getting the same email twice.
 
-Emails come from the Google account that owns the script, shown with the name "Ezra Anya", and replies go to message.theezraanya@gmail.com. To send from a different address, add it in Gmail under Settings > Accounts > Send mail as, then fill in `FROM_ALIAS`.
+Emails come from the Google account that owns the script, shown with the name "Ezra Anya", and replies go to message.theezraanya@gmail.com. To send from message.theezraanya@gmail.com, set up the Sheet and script while signed into that account.
 
 Every change to Code.gs needs Deploy > Manage deployments > pencil > Version: New version.
 
 ## Umami
 
 The Umami tag sits in the `<head>` of every page (set in `build/build.py`). It also records a "Form sent" event with the form name and nothing else. Dashboard: cloud.umami.is.
+
+## Authentic Intelligence articles (the /articles folder)
+
+Articles now live on the site itself. Each article is one Markdown file in `articles/`, and its cover image goes in `assets/img/articles/`.
+
+To publish a new article:
+1. Copy an existing file in `articles/`, give it a new name such as `my-new-article.md`, and change the header (title, date as YYYY-MM-DD, cover, excerpt, and the LinkedIn link once it is live).
+2. Paste the article below the header. Use `###` for section headings, `**bold**`, `*italic*`, `1.` for numbered lists and `---` for a dividing line.
+3. Commit it. The "Build articles" GitHub Action turns it into `data/articles.json` and `feed.xml` within a minute or two, and it appears on the home page and the Writing page.
+
+Set `date: draft` to keep an article off the site while you work on it.
+
+`feed.xml` (https://theezraanya.com/feed.xml) lists every article. Point Zapier or Make at it to share each new article on LinkedIn automatically.
+
+Substack posts only appear on the site if they are in the Authentic Intelligence section (`EA_SHOW_TAGS` in `js/config.js`). Theology letters stay on Substack.
